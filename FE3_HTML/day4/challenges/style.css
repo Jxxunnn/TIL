@@ -33,8 +33,10 @@ h1 {
 .text-desc {
     font-weight:lighter;
     line-height:1.4em;
+    opacity: 0.8;
 }
 
 .text-name, .text-desc {
     color : white;
 }
+
