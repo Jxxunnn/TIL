@@ -1,0 +1,122 @@
+/* Reset CSS */
+*{
+    margin : 0;    
+    padding : 0;
+}
+h1 {
+    font-size:initial;
+    font-weight:initial
+}
+li {
+    list-style: none;
+}
+button {
+    border : initial;
+    background-color: initial;
+}
+button:hover, a:hover{
+    cursor: pointer;
+}
+/* header */
+.header{
+    display: flex;
+    padding:24px;
+}
+.header-title {
+    margin-right:2vw;
+}
+.nav {
+    display: flex;
+}
+.nav-menu{
+    display:flex;
+}
+.nav-menu_blank{
+    margin:0 30px;
+}
+.nav-menu li a{    
+    font-weight: 700;
+    font-size:1.1vw;
+    padding : 8px 7px;
+    line-height: 1.1vw;
+    white-space: nowrap;
+}
+.nav-menu li a:hover{
+    color:white;
+    background-color: black;
+    border-radius: 13px;
+}
+
+.nav-btns {
+    display: flex;
+}
+.nav-btns li{
+    padding:0 12px;
+}
+/* main */
+/* section notice */
+.notice {
+    position:relative;
+    color:White;
+    background-image: url(/assets/main.jpg);
+    background-size: cover;
+    min-height: 600px;    
+    min-width:1400px;
+    height:50vh;
+}
+.notice-container {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    padding:0 100px;
+    height: 100%;    
+}
+.contents-title {
+    font-size:2rem;
+    margin-bottom:20px;
+}
+.contents-desc {
+    margin-bottom:30px;
+}
+.contents-link {
+    padding: 5px 15px;
+    color:black;
+    background-color:white;
+    border-radius: 15px;
+    font-weight: bold;
+    letter-spacing: -0.1rem;
+}
+.notice-menu {
+    position:absolute;
+    display:flex;
+    bottom:10%;
+    left:15%;
+}
+.notice-menu li {
+    position:relative;    
+    margin-right:20px;
+
+} 
+.notice-menu li{
+    display:inline-block;
+    vertical-align: bottom;
+}
+.notice-menu li::after {
+    content: "";
+    position: absolute;
+    left:0px;
+    bottom:-2px;
+    height:3px;
+    background-color: rgba(255,255,255,0.3);
+    width:100%;
+
+}
+.notice-btn_left, .notice-btn_right {
+    position:absolute;
+    font-size:20rem;
+    color:red;
+    padding:30px;
+    text-align:center;
+}
+.notice-btn_left {}
+/* inline-block vertical -algin  */

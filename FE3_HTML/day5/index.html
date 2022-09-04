@@ -5,73 +5,91 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="/assets/samsung.png" />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="/assets/Samsung_Favicon.png"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
+    />
+
     <title>Samsung 대한민국 | 모바일 | TV | 가전 | IT</title>
   </head>
   <body>
-    <div>봄맞이 특가 세일! 함께 뭉치면 최대 49% 할인! <a>공동 구매하기</a></div>
+    <!-- Block - Element - Modifier -->
+    <!-- 요소 - 의미 - modifier -->
+    <!-- header -->
 
-    <header>
-      <div>
-        <h1>SAMSUNG</h1>
-        <nav>
-          <ul>
-            <li><a>제품</a></li>
-            <li><a>기획전</a></li>
-            <li><a>식품관</a></li>
-            <li><a>스토리</a></li>
-            <li><a>고객 서비</a>스</li>
-            <li><a>멤버십</a></li>
-            <li><a>디지털프라자</a></li>
-            <li><a>사회공헌</a></li>
-            <li><a>서비스</a></li>
-          </ul>
-        </nav>
-
-        <div>
-          <a>돋보기</a>
-          <a>장바구니</a>
-          <a>나의정보</a>
-        </div>
-      </div>
-
-      <!--
-        위아래를 div로 나누신 것은 아래 이미지 영역과 위의 메뉴를 구분하기 위하신 거겠죠?!
-        이런 이미지 배너같은 경우는 메인 페이지의 중요 콘텐츠 중 하나라 header가 아닌 아래 main으로 들어가는 것이 좋을 것 같다는 의견입니다.
-        보통 header에는 각 페이지별 공통되는 태그들을 넣는 편이기도 해서요.(예를 들어 메인 메뉴, 로그인 메뉴 등등 우리가 보통 페이지마다 공통적으로 보게되는 것들)
-      -->
-      <div>
-        <!-- 그리고 이 부분은 따로 떼어보아도 갤럭시 S22 울트라를 런칭하는 내용이니 div대신 article 혹은 section으로 넣으셔도 좋을 것 같아요 -->
-        <div>
-          <img />
-          <p>Galaxy S22 Ultra 런칭</p>
-          <p>
-            삼성닷컴에서만 만날 수 있는 절대적 단독 컬러와 탐나는 단독 혜택까지
-            지금 바로 확인하세요
-          </p>
-          <!--
-            button과 a태그는 하나만 사용해도 충분합니다!
-            클릭하여 어떤 기능이나 역할이 있다면 button, 페이지를 이동한다면 a 태그를 사용해주세요.
-            (아마 앞으로도 많이많이 사용하게 될 테니 그때마다 태그의 역할에 대해서 고민해보시면 좋을 것 같습니다 :)
-          -->
-          <button><a>더 알아보기</a></button>
-          <button><a>구매 혜택 보기</a></button>
-          <ul>
-            <li>2022 Neo QLED</li>
-            <li>Galaxy S22 Ultra</li>
-            <li>봄맞이 특가 세일</li>
-            <li>Glaaxy Book2</li>
-            <li>BESPOKE 인덕션</li>
-            <li>BESPOKE 큐커</li>
-            <li>큐커 식품관 런칭</li>
-          </ul>
-        </div>
-        <button><</button>
-        <button>></button>
-      </div>
+    <header class="header">
+      <h1 class="sr-only" style:"display:none">삼성 웹페이지</h1>
+      <a class="header-title"
+        ><img src="/assets/logo_samsung_black.svg" alt="logo"
+      /></a>
+      <nav class="nav">
+        <ul class="nav-menu">
+          <li><a>제품</a></li>
+          <li><a>이벤트/선물하기</a></li>
+          <li><a>갤럭시 캠퍼스 스토어</a></li>
+          <li><a>e식품관</a></li>
+          <li><a>#YouMake</a></li>
+          <li><a>스마트싱스</a></li>
+          <li><a>아울렛</a></li>
+          <li><a>고객 서비스</a></li>
+          <li class="nav-menu_blank"></li>
+          <li><a>스토리</a></li>
+          <li><a>멤버십</a></li>
+          <li><a>디지털프라자</a></li>
+          <li>
+            <a><span>사회공헌</span><i class="fas fa-arrow-down"></i></a>
+          </li>
+          <li>
+            <a><span>비즈니스</span><i class="fas fa-arrow-down"></i></a>
+          </li>
+        </ul>
+      </nav>
+      <ul class="nav-btns">
+        <li>
+          <a><i class="fas fa-search"></i></a>
+        </li>
+        <li>
+          <a><i class="fas fa-shopping-cart"></i></a>
+        </li>
+        <li>
+          <a><i class="fas fa-user"></i></a>
+        </li>
+      </ul>
+      <!-- <i class="fa-solid fa-arrow-up-right"></i> -->
     </header>
 
     <main>
+      <section class="section notice">
+        <h2 class="sr-only" style:"display:none">notice</h2>
+        <div class="notice-container">
+          <div class="notice-contents">
+            <p class="contents-title">Galaxy S22 Ultra 런칭</p>
+            <p class="contents-desc">
+              대화면으로 즐기는 스포츠의 감동!<br/>
+              초대형 TV를 특별 혜택가로 만나보세요
+            </p>           
+            <a class="contents-link">모든 제품 보기</a>
+          </div>        
+        </div>
+        <ul class="notice-menu">
+          <li>갤럭시 Z 폴드4|Z<br/>플립4 런칭</li>
+          <li>갤럭시 워치5<br/>시리즈|버즈2</li>
+          <li>공동구매</li>
+          <li>스포츠TV</li>
+          <li>BESPOKE 냉장고</li>
+          <li>심심닷컴 Live</li>
+          <li>갤럭시 스튜디오</li>
+          <li>갤럭시 컴퍼스 데이</li>
+          <li><div>선물하기</div></li>
+        </ul>
+        <button class="notice-btn_left"><i class="fas fa-angle-left"></i></button>
+        <button class="notice-btn_right"><i class="fas fa-angle-right"></i></button>
+      </section>
       <section>
         <!-- DM으로 주셨던 헤딩태그 관련인데 이렇게 display: none을 하게되면 스크린리더기도 아예 없는 것으로 파악하여 읽지 못합니다. 나중에 수업시간에 배우실텐데 이런 경우 아래처럼 클래스를 주어 별도 처리를 하게됩니다 -->
         <!-- <h2 class="sr-only">NEWS</h2> -->

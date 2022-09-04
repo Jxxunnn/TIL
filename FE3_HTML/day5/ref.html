@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jun's portfolio</title>
+    <meta name="description" content="Porfolio for JunGeun" />
+    <meta name="author" content="JunGeun" />
+    <link rel="icon" type="image/png" href="asset/favicon.png" />
+    <script
+      src="https://kit.fontawesome.com/ec94890ce3.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style2.css" />
+    <script src="main.js" defer></script>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="navbar__logo">
+        <a href="#">🔶</a>
+        <a href="#">이준근</a>
+      </div>
+      <ul class="navbar__menu">
+        <li class="navbar__menu__item" data-link=".home">Home</li>
+        <li class="navbar__menu__item" data-link=".about">About</li>
+        <li class="navbar__menu__item" data-link=".skill">Skills</li>
+        <li class="navbar__menu__item" data-link=".work">My work</li>
+        <li class="navbar__menu__item" data-link=".testimonials">
+          Testimonial
+        </li>
+        <li class="navbar__menu__item" data-link=".contact">Contact</li>
+      </ul>
+
+      <!-- Toggle button -->
+      <button class="navbar__toggle-btn"><i class="fas fa-bars"></i></button>
+    </nav>
+    <!-- Home -->
+    <section class="home">
+      <div class="home__container">
+        <img class="home__avatar" src="asset/profile.jpg" alt="Jun's photo" />
+        <h1 class="home__title">안녕?<br />나는 준근~</h1>
+        <h2 class="home__description">프론트엔드 지망 코린이예요.</h2>
+        <button class="home__contact">CONTACT ME</button>
+      </div>
+    </section>
+    <!-- About -->
+    <section class="about">
+      <h1>About me</h1>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis
+        consequatur voluptates totam aliquam fugiat reiciendis illum tenetur
+        ipsam! Ratione vel possimus vero. Ipsa culpa sit rerum sint aliquid
+        saepe accusantium?
+      </p>
+      <div class="about__majors">
+        <div class="major">
+          <div class="major__icon"><i class="fab fa-html5"></i></div>
+          <h2 class="major__title">Front-end</h2>
+          <p class="major__description">
+            HTML, CSS, JavaScript<br />React, Web APIs
+          </p>
+        </div>
+      </div>
+      <div class="about__job">
+        <div class="job">
+          <div class="job__logo"><i class="fas fa-graduation-cap"></i></div>
+          <div class="job__description">
+            <p class="job__name">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem,
+              ratione.
+            </p>
+            <p class="job__period">Lorem ipsum dolor sit amet.</p>
+          </div>
+        </div>
+        <div class="job">
+          <div class="job__logo"><i class="fas fa-school"></i></div>
+          <div class="job__description">
+            <p class="job__name">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Esse,
+              corporis.
+            </p>
+            <p class="job__period">Lorem ipsum dolor sit amet.</p>
+          </div>
+        </div>
+        <div class="job">
+          <div class="job__logo"><i class="fab fa-leanpub"></i></div>
+          <div class="job__description">
+            <p class="job__name">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+              Voluptates, quam.
+            </p>
+            <p class="job__period">Lorem ipsum dolor sit amet.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Skill -->
+    <section class="skill">
+      <div class="section__container">
+        <h1>Skills</h1>
+        <h2>Skills & Attributes</h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi soluta
+          eaque aliquam nulla nobis. Debitis magnam magni deleniti molestiae
+          iure, possimus quam nihil qui voluptatem et, placeat, harum nesciunt
+          optio!
+        </p>
+        <div class="skillset">
+          <div class="skillset__left">
+            <h3 class="skillset__title">skills</h3>
+            <div class="skill__description">
+              <span>HTML</span><span>99%</span>
+            </div>
+
+            <div class="skill__bar">
+              <div class="skill__value" style="width: 99%"></div>
+            </div>
+            <div class="skill__description">
+              <span>CSS</span><span>90%</span>
+            </div>
+
+            <div class="skill__bar">
+              <div class="skill__value" style="width: 90%"></div>
+            </div>
+            <div class="skill__description">
+              <span>JAVASCRIPT</span><span>90%</span>
+            </div>
+
+            <div class="skill__bar">
+              <div class="skill__value" style="width: 90%"></div>
+            </div>
+
+            <div class="skill__description">
+              <span>REACT</span><span>88%</span>
+            </div>
+
+            <div class="skill__bar">
+              <div class="skill__value" style="width: 88%"></div>
+            </div>
+          </div>
+
+          <div class="skillset__right">
+            <div class="tools">
+              <h3 class="skillset__title">Tools</h3>
+              <ul class="tools__list">
+                <li><span>Visual Studio</span></li>
+              </ul>
+            </div>
+            <div class="etc">
+              <h3 class="skillset__title">Etc</h3>
+              <ul class="etc__list">
+                <li><span>Git</span></li>
+                <li><span>Dev Tools</span></li>
+                <li><span>Math</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Project -->
+    <section class="work">
+      <div class="section__container">
+        <h1>My work</h1>
+        <h3>Front-end Projects</h3>
+        <div class="work__category">
+          <button class="category__btn selected" data-filter="*">
+            All<span class="category__count">6</span>
+          </button>
+          <button class="category__btn" data-filter="vanilla-js">
+            React<span class="category__count">3</span>
+          </button>
+          <button class="category__btn" data-filter="react">
+            Vanilla JS<span class="category__count">3</span>
+          </button>
+        </div>
+        <div class="work__project">
+          <a href="#" class="project" target="blank" data-type="vanilla-js">
+            <img class="project__img" src="asset/favicon.png" alt="project" />
+            <div class="project__describtion">
+              <h3>Youtube Site</h3>
+              <span>Clone coding with HTML and CSS</span>
+            </div>
+          </a>
+          <a href="#" class="project" target="blank" data-type="vanilla-js">
+            <img class="project__img" src="asset/favicon.png" alt="project" />
+            <div class="project__describtion">
+              <h3>Responsive Navbar</h3>
+              <span>HTML, CSS with media query</span>
+            </div>
+          </a>
+          <a href="#" class="project" target="blank" data-type="vanilla-js">
+            <img class="project__img" src="asset/favicon.png" alt="project" />
+            <div class="project__describtion">
+              <h3>Shopping mall game</h3>
+              <span>HTML, CSS, JavaScript, Json</span>
+            </div>
+          </a>
+          <a href="#" class="project" target="blank" data-type="react">
+            <img class="project__img" src="asset/favicon.png" alt="project" />
+            <div class="project__describtion">
+              <h3>TO-DO List</h3>
+              <span>HTML, CSS, JavaScript, LocalStrage</span>
+            </div>
+          </a>
+          <a href="#" class="project" target="blank" data-type="react">
+            <img class="project__img" src="asset/favicon.png" alt="project" />
+            <div class="project__describtion">
+              <h3>Project</h3>
+              <span>Explanation</span>
+            </div>
+          </a>
+          <a href="#" class="project" target="blank" data-type="react">
+            <img class="project__img" src="asset/favicon.png" alt="project" />
+            <div class="project__describtion">
+              <h3>Project</h3>
+              <span>Explanation</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- Testimonial -->
+    <section class="testimonials">
+      <div class="section__container">
+        <h1>Testimonials</h1>
+        <h3>See what they say about me</h3>
+        <div class="testimonial">
+          <div class="testimonial__container">
+            <img
+              class="testimonial__avater"
+              src="asset/people.jpg"
+              alt="people"
+            />
+            <div class="testimonial__speech-bubble">
+              <p>
+                Lorem ipsum dolor sit amet consectetur, adipisici Lorem ipsum
+                dolor sit amet consectetur, adipisicing elit. Cupiditate, odio!
+              </p>
+              <p class="name"><a href="#">June</a> / TigerSpike</p>
+            </div>
+          </div>
+          <div class="testimonial__container">
+            <div class="testimonial__speech-bubble">
+              <p>Lorem ipsum dolor sit amet consectetur, adipisici</p>
+              <p class="name"><a href="#">June</a> / TigerSpike</p>
+            </div>
+            <img
+              class="testimonial__avater"
+              src="asset/people.jpg"
+              alt="people"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Contact -->
+    <section class="contact">
+      <h1 class="contact__title">Let's talk</h1>
+      <h2 class="contact__email">roof2586@naver.com</h2>
+      <div class="contact__link">
+        <a href="#" target="_blank"><span>🎃</span></a>
+        <a href="#" target="_blank"><span>🎨</span></a>
+      </div>
+      <p class="contact__right">Last updated ㆍ 2021.12.29</p>
+    </section>
+
+    <!-- Arrow up -->
+    <button class="arrow--up" type="button">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+  </body>
+</html>
