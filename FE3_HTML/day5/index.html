@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/samsung.png" />
+    <title>Samsung 대한민국 | 모바일 | TV | 가전 | IT</title>
+  </head>
+  <body>
+    <div>봄맞이 특가 세일! 함께 뭉치면 최대 49% 할인! <a>공동 구매하기</a></div>
+
+    <header>
+      <div>
+        <h1>SAMSUNG</h1>
+        <nav>
+          <ul>
+            <li><a>제품</a></li>
+            <li><a>기획전</a></li>
+            <li><a>식품관</a></li>
+            <li><a>스토리</a></li>
+            <li><a>고객 서비</a>스</li>
+            <li><a>멤버십</a></li>
+            <li><a>디지털프라자</a></li>
+            <li><a>사회공헌</a></li>
+            <li><a>서비스</a></li>
+          </ul>
+        </nav>
+
+        <div>
+          <a>돋보기</a>
+          <a>장바구니</a>
+          <a>나의정보</a>
+        </div>
+      </div>
+
+      <!--
+        위아래를 div로 나누신 것은 아래 이미지 영역과 위의 메뉴를 구분하기 위하신 거겠죠?!
+        이런 이미지 배너같은 경우는 메인 페이지의 중요 콘텐츠 중 하나라 header가 아닌 아래 main으로 들어가는 것이 좋을 것 같다는 의견입니다.
+        보통 header에는 각 페이지별 공통되는 태그들을 넣는 편이기도 해서요.(예를 들어 메인 메뉴, 로그인 메뉴 등등 우리가 보통 페이지마다 공통적으로 보게되는 것들)
+      -->
+      <div>
+        <!-- 그리고 이 부분은 따로 떼어보아도 갤럭시 S22 울트라를 런칭하는 내용이니 div대신 article 혹은 section으로 넣으셔도 좋을 것 같아요 -->
+        <div>
+          <img />
+          <p>Galaxy S22 Ultra 런칭</p>
+          <p>
+            삼성닷컴에서만 만날 수 있는 절대적 단독 컬러와 탐나는 단독 혜택까지
+            지금 바로 확인하세요
+          </p>
+          <!--
+            button과 a태그는 하나만 사용해도 충분합니다!
+            클릭하여 어떤 기능이나 역할이 있다면 button, 페이지를 이동한다면 a 태그를 사용해주세요.
+            (아마 앞으로도 많이많이 사용하게 될 테니 그때마다 태그의 역할에 대해서 고민해보시면 좋을 것 같습니다 :)
+          -->
+          <button><a>더 알아보기</a></button>
+          <button><a>구매 혜택 보기</a></button>
+          <ul>
+            <li>2022 Neo QLED</li>
+            <li>Galaxy S22 Ultra</li>
+            <li>봄맞이 특가 세일</li>
+            <li>Glaaxy Book2</li>
+            <li>BESPOKE 인덕션</li>
+            <li>BESPOKE 큐커</li>
+            <li>큐커 식품관 런칭</li>
+          </ul>
+        </div>
+        <button><</button>
+        <button>></button>
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <!-- DM으로 주셨던 헤딩태그 관련인데 이렇게 display: none을 하게되면 스크린리더기도 아예 없는 것으로 파악하여 읽지 못합니다. 나중에 수업시간에 배우실텐데 이런 경우 아래처럼 클래스를 주어 별도 처리를 하게됩니다 -->
+        <!-- <h2 class="sr-only">NEWS</h2> -->
+        <h2 style="display: none">NEWS</h2>
+        <ul>
+          <li>새로운 갤럭시</li>
+          <li>셀렉트샵</li>
+          <li>삼성 케어 플러스</li>
+          <li>특별한 혜택</li>
+        </ul>
+        <ul>
+          <li>
+            <img />
+            <p>갤럭시 A23 자급제</p>
+            <p>SM-A23ASDASDAS</p>
+            <p>회원가 1,578,500</p>
+          </li>
+          <li>
+            <img />
+            <p>갤럭시 A23 자급제</p>
+            <p>SM-A23ASDASDAS</p>
+            <p>회원가 1,578,500</p>
+          </li>
+          <li class="center">
+            <img />
+            <p>Galaxy S22 Ultra 런칭</p>
+            <button><a>구매 혜택 보기</a></button>
+          </li>
+          <li>
+            <img />
+            <p>갤럭시 A23 자급제</p>
+            <p>SM-A23ASDASDAS</p>
+            <p>회원가 1,578,500</p>
+          </li>
+          <li>
+            <img />
+            <p>갤럭시 A23 자급제</p>
+            <p>SM-A23ASDASDAS</p>
+            <p>회원가 1,578,500</p>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2 style="display: none">PRODUCTS</h2>
+        <ul>
+          <!--
+            아래의 #YouMake 부분을 article로 작성하신 것은 따로 떼어두어도 의미가 유지되기 때문이겠죠?!
+            사실 이미지에서는 보이지 않지만 모바일 & PC 아래 제품들을 클릭하는 경우에 아마 전체 콘텐츠 자체가 바뀌게 될 것 같은데 그럴 경우 각각의 콘텐츠가 있을텐데
+            그 부분들도 article로 묶을 수 있을 것 같아요~
+
+            <section>
+              ...
+              <article>
+              <article>
+                <p>Neo QLED</p>
+                ...
+              </article>
+              
+              <article>
+                <p>MICRO LED</p>
+                ...
+              </article>
+            
+            </section>
+          -->
+
+          <li>
+            <p>모바일 & PC</p>
+            <ul>
+              <li>Neo QLED</li>
+              <li>MICRO LED</li>
+              <li>스마트 모니터</li>
+            </ul>
+
+            <div>
+              <p>Neo QLED</p>
+              <p>Global No.1이 만든 새로운 화질의 시작</p>
+              <div>
+                <button><a>더 알아보기</a></button
+                ><button><a>제품 모두 보기</a></button>
+              </div>
+            </div>
+
+            <div>
+              <p>MICRO LED</p>
+              <p>MICRO LED 내용</p>
+              <div>
+                <button><a>더 알아보기</a></button
+                ><button><a>제품 모두 보기</a></button>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <p>TV & 오디오</p>
+            <ul>
+              <li>Neo QLED</li>
+              <li>MICRO LED</li>
+              <li>스마트 모니터</li>
+            </ul>
+            <div>
+              <p>Neo QLED</p>
+              <p>Global No.1이 만든 새로운 화질의 시작</p>
+              <div>
+                <button><a>더 알아보기</a></button
+                ><button><a>제품 모두 보기</a></button>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <p>가전</p>
+            <ul>
+              <li>Neo QLED</li>
+              <li>MICRO LED</li>
+              <li>스마트 모니터</li>
+            </ul>
+            <div>
+              <p>Neo QLED</p>
+              <p>Global No.1이 만든 새로운 화질의 시작</p>
+              <div>
+                <button><a>더 알아보기</a></button
+                ><button><a>제품 모두 보기</a></button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <article>
+        <p><strong>#YouMake</strong></p>
+        <img />
+        <ol>
+          <li>#YouMake 프로젝트</li>
+          <li>#우리 집이 영화관이 되는 순간</li>
+          <li>#BESPOKE가 집의 모든 순간을 나답게 만드는 방법</li>
+          <li>#Samsung at CES 2022</li>
+        </ol>
+      </article>
+
+      <section>
+        <p>what's happening @SAMSUNG.COM</p>
+        <h2>트렌드</h2>
+        <ul>
+          <li>
+            <img src="#" alt="" />
+            <p>EXPERIENCE</p>
+            <p>갤럭시 배워보기</p>
+            <p>
+              GALAXY와 S22와 함께하는 놀라운 기능을 영상으로 쉽게 솔루션을
+              만나보세요
+            </p>
+          </li>
+          <li>
+            <img src="#" alt="" />
+            <p>EXPERIENCE</p>
+            <p>갤럭시 배워보기</p>
+            <p>
+              GALAXY와 S22와 함께하는 놀라운 기능을 영상으로 쉽게 솔루션을
+              만나보세요
+            </p>
+          </li>
+          <li>
+            <img src="#" alt="" />
+            <p>EXPERIENCE</p>
+            <p>갤럭시 배워보기</p>
+            <p>
+              GALAXY와 S22와 함께하는 놀라운 기능을 영상으로 쉽게 솔루션을
+              만나보세요
+            </p>
+          </li>
+          <li>
+            <img src="#" alt="" />
+            <p>EXPERIENCE</p>
+            <p>갤럭시 배워보기</p>
+            <p>
+              GALAXY와 S22와 함께하는 놀라운 기능을 영상으로 쉽게 솔루션을
+              만나보세요
+            </p>
+          </li>
+          <li>
+            <img src="#" alt="" />
+            <p>EXPERIENCE</p>
+            <p>갤럭시 배워보기</p>
+            <p>
+              GALAXY와 S22와 함께하는 놀라운 기능을 영상으로 쉽게 솔루션을
+              만나보세요
+            </p>
+          </li>
+          <li>
+            <img src="#" alt="" />
+            <p>EXPERIENCE</p>
+            <p>갤럭시 배워보기</p>
+            <p>
+              GALAXY와 S22와 함께하는 놀라운 기능을 영상으로 쉽게 솔루션을
+              만나보세요
+            </p>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer></footer>
+  </body>
+</html>
