@@ -12,24 +12,52 @@
     <title>모두의 CSS</title>
   </head>
   <body>
-    <header>
-      <h1>모두의<br />HTML/CSS</h1>
-      <nav>
-        <ul>
-          <li>HOME</li>
-          <li>HTML</li>
-          <li>CSS</li>
-          <li>JavaScript</li>
+    <header class="header">
+      <div class="header__now"></div>
+      <h1 class="logo">
+        <div>모두의</di>
+        <div class="logo__line--yellow"></div>
+        HTML/CSS
+      </h1>
+
+      <nav class="nav">
+        <ul class="nav__list">
+          <li class="nav__list__item">HOME</li>
+          <li class="nav__list__item">HTML</li>
+          <li class="nav__list__item">CSS</li>
+          <li class="nav__list__item">JavaScript</li>
         </ul>
       </nav>
-      <a><i class="fas fa-search"></i></a>
+      <button class="header__search" type="button">
+        <img src="./assets/shape (Stroke).png" alt="">
+      </button>
     </header>
+    <footer class="footer">
+      <ariticle class="logo">
+        <strong class="logo__title">
+          모두의
+          <div class="logo__line--yellow"></div>
+          HTML/CSS
+        </strong>
+      </ariticle>
+      <address class="footer__address">
+        서울특별시 사랑시 고백구 행복동 123-45 1층<br />
+        02-987-6543 / abc@gmail.com
+      </address>
+      <small class="footer__copyright">©Weniv all rights reserved</small>
+    </footer>
     <main>
-      <section>
-        <img src="" alt="" />
-        <p></p>
-        <p></p>
-        <p></p>
+      <section class="section banner">
+        <h2 class="sr-only">메인 배너</h2>
+        <div class="banner__img" aria-label="lion"></div>
+        <p class="banner__title">모두의 HTML/CSS</p>
+        <strong class="banner__content">HELLO<br />WORLD! :)</strong>
+        <p class="banner__desc">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis
+          expedita quo earum? Quam iste pariatur consectetur. Nobis dolores ea
+          ullam earum eligendi voluptates, quae eaque fuga commodi dignissimos
+          aperiam mollitia.
+        </p>
         <a href=""></a>
         <button></button>
         <div>
@@ -124,10 +152,5 @@
         </div>
       </article>
     </main>
-    <footer>
-      <strong></strong>
-      <address></address>
-      <small></small>
-    </footer>
   </body>
 </html>
