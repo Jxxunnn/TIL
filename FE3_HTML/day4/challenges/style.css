@@ -8,21 +8,19 @@ body {
     justify-content: center;
     align-items: center;
     background-image: url(./images/bg.png);
+    background-attachment: fixed;
 }
-
 h1 {
     font-size:inherit;
     font-weight:inherit;
 }
-
-.container {
+.main {
     width: 300px;
     background-color: #9B5F33;    
     border-radius: 0 0 20px 20px;
     box-shadow:0 10px 0 #3C2417;
 }
-
-.contents {
+.main-contents {
     padding:10px 20px 20px;
 }
 .text-name {
@@ -35,7 +33,6 @@ h1 {
     line-height:1.4em;
     opacity: 0.8;
 }
-
 .text-name, .text-desc {
     color : white;
 }
