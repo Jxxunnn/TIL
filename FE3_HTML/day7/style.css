@@ -1,0 +1,10 @@
+.box p:nth-of-type(1) {
+    color: red;
+}
+.a100::after {
+    content:"";
+    background-color: red;
+    display: block;
+    width:calc(5%/6);
+    height:2px
+}
