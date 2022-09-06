@@ -6,5 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title></title>
   </head>
-  <body></body>
+  <body>
+    <!-- 스크린 리더가 파일 명을 읽음. -->
+    <img src="img/a.jpg" />
+    <!-- 스크린 리더가 읽지 않습니다. -->
+    <img src="img/a.jpg" alt="" />
+    <!-- alt의 값을 읽음. -->
+    <img src="img/a.jpg" alt="스크린 리더가 읽어야 하는 문구" />
+    <!-- 상대경로 : 현재 폴더에 -->
+    <img src="./jeju.jpg" alt="이미지" />
+    <!-- 상대경로 : 상위 폴더에 -->
+    <img src="../jeju.jpg" alt="이미지" />
+    <!--  -->
+    <img
+      width="200px"
+      srcset="img/logo_1.png 2x, img/logo_2.png 3x"
+      src="a.png"
+      alt="test"
+    />
+  </body>
 </html>
