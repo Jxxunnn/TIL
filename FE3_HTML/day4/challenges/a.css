@@ -12,8 +12,11 @@ body {
     position: relative;
 }
 .wrapper {
+    position:absolute;
+    left:50%;
+    transform:translate(-50%,25%);
     text-align: center;
-    transform: translateY(22%);
+    /* transform: translateY(22%); */
 }
 h1 {
     font-size:inherit;
