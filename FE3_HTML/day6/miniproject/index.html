@@ -12,64 +12,47 @@
     <title>모두의 CSS</title>
   </head>
   <body>
+    <!-- HEADER 시작 -->
     <header class="header">
-      <div class="header__now"></div>
-      <h1 class="logo">
-        <div>모두의</di>
-        <div class="logo__line--yellow"></div>
-        HTML/CSS
+      <h1 class="header__logo">
+        <img src="./assets/CSS.png" alt="logo" />
       </h1>
-
       <nav class="nav">
         <ul class="nav__list">
-          <li class="nav__list__item">HOME</li>
-          <li class="nav__list__item">HTML</li>
-          <li class="nav__list__item">CSS</li>
-          <li class="nav__list__item">JavaScript</li>
+          <li class="nav__list__item"><a>HOME</a></li>
+          <li class="nav__list__item"><a>HTML</a></li>
+          <li class="nav__list__item"><a>CSS</a></li>
+          <li class="nav__list__item"><a>JavaScript</a></li>
         </ul>
       </nav>
       <button class="header__search" type="button">
-        <img src="./assets/shape (Stroke).png" alt="">
+        검색버튼
+        <img src="./assets/shape (Stroke).png" alt="검색 버튼" />
       </button>
     </header>
-    <footer class="footer">
-      <ariticle class="logo">
-        <strong class="logo__title">
-          모두의
-          <div class="logo__line--yellow"></div>
-          HTML/CSS
-        </strong>
-      </ariticle>
-      <address class="footer__address">
-        서울특별시 사랑시 고백구 행복동 123-45 1층<br />
-        02-987-6543 / abc@gmail.com
-      </address>
-      <small class="footer__copyright">©Weniv all rights reserved</small>
-    </footer>
+    <!-- HEADER 끝 -->
+    <!-- MAIN 시작 -->
     <main>
+      <!-- SECTION-1 시작 -->
       <section class="section banner">
         <h2 class="sr-only">메인 배너</h2>
-        <div class="banner__img" aria-label="lion"></div>
-        <p class="banner__title">모두의 HTML/CSS</p>
-        <strong class="banner__content">HELLO<br />WORLD! :)</strong>
-        <p class="banner__desc">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis
-          expedita quo earum? Quam iste pariatur consectetur. Nobis dolores ea
-          ullam earum eligendi voluptates, quae eaque fuga commodi dignissimos
-          aperiam mollitia.
-        </p>
-        <a href=""></a>
-        <button></button>
-        <div>
-          <figure>
-            <img src="" alt="" />
-            <figcaption></figcaption>
-          </figure>
-          <figure>
-            <img src="" alt="" />
-            <figcaption></figcaption>
-          </figure>
+        <div class="banner__img" aria-label="라이캣"></div>
+        <div class="banner__contents">
+          <p class="banner__title">모두의 HTML/CSS</p>
+          <strong class="banner__content">HELLO<br />WORLD! :)</strong>
+          <p class="banner__desc">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis
+            expedita quo earum? Quam iste pariatur consectetur. Nobis dolores ea
+            ullam earum eligendi voluptates, quae eaque fuga commodi dignissimos
+            aperiam mollitia.
+          </p>
+          <a href="">회원가입</a>
+          <button>BUTTON</button>
         </div>
+        <aside>
+          <a href=""><img src="" alt="" /></a
+          ><a href=""><img src="" alt="" /></a>
+        </aside>
       </section>
       <section>
         <h2>프론트엔드 언어</h2>
@@ -85,72 +68,121 @@
           <dd></dd>
         </dl>
       </section>
-      <ariticle>
+      <section>
         <h2>스케쥴</h2>
-        <ul>
+        <ol>
           <li>
-            <strong></strong>
             <figure>
               <img src="" alt="" />
-              <figcaption></figcaption>
+              <figcaption>
+                <time></time>
+                <strong></strong>
+                <p></p>
+              </figcaption>
             </figure>
           </li>
           <li>
-            <strong></strong>
             <figure>
               <img src="" alt="" />
-              <figcaption></figcaption>
+              <figcaption>
+                <time></time>
+                <strong></strong>
+                <p></p>
+              </figcaption>
             </figure>
           </li>
           <li>
-            <strong></strong>
             <figure>
               <img src="" alt="" />
-              <figcaption></figcaption>
+              <figcaption>
+                <time></time>
+                <strong></strong>
+                <p></p>
+              </figcaption>
             </figure>
           </li>
-        </ul>
-      </ariticle>
+        </ol>
+      </section>
       <section>
         <h2>Lorem ipsum dolor sit.</h2>
-        <div>
-          <button></button><button></button><button></button><button></button>
-        </div>
         <ol>
-          <li><span></span><span></span><span></span></li>
-          <li><span></span><span></span><span></span></li>
-          <li><span></span><span></span><span></span></li>
-          <li><span></span><span></span><span></span></li>
-          <li><span></span><span></span><span></span></li>
+          <button>Tab1</button
+          ><button>Tab2</button
+          ><button>Tab3</button>
         </ol>
+        <ol reversed>
+          <li>
+            <span></span>
+            <p></p>
+            <time></time>
+          </li>
+          <li>
+            <span></span>
+            <p></p>
+            <time></time>
+          </li>
+          <li>
+            <span></span>
+            <p></p>
+            <time></time>
+          </li>
+          <li>
+            <span></span>
+            <p></p>
+            <time></time>
+          </li>
+          <li>
+            <span></span>
+            <p></p>
+            <time></time>
+          </li>
+        </ol>
+        <button>more+</button>
       </section>
       <article>
         <h2>Amet consectetur adipisicing.</h2>
-        <button></button><button></button>
         <div>
           <ul>
             <li>
               <figure>
                 <img src="" alt="" />
-                <figcaption></figcaption>
+                <figcaption>
+                  <strong></strong>
+                  <p></p>
+                </figcaption>
               </figure>
             </li>
             <li>
               <figure>
                 <img src="" alt="" />
-                <figcaption></figcaption>
+                <figcaption>
+                  <strong></strong>
+                  <p></p>
+                </figcaption>
               </figure>
             </li>
             <li>
               <figure>
                 <img src="" alt="" />
-                <figcaption></figcaption>
+                <figcaption>
+                  <strong></strong>
+                  <p></p>
+                </figcaption>
               </figure>
             </li>
           </ul>
           <button></button><button></button><button></button>
         </div>
+        <button>prev</button><button>next</button>
       </article>
     </main>
+    <footer class="footer">
+      <img src="./assets/logo.png" alt="logo" />
+      <address class="footer__address">
+        서울특별시 사랑시 고백구 행복동 123-45 1층<br />
+        02-987-6543 / abc@gmail.com
+      </address>
+      <small class="footer__copyright">©Weniv all rights reserved</small>
+    </footer>
   </body>
 </html>
