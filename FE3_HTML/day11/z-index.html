@@ -16,20 +16,16 @@
 
       img {
         padding: 10px;
-        position: absolute;
+        position: relative;
       }
 
       img:nth-child(1) {
-        top: 100px;
-        left: 100px;
         background-color: red;
         /* 자식에게 값을 주면 부모 뒤로 감 */
-        z-index: 1;
+        z-index: 2;
       }
 
       img:nth-child(2) {
-        top: 150px;
-        left: 150px;
         background-color: green;
         z-index: 0;
       }
