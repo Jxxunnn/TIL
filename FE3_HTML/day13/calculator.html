@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>계산기</title>
+    <style>
+      .sr-only {
+        border: 0 !important;
+        clip: rect(1px, 1px, 1px, 1px) !important;
+        -webkit-clip-path: inset(50%) !important;
+        clip-path: inset(50%) !important;
+        height: 1px !important;
+        overflow: hidden !important;
+        padding: 0 !important;
+        position: absolute !important;
+        width: 1px !important;
+        white-space: nowrap !important;
+      }
+      .calculator-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+        display: flex;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="calculator">
+      <h2 class="sr-only">계산기</h2>
+      <p class="calculator-answer">456</p>
+      <div class="calculator-container">
+        <ul class="calculator-functions">
+          <li><button>1</button></li>
+          <li><button>2</button></li>
+          <li><button>3</button></li>
+        </ul>
+        <ul class="calculator-operators">
+          <li><button>1</button></li>
+          <li><button>2</button></li>
+          <li><button>3</button></li>
+          <li><button>4</button></li>
+          <li><button>5</button></li>
+        </ul>
+        <ul class="calculator-nums">
+          <li><button>1</button></li>
+          <li><button>2</button></li>
+          <li><button>3</button></li>
+          <li><button>4</button></li>
+          <li><button>5</button></li>
+          <li><button>6</button></li>
+          <li><button>7</button></li>
+          <li><button>8</button></li>
+          <li><button>9</button></li>
+          <li><button>10</button></li>
+          <li><button>11</button></li>
+        </ul>
+      </div>
+    </section>
+  </body>
+</html>

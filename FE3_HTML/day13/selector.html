@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>selector</title>
+    <style>
+      h1 ~ ul {
+        color: red;
+      }
+      div ~ div {
+        background-color: red;
+      }
+      a::selection {
+        color: red;
+      }
+      a:visited {
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- class 속성을 가지고 있지 않아 스타일 설정이 되지 않음 -->
+    <h1>hello world</h1>
+    <ul>
+      <li>hello</li>
+      <li>hello</li>
+      <li>hello</li>
+      <li>hello</li>
+    </ul>
+    <h2>hello world</h2>
+    <ul>
+      <li>hello</li>
+      <li>hello</li>
+      <li>hello</li>
+      <li>hello</li>
+    </ul>
+    <div>1</div>
+    <div class="red">2</div>
+    <div class="red-pink">3</div>
+    <div class="redpink skyblue pink">4</div>
+    <div class="skyblue">5</div>
+    <hr />
+    <!-- href 속성을 가지고 있지 않아 스타일 설정이 되지 않음 -->
+    <a>바울랩</a>
+
+    <a href="#">바울랩1</a>
+    <a href="#">바울랩2</a>
+    <a href="https://paullab.com">바울랩3</a>
+    <a href="http">바울랩4</a>
+    <a href="http-paullab">바울랩5</a>
+  </body>
+</html>
