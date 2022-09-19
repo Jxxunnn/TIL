@@ -1,3 +1,4 @@
+/* Reset CSS */
 * {
     margin : 0;
     padding : 0;
@@ -71,4 +72,3 @@ background-color:#DDDDDD;
 .main__list__item ~ li {
     margin-top : 12px;
 }
-

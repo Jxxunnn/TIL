@@ -1,0 +1,211 @@
+*{padding: 0;
+    margin: 0;}
+    body {
+      background-color: #5B2386;
+      width: 1920px ;
+      height: 1963px ;
+      text-align: center;
+    }
+    
+    
+    main {
+      padding-top: 140px ;
+      text-align: center;
+      margin: 0 auto;
+    }
+    
+    
+    .tit{
+      width: 564px ;
+      height: 112px ;
+    }
+    
+    
+    header {
+      position: relative;
+      background-image: url(/img/clock.png);
+      background-size: 221px 225px;
+      background-position: top;
+      padding: 60px;
+      background-repeat: no-repeat;
+      margin-bottom: 33px;
+    }
+    
+    
+    .txt-stc {
+      font-family: 'OTEnjoystoriesBA';
+      color: #F5DF4D;
+      font-size: 36px;
+    }
+    
+    
+    input {
+      width: 228px;
+      height: 57px;
+      border-radius: 7px;
+      border : none;
+      text-align: center;
+      font-size: 24px;
+      color: #BABCBE;
+      margin-left: 17px;
+      margin-right: 17px;
+      margin-top: 13px;
+      margin-bottom: 13px;
+    }
+    .txt-desc{
+      background-image: url(/img/quotes.png);
+      background-position: center;
+      background-position-y: 100px;
+      background-repeat: no-repeat;
+      padding: 78px ;
+      font-size: 18px ;
+      line-height: 30px ;
+    }
+    
+    
+    .txt-desc, .txt-wannabe, .txt-time {
+      font-family: 'GmarketSansMedium';
+      color: #FFFFFF;
+    }
+    
+    
+    .txt-wannabe, .txt-time, .btn-exc {
+      font-size: 24px ;
+      display: flex ;
+      justify-content: center ;
+      align-items: center ;
+    }
+    
+    
+    .t-thou {
+      font-size: 24px ;
+      font-family: 'GmarketSansBold';
+    }
+    
+    
+    .btn-exc, .btn-go, .btn-share {
+      font-size: 24px ;
+      font-family: 'GmarketSansBold';
+      color: #5B2386;
+      background-color: #FCEE21;
+      border: #5B2386;
+      border-radius: 56px;
+      padding: 21px 49px;
+      /* height: 66px; */
+    }
+    
+    
+    .btn-exc{  
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    }
+    
+    
+    .click {
+      border-radius: 56px;
+      margin-top: 113px;
+      margin-bottom: 113px;
+      margin-right: 75px;
+      background-image: url(/img/click.png);
+      background-position: right;
+      background-position-y: 135px;
+      background-repeat: no-repeat;
+      display: inline-block;
+    
+    
+    }
+    
+    
+    .txt-input {
+      font-size: 72px ;
+      font-family: 'GmarketSansBold';
+      padding-left: 12px;
+      padding-right: 12px;
+      padding-top: 17px;
+    }
+    
+    
+    /* .btn-go, .btn-share {
+     
+    } */
+    
+    
+    .btn-share {
+      background-color: #FFFFFF;
+      margin-left: 18px;
+    }
+    
+    
+    .btns {
+      margin-top: 130px;
+      margin-bottom: 130px;
+    }
+
+
+
+/*  */
+
+input {
+    width: 228px;
+    height: 57px;
+    border-radius: 7px;
+    text-align: center;
+    font-size: 24px;
+    color: #BABCBE;
+    margin-left: 17px;
+    margin-right: 17px;
+    margin-top: 13px;
+    margin-bottom: 13px;
+  }
+
+
+/*  */
+
+.btn-exc, .btn-go, .btn-share {
+    font-size: 24px ;
+    font-family: 'GmarketSansBold';
+    color: #5B2386;
+    background-color: #FCEE21;
+    border: #5B2386;
+    border-radius: 56px;
+    padding: 21px 49px;
+    /* height: 66px; */
+  }
+  
+  .btn-exc{  
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .click {
+    border-radius: 56px;
+    margin-top: 113px;
+    margin-bottom: 113px;
+    margin-right: 75px;
+    background-image: url(/img/click.png);
+    background-position: right;
+    background-position-y: 135px;
+    background-repeat: no-repeat;
+    display: inline-block;
+  
+  }
+  
+  .txt-input {
+    font-size: 72px ;
+    font-family: 'GmarketSansBold';
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 17px;
+  }
+  
+  /* .btn-go, .btn-share {
+   
+  } */
+  
+  .btn-share {
+    background-color: RED;
+    margin-left: 18px;
+  }
+  
+  .btns {
+    margin-top: 130px;
+    margin-bottom: 130px;
+  }
