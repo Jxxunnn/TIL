@@ -1,0 +1,128 @@
+/* Reset CSS */
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family:'Pretendard';
+    font-style: normal;
+}
+li {
+    list-style: none;
+}
+h1 {
+    font-size:initial;
+    font-weight: initial;
+}
+button{
+    background-color: initial;
+    border:initial;
+}
+.sr-only {
+    z-index:-10;
+}
+/* Header */
+.header{
+    background-color: #FFFFFF;
+    padding-left : 347px;
+    padding-right: 348px;
+    display: flex;
+}
+.header__logo {
+    padding-top:24px;
+    padding-bottom:21px;
+    position: relative;
+}
+.header__logo::after{
+    content : "";
+    display : block;
+    background-color: #FFCF5C;
+    width: 56px;
+    height: 4px;
+    border-radius: 4px;    
+    position:absolute;
+    right:0%;
+    top:33%;
+}
+.nav__list{
+    display:flex;
+    height:100%; 
+    align-items: center;
+    gap:80px;
+    margin-left:182px;
+}
+.nav__list__item{
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+}
+.header__search {
+    margin-left : 375px;
+    margin-right:348px;
+    padding:11px;
+}
+/* main */
+/* section banner */
+.banner {
+    background-color:#FFCF5C;;
+
+}
+.banner__wrapper {
+    display:flex;
+}
+.banner__img {
+    background-image: url(./assets/Lycat_3\ 1.png);
+    background-position-y: 30px;
+    background-repeat: no-repeat;
+    height:699px;
+    width:100%;
+}
+
+
+/* footer */
+.footer{
+    background-color: #F9F9F9;
+    padding-left : 347px;
+    padding-right: 348px;
+    padding-bottom : 66px;
+    padding-top : 66px;
+    display:flex;
+    align-items:center;
+}
+.footer .logo__wrapper {   
+    position: relative;
+}
+.footer .logo__wrapper::after{
+    content : "";
+    display : block;
+    background-color: #D9D9D9;
+    width: 56px;
+    height: 4px;
+    border-radius: 4px;    
+    position:absolute;
+    right:0%;
+    top:38%;
+}
+.footer__address, .footer__copyright {
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #767676;
+    white-space:nowrap;
+}
+.footer__address{
+    margin-left:181px;
+    margin-right:191px;
+    
+}
+
+
+
+
+
+
+

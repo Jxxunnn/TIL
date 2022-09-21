@@ -1,0 +1,82 @@
+:root {
+    --login-bg-color :  #711BFF;   
+    --font-weight-medium : 500;
+    --font-weight-normal : 400;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    font-size : 62.5%;
+}
+button {
+    border:initial;
+    background-color: initial;
+}
+a {
+    color:initial;
+    text-decoration: initial;
+}
+.login {
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    padding : 19px 16px; 
+    border : 1px solid #DBDBDB;
+    border-radius: 5px;
+}
+
+.login-greeting {
+    font-weight:var(--font-weight-normal);
+    font-size: 1.2rem;
+    line-height : 1.25em;
+    color : #000000;
+    margin-bottom : 16px;
+}
+.login-btn {
+    font-weight:var(--font-weight-medium);
+    font-size: 1.2rem;
+    background-color: var(--login-bg-color);
+    border-radius:4px;
+    padding: 12px 108px;
+    margin-bottom : 17px;
+}
+.login-btn > img {
+    width: 64px;
+    height: 18px;    
+    vertical-align: bottom;
+    padding-right:7.7px;
+}
+.login-btn > span {    
+    color: #FFFFFF;
+}
+
+.login-find > img, .login-join > img {
+    width:16px;
+    height:16px;
+    height:100%;
+    vertical-align: bottom;
+    padding-right:6px;
+}
+.login-find{
+    float:left;
+}
+
+.login-join{
+    float:right;
+}
+.sr-only {
+    border: 0 !important;
+    clip: rect(1px, 1px, 1px, 1px) !important;
+    -webkit-clip-path: inset(50%) !important;
+    clip-path: inset(50%) !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    width: 1px !important;
+    white-space: nowrap !important;
+}
