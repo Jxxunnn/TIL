@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>myselect</title>
     <style>
+      * {
+        box-sizing: border-box;
+      }
       button {
         border: none;
         padding: initial;
         background: initial;
-
-        text-align: left;
       }
       ul {
         margin: initial;
@@ -23,69 +24,65 @@
       /* start */
       .cont-select {
         width: 200px;
-        margin: 100px auto 0;
+        margin: 100px auto;
+        position: relative;
       }
+      /* 합격 */
       .btn-select {
         width: 100%;
-        padding: 11px 20px 11px 13px;
-        font-weight: 400px;
+
+        font-weight: 400;
         font-size: 14px;
         line-height: 16px;
-        text-align: left;
-        border: 1px solid #9b51e0;
+        background: url(./Polygon\ 1.png) no-repeat right 12px center;
+        /* height: 40px; */
+        padding: 11px 20px 11px 14px;
+        border: 1px solid #c4c4c4;
         border-radius: 10px;
-        cursor: pointer;
-        background: url(Polygon\ 1.png) no-repeat right 12px center;
+        border-color: #9b51e0;
         white-space: nowrap;
+        text-align: left;
         text-overflow: ellipsis;
         overflow: hidden;
+        cursor: pointer;
       }
       .btn-select:focus {
         outline: 3px solid #f8e4ff;
+        background-image: url(./Polygon\ 2.png);
       }
+
       .list-member {
-        position: relative;
-        top: 9px;
+        position: absolute;
+        top: 49px;
         left: 0;
+        right: 0;
+
         border: 1px solid #c4c4c4;
         box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.15);
         border-radius: 10px;
       }
-
-      /* .btn-select,
-      .list-member {
-        box-sizing: border-box;
-        width: 200px;
-        text-align: left;
-        border: 1px solid #c4c4c4;
-        border-radius: 10px;
-      }
-      .btn-select {
-        padding-left: 14px;
-        height: 40px;
-        margin-bottom: 9px;
-      }
-
-      .btn-select:hover {
-        border-color: #f8e4ff;
-      }
-      .list-member {
-        padding: 4px 0px;
+      .list-member > li {
+        padding: 5px 8px;
       }
       .list-member > li > button {
-        padding: 12px 18px;
-      }
-      .list-member > li:hover {
-        background: #f8e4ff;
+        width: 100%;
+        padding: 7px 10px;
+        cursor: pointer;
         border-radius: 8px;
-        padding: 5px 8px;
-      } */
+        text-align: left;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      .list-member > li > button:hover {
+        background-color: #9b51e0;
+      }
     </style>
   </head>
   <body>
     <article class="cont-select">
-      <h2 class="txt-hide">셀렉트 박스 만들기</h2>
-      <button class="btn-select">최애 프로그래밍 언어</button>
+      <!-- <h2 class="txt-hide">셀렉트 박스 만들기</h2> -->
+      <button class="btn-select" type="button">최애 프로그래밍 언어</button>
       <ul class="list-member">
         <li>
           <button type="button">Python</button>
