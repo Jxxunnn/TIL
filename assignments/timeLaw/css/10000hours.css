@@ -1,0 +1,407 @@
+/* 전체 의견 : 
+    1. 확실히 그 전보다 더 구체적이고 정확한 코드가 된 것 같아요! 고생 많으셨습니다 :) 고민하시는 부분들은 충분히 고민될만한 부분들이며 앞으로 많이 진행하시면서 자연스럽게 기준이 생기실거예요.
+    2. (104번째 줄)background 속성같이 축약형이 가능한 것들은 축약해서 사용하시는 것이 좋습니다! 
+    3. (84번째 줄)font-face에서 설정한 'GmarketSansMedium'의 font-weigt는 Medium의 weight로 설정되어있어서 700으로 설정해도 기존 글꼴과 두께가 동일하게 나옵니다. 이럴 경우에 위에 따로 선언해주신 'GmarketSansBold'로 설정해주어야 하며, 혹은 일괄적으로 'GmarketSans'라는 font-family 값으로 설정 후 각각 bold, medium 폰트 파일을 설정해주면 weight 값에 따라 사용 가능합니다!
+    3. 사소한 내용이지만 '속성: 값' 의 띄어쓰기를 통일해주시는 것도 좋습니다 :) 프리티어에서 설정 가능합니다.
+    4. em을 사용하신다면 반응형때문에 사용하신 것 이겠죠?? 이럴 경우 하나하나 계산하여 소수점 단위로 변환하기가 까다로우니 body: font-size: 10px로 설정한 뒤 16px의 경우 1.6rem, 28px의 경우 2.8rem같이 사용하시는 것도 하나의 방법일 수 있습니다.
+     */
+
+/* 1만시간 피그마 링크
+https://www.figma.com/file/YIoHn24LhFrCBEedo96rx6/1%EB%A7%8C-%EC%8B%9C%EA%B0%84%EC%9D%98-%EB%B2%95%EC%B9%99?node-id=3%3A293
+ */
+
+@import url(./reset.css);
+@font-face {
+    font-family: 'OTEnjoystoriesBA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/OTEnjoystoriesBA.woff') format('woff');
+    font-weight: normal; /*400*/
+    font-style: normal;    
+}
+@font-face {
+    font-family: 'GmarketSansBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+    font-weight: normal;
+    font-style:normal;
+}
+
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: normal;
+    src: url("https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2") format('woff2'),
+    url("https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff") format('woff'),
+    url("https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf") format('opentype');
+}
+
+* {
+    --font-weight-bold : 700;
+    --color-title-yellow : #F5DF4D;
+    --color-purple : #5B2386;
+    --color-yellow : #FCEE21;
+    --color-white : #FFFFFF;  
+}
+
+
+/* 변수에는 색상과 폰트사이즈, 폰트웨이트외에도 어떤 것을 넣어주면 좋을까요?*/
+/* 답변 :
+    보통 font-weight는 변수로 따로 사용하지 않는 편이긴 합니다! 기본적으로 css에서 700을 bold로 인식하기도하고, 프로젝트 별로 달라지는 값이 아니라서요...! 아래 MDN 문서도 같이 보시면 좋을 것 같아요~
+    참고 : https: //developer.mozilla.org/en-US/docs/Web/CSS/font-weight#syntax
+
+    저같은 경우에는 프로젝트마다 달라지는 컬러 코드, 브레이크 포인트(미디어 쿼리) 등등에 사용합니다. 사실 변수를 사용하는 것도 좀 더 효율적으로 사용하기위한 것이니(반복적인 코드 사용 최소화, 값 변경시 반복 수정 최소화) 상황에 따라 필요에 의해 추가하는 것도 좋은 방법입니다 :)
+
+    추가 : 
+    그리고 지금 * 선택자에 변수를 설정해주셨는데 보통 :root 선택자에 많이 선언하여 사용하는 편 입니다.
+    :root 가상 선택자로 최상위 선택자를 이야기하는데, 선택자 우선순위에 따라 가상선택자는 class로 10점으로 들어가 html, * 태그보다 더 우선순위가 높습니다. 저는 보다 확실한(?) 사용을 위해 :root 선택자로 설정합니다!
+ */
+body {
+    background-color: #5B2386;
+    font-family: 'GmarketSansMedium';
+    font-size : 14px;
+    text-align: center; 
+    color: var(--color-white);
+    white-space: nowrap;
+}
+.sr-only {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+}
+.btn-type-1 {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    background-color: var(--color-yellow);    
+    /* font-family: 'GmarketSansBold'; */
+    font-family: 'GmarketSansMedium';
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.02em;
+    vertical-align: middle;
+    color:var(--color-purple);
+}
+/* 버튼의 결이 다 비슷한 것 같아 클래스로 묶어서 공통된 스타일을 적용해 보았는데 괜찮은가요? */
+/* 답변 : 네! 당연히 괜찮습니다 */
+
+/* header 시작 */
+.header{
+    margin-top : 41px;  
+    margin-bottom : 31px;   
+}
+.header__title {
+    background-image: url(../img/clock.png);
+    background-repeat: no-repeat;   
+    background-position: center;
+    background-size: 120px;
+    /* background: url(../img/clock.png) no-repeat center / 120px; */
+    height : 106px;      
+    display: flex;
+    align-items: center;
+    justify-content: center;   
+}
+.header__title > img {
+    width : 267px;
+}
+
+/* section > explain 시작 */
+.explain {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom : 62px;
+}
+.explain__title{
+    font-family: "OTEnjoystoriesBA";
+    font-weight : var(--font-weight-bold);
+    font-size: 1.57em;
+    line-height: 1.09em;
+    color: var(--color-title-yellow);
+    margin-bottom:78px;
+}
+.explain__desc {   
+    line-height: 2em;  
+    width:100%;
+}
+.explain__desc > strong {   
+    font-weight: var(--font-weight-bold);  
+}
+.explain__desc::after{
+    content : "";
+    background-image: url(../img/quotes.png);
+    background-repeat: no-repeat;
+    width: 302px;
+    height: 17px;
+    display: block;
+    margin : 0 auto;
+    position: relative;
+    bottom : 3.9em;
+}
+/* 누리님은 이 따옴표의 포지션을 어떻게 잡으실지가 궁금합니다 */
+/* 답변 : 이렇게 설정하셔도 괜찮긴 한데, 만약 저라면 explain__desc에 position:relative, ::after에 position:absolute 넣어서 가운데 정렬한 다음 상세 간격을 맞출 것 같긴 합니다. */
+
+
+/* section > wannabe 시작 */
+.wannabe {
+   margin-bottom : 16px;
+   padding : 0 24px;   
+}
+.wannabe__form {
+    line-height : 3em;
+}
+.wannabe__form input {
+    font-family: 'GmarketSansMedium';
+    /* 인풋이나 버튼의 타이포그래피는 원래 항상 선언을 따로 해주어야 하는 걸까요? */
+    /* 상속이 안되네요 */
+    /* 답변 : * 선택자에 폰트 설정을하면 input, button까지 모두 일괄적용됩니다. form관련 태그들은 font 관련하여서는 OS나 브라우저 속성을 따르기 때문에 별도로 설정해주어야 합니다ㅜㅜ 예를들어 아이폰에서 select와 안드로이드에서 select는 아예 UI가 다른 것 처럼 별도의 설정이 들어갑니다. */
+    width : 157px;
+    height: 37px;
+    border-radius: 7px;
+    text-align: center;
+}
+#wannabe__block {
+    display:block;
+}
+.wannabe__btn { 
+    border-radius: 13px;
+    width : 241px;
+    white-space: normal;
+    padding: 18px 36.5px;
+    margin-top: 49px;
+}
+.test::after {
+    content: "";
+    display: block;
+    background-image: url(../img/click.png);
+    background-size: cover;
+    width: 43px;
+    height: 48px;
+    position:relative;
+    right:-10.7em;
+    bottom:2.64em;
+    margin : 0 auto;
+}
+
+/* section > result 시작 */
+.result {    
+    margin-bottom : 87px;
+
+}
+.result {
+    letter-spacing: 0.01em;
+}
+.result__text {
+    font-weight: var(--font-weight-bold);
+    font-size : 1.7em;
+    line-height: 2em; 
+    vertical-align:middle;
+    padding : 0 7px;
+}
+.result > .btn__box > button {
+    margin-top: 55px;
+    padding: 13.5px 17.5px;  
+    border-radius: 56px;
+    color: #5B2386;
+}
+.result > .btn__box > button:last-child {
+    background-color: var(--color-white);
+    margin-left:17px;
+    /* line-height: 21px;     */
+}
+/* 버튼에 패딩을 줘서 크기를 맞추는 것보다 heigth와 width를 쓰는 것이 나은 것일까요? */
+/* 어떠한 요소에 width와 height를 고정으로 줘야할 지 컨텐츠의 크기로 맞춰줘야할 지 고민이 많이 됩니다.. */
+/* 답변 :
+    상황에 따라서 다를 것 같아요. 저라면 만약 반응형에 맞춰서 크기도 조절이 되는 경우라면 padding을 주고 min 혹은 max-width를 줄 것 같고, 크기가 고정적인 버튼이라면 그냥 width+height 혹은 width, padding으로 줄 것 같은데 버튼의 경우 text-align이 cetner이니 크기만 주고 vertical간격을 맞추는 편이긴 합니다! */
+
+/* footer 시작 */
+.footer {
+    margin-bottom : 32px;
+}
+.footer__logo {
+    margin-bottom: 17px;
+}
+.footer__copyright {
+    display: block;
+    font-family: 'Noto Sans KR';
+    font-size: 0.64em;
+    line-height: 1.44em;
+}
+
+/* modal 시작 */
+.cheer {
+    display: flow-root;
+    width:330px;
+    height:500px;
+    margin : 0 auto;
+    background-color:var(--color-white);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 30px;
+    margin-bottom : 32px;
+}
+.cheer__title {
+    font-family: 'OTEnjoystoriesBA';
+    font-weight: var(--font-weight-bold);
+    font-size: 4em;
+    line-height: 1.09em;
+    color: var(--color-purple);
+    margin-top : 40px;
+    
+}
+.cheer__desc {
+    font-family: 'OTEnjoystoriesBA';
+    font-weight: var(--font-weight-bold);
+    font-size: 2.57em;
+    line-height: 1.11em;
+    color: var(--color-purple);
+ 
+}
+.cheer__btn {
+    white-space: normal;
+    width : 241px;
+    padding : 19px 45px;
+    line-height: 1em; 
+    border-radius: 13px;
+    margin-top:246px;
+}
+/* 가끔 가다 버튼 안의 텍스트가 살짝 올라온 것 같은 녀석들이 있는데 line-height를 버튼의 높이와 맞춰주는 방법 말고 다른 방법이 있을까요? */
+/* 답변 :
+    상황에 따라 다양한 방법이 있습니다! 정해진 정답은 없고, 저는 line-height나 vertical-align으로 수정 많이 하고 아주 미약한 차이면 가끔 padding값으로도 수정합니다...^^; */
+
+/* 반응형 웹 시작 */
+
+@media all and (min-width:480px)  {
+body{
+        font-size : 24px;
+    }
+.btn-type-1 {
+        font-size : 24px;   
+        vertical-align: middle;
+        color:var(--color-purple);
+}
+.header{
+    margin-top : 120px;  
+    margin-bottom : 46px;   
+}
+.header__title {
+    background-size:225px;
+    height : 225px;      
+}
+.header__title > img {
+    width : 564px;
+}
+.explain {
+    margin-bottom : 6px;
+}
+.explain__title{
+    margin-bottom:78px;
+}
+.explain__desc::after{ 
+    width:493px;
+    height : 96px;
+    background-size: contain;  
+}
+.wannabe {
+   margin-bottom : 80px;
+}
+.wannabe__form input {
+    width : 228px;
+    height: 57px;
+    font-size : 24px;
+}
+#wannabe__block {
+    display:inline;
+}
+
+.wannabe__btn { 
+    white-space: nowrap;
+    border-radius: 56px;
+    width : 565px;
+    padding: 21px 49px;
+    margin-top: 115px;
+}
+
+.wannabe::after {
+    width: 64px;
+    height: 72px;
+    margin : 0 auto;
+    right:-13.7em;
+    bottom:2.44em; 
+    /* 따옴표와 마찬가지로 */
+    /* 손가락 포지션은 어떻게 잡아야 베스트일지.. */
+    /* 반응형까지 고려하니 position속성으로 잡아주기가 조금 어렵네요 */
+    /* 답변 : 만약 저라면 단순 디자인 관련이니 button 위에 wrapper 용도로 div 하나를 싸주고 그 div에 ::after를 붙여줘서 버튼과 간격조절해서 넣을 것 같습니다! */
+}
+.result {    
+    margin-bottom : 130px;
+}
+.result__text {
+    font-size : 3em;
+    line-height: 1.25em; 
+    padding : 0 12px;
+}
+.result > .btn__box > button {
+    margin-top: 127px;
+    padding: 21px 49px;  
+}
+.result > .btn__box > button:last-child {
+    margin-left:17px;
+    /* line-height: 36px;     */
+}
+/* 버튼 두 개의 컨텐츠 높이가 다릅니다.. */
+/* 폰트 글자의 문제일까요? */
+/* 한쪽에 line-height를 높게 줘서 맞춰주는 방식으로 하였는데 좋은 방법이 있을까요.. */
+/* 답변 :
+    위에 미디어쿼리 아닌 기존 css에 설정된 line-height를 해제하니까 버튼 크기가 동일하네요! 이렇게 고정된 버튼의 경우 width, height를 정해주는 것도 좋은 방법입니다. */
+
+.footer {
+    margin-bottom : 130px;
+}
+.footer__logo {
+    margin-bottom: 20px;
+}
+.footer__copyright {
+    font-size: 12px;
+}
+.cheer {
+    width:800px;
+    height:800px;
+    margin-bottom : 130px;
+}
+.cheer__title {
+    margin-top : 76px;
+    font-size: 4em;
+    line-height: 1.09em;
+}
+.cheer__title::after {
+    content : "♥♥♥"
+}
+.cheer__desc {
+    font-size: 1.5em;
+}
+.cheer__desc::after {
+    content : "";
+    display: block;
+    width: 433px;
+    height : 337px; 
+    margin: 0 auto;
+    background-image: url(../img/licat.png);
+}
+.cheer__btn { 
+    width : 508px;
+    padding : 21px 49px;
+    margin-top:74px;
+}
+}
+
+/* 반응형을 고려하면서 생각해본 게 스타일링에 있어서 본인만의 확실한 기준이 있어야 
+할 것다는 느낌이 옵니다. 왜 내가 이 스타일을 주었는지 까먹고 헷갈리는 경우가 있네요..
+CSS도 협업을 하는 경우가 있나요?-?*/
+/* 답변 : 이것도 때에 따라서 많이 다르겠지만 컴포넌트나 부분부분 작업해서 페이지에 합칠 때 같이 보는 경우가 있긴 합니다! */

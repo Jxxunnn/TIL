@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>myselect</title>
+    <style>
+      button {
+        border: none;
+        padding: initial;
+        background: initial;
+
+        text-align: left;
+      }
+      ul {
+        margin: initial;
+        padding: initial;
+      }
+      li {
+        list-style-type: none;
+      }
+      /* start */
+      .cont-select {
+        width: 200px;
+        margin: 100px auto 0;
+      }
+      .btn-select {
+        width: 100%;
+        padding: 11px 20px 11px 13px;
+        font-weight: 400px;
+        font-size: 14px;
+        line-height: 16px;
+        text-align: left;
+        border: 1px solid #9b51e0;
+        border-radius: 10px;
+        cursor: pointer;
+        background: url(Polygon\ 1.png) no-repeat right 12px center;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      .btn-select:focus {
+        outline: 3px solid #f8e4ff;
+      }
+      .list-member {
+        position: relative;
+        top: 9px;
+        left: 0;
+        border: 1px solid #c4c4c4;
+        box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.15);
+        border-radius: 10px;
+      }
+
+      /* .btn-select,
+      .list-member {
+        box-sizing: border-box;
+        width: 200px;
+        text-align: left;
+        border: 1px solid #c4c4c4;
+        border-radius: 10px;
+      }
+      .btn-select {
+        padding-left: 14px;
+        height: 40px;
+        margin-bottom: 9px;
+      }
+
+      .btn-select:hover {
+        border-color: #f8e4ff;
+      }
+      .list-member {
+        padding: 4px 0px;
+      }
+      .list-member > li > button {
+        padding: 12px 18px;
+      }
+      .list-member > li:hover {
+        background: #f8e4ff;
+        border-radius: 8px;
+        padding: 5px 8px;
+      } */
+    </style>
+  </head>
+  <body>
+    <article class="cont-select">
+      <h2 class="txt-hide">셀렉트 박스 만들기</h2>
+      <button class="btn-select">최애 프로그래밍 언어</button>
+      <ul class="list-member">
+        <li>
+          <button type="button">Python</button>
+        </li>
+        <li>
+          <button type="button">Java</button>
+        </li>
+        <li>
+          <button type="button">JavaScript</button>
+        </li>
+        <li>
+          <button type="button">C#</button>
+        </li>
+        <li>
+          <button type="button">C/C++</button>
+        </li>
+      </ul>
+    </article>
+  </body>
+</html>
