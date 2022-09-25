@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>준근이의 자판기</title>
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="header-logo">
+        <img src="./mediaquery/logo.svg" alt="ColaCola" />
+      </h1>
+    </header>
+    <main class="main">
+      <section class="section section-app">
+        <h2 class="sr-only">자판기</h2>
+        <section class="menu">
+          <h3 class="sr-only">메뉴</h3>
+          <ul class="menu-list">
+            <li class="list-item-info picked">
+              <figure>
+                <img
+                  class="item-img"
+                  src="./mediaquery/Original_Cola.svg"
+                  alt="Original Cola"
+                />
+                <figcaption class="item-name">Original_Cola</figcaption>
+              </figure>
+              <strong class="item-price">1000</strong>
+            </li>
+            <li class="list-item-info sold-out">
+              <figure>
+                <img
+                  class="item-img"
+                  src="./mediaquery/Violet_Cola.svg"
+                  alt="Violet Cola"
+                />
+                <figcaption class="item-name">Violet_Cola</figcaption>
+              </figure>
+              <strong class="item-price">1000</strong>
+            </li>
+            <li class="list-item-info">
+              <figure>
+                <img
+                  class="item-img"
+                  src="./mediaquery/Yellow_Cola.svg"
+                  alt="Yellow Cola"
+                />
+                <figcaption class="item-name">Yellow_Cola</figcaption>
+              </figure>
+              <strong class="item-price">1000</strong>
+            </li>
+            <li class="list-item-info">
+              <figure>
+                <img
+                  class="item-img"
+                  src="./mediaquery/Cool_Cola.svg"
+                  alt="Cool Cola"
+                />
+                <figcaption class="item-name">Cool_Cola</figcaption>
+              </figure>
+              <strong class="item-price">1000</strong>
+            </li>
+            <li class="list-item-info picked">
+              <figure>
+                <img
+                  class="item-img"
+                  src="./mediaquery/Green_Cola.svg"
+                  alt="Green Cola"
+                />
+                <figcaption class="item-name">Green_Cola</figcaption>
+              </figure>
+              <strong class="item-price">1000</strong>
+            </li>
+            <li class="list-item-info">
+              <figure>
+                <img
+                  class="item-img"
+                  src="./mediaquery/Orange_Cola.svg"
+                  alt="Orange Cola"
+                />
+                <figcaption class="item-name">Orange_Cola</figcaption>
+              </figure>
+              <strong class="item-price">1000</strong>
+            </li>
+          </ul>
+        </section>
+        <section class="exchanger">
+          <h3 class="sr-only">교환기</h3>
+          <p class="text-left-money"><span>잔액</span><strong>1,000</strong></p>
+          <button class="btn-return-money" type="text">거스름돈 반환</button>
+          <input
+            class="input-put-money"
+            type="text"
+            placeholder="입금액 입력"
+          /><button class="btn-put-money" type="text">입금</button>
+          <ul class="list-get">
+            <li class="list-get-item">
+              <figure>
+                <img src="./mediaquery/Original_Cola.svg" alt="Original Cola" />
+                <figcaption>Original_Cola</figcaption>
+              </figure>
+              <strong class="item-quantity">1</strong>
+            </li>
+            <!-- text 말고 txt -->
+            <!-- 언더바 활용좀해라 -->
+            <!-- 피그캡션있는데 왜 alt? -->
+            <!-- 클래스명 정반대로 해라 -->
+            <li class="list-get-item">
+              <figure>
+                <img src="./mediaquery/Green_Cola.svg" alt="Green Cola" />
+                <figcaption>Green_Cola</figcaption>
+              </figure>
+              <strong class="item-quantity">2</strong>
+            </li>
+            <li class="list-get-item">
+              <figure>
+                <img src="./mediaquery/Orange_Cola.svg" alt="Orange Cola" />
+                <figcaption>Orange_Cola</figcaption>
+              </figure>
+              <strong class="item-quantity">1</strong>
+            </li>
+            <li class="list-get-item">
+              <figure>
+                <img src="./mediaquery/Violet_Cola.svg" alt="Violet Cola" />
+                <figcaption>Violet_Cola</figcaption>
+              </figure>
+              <strong class="item-quantity">5</strong>
+              <!-- li에 이미 item 있는데 strong에는 왜 굳이 써서 클래스만 길어지게 하는거야? -->
+              <!-- 어차피 셀렉할 때 부모도 같이 쓰잖아. -->
+            </li>
+          </ul>
+          <button class="btn-get-money" type="text">획득</button>
+        </section>
+      </section>
+      <section class="section section-state">
+        <!-- section의 class명 section? 의미를 둡시다. -->
+        <p class="text-hand-money">
+          <span>소지금</span><strong>25,000</strong>
+        </p>
+        <h2 class="title-state">획득한 음료</h2>
+        <ul class="list-get big">
+          <li class="list-get-item big">
+            <figure>
+              <img src="./mediaquery/Original_Cola.svg" alt="Original Cola" />
+              <figcaption>Original_Cola</figcaption>
+            </figure>
+            <strong class="item-quantity">1</strong>
+          </li>
+          <li class="list-get-item big">
+            <figure>
+              <img src="./mediaquery/Green_Cola.svg" alt="Green Cola" />
+              <figcaption>Green_Cola</figcaption>
+            </figure>
+            <strong class="item-quantity">2</strong>
+          </li>
+          <li class="list-get-item big">
+            <figure>
+              <img src="./mediaquery/Orange_Cola.svg" alt="Orange Cola" />
+              <figcaption>Orange_Cola</figcaption>
+            </figure>
+            <strong class="item-quantity">1</strong>
+          </li>
+          <li class="list-get-item big">
+            <figure>
+              <img src="./mediaquery/Violet_Cola.svg" alt="Violet Cola" />
+              <figcaption>Violet_Cola</figcaption>
+            </figure>
+            <strong class="item-quantity">5</strong>
+          </li>
+        </ul>
+        <p class="text-total-money">
+          <span>총금액</span><strong>9,000</strong>
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

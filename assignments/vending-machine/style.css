@@ -1,0 +1,296 @@
+/* variable */
+:root {
+    --main-bg-color : #EAE8FE;
+    --bg-color-blue : #6327FE;
+    --break-point : 768px;
+    /* 변수를 넣으시오 */
+}
+/* reset css */
+* {
+    margin : 0;
+    padding : 0;
+}
+*, *::before, *::after {
+    box-sizing : content-box;
+    /* border-box로 바꾸고 여러가지 길이 다시 바꿔라ㅠ */
+    /* 어쩐지 길이 자꾸 안맞더라 ㅠ */
+}
+li {
+    list-style : none;
+}
+button, input {
+    border : initial;
+    font-family : inherit;
+    font-size : inherit;
+    font-weight : inherit;
+}
+button {
+    background-color : initial;    
+    cursor : pointer;
+}
+h1,h2,h3,h4,h5,h6 {
+    font-size : inherit;
+    font-weight : initial;
+}
+strong {
+    font-weight : initial;
+}
+/* font */
+html {
+    font-size : 62.5%;
+    font-family : 'Noto Sans KR';
+    font-style : normal;
+    font-weight : 500;
+}
+/* font-size : 9px;  -> 9px 지원되는 곳에 적용.*/
+/* -webkit-transform : scale(0.9) 9px가 안되는 크롬에서만 이렇게 작동한다는 뜻. */
+
+/* layout */
+.section {
+    width : 306px;
+    margin : 0 auto;
+}
+/* sr-only */
+.sr-only {
+    position: absolute;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    border: 0;
+    clip: rect(0,0,0,0);
+    }
+/* header */
+.header {
+    width : 168px;
+    margin : 0 auto;
+    margin-bottom : 18px;
+}
+/* main */
+/* section-app */
+.section-app {
+    margin-bottom : 20px;
+}
+/* section-app menu */
+.menu {
+    margin-bottom : 20px;
+}
+.menu-list {
+    display : grid;
+    grid-template-columns : repeat(3, 100px);
+    grid-auto-rows : 136px;
+    gap : 12px;
+}
+.list-item-info {
+    border : 3px solid transparent;
+    box-shadow : 0px 0px 3px rgba(0, 0, 0, 0.25) inset;
+    border-radius : 10px;
+    text-align : center;
+    cursor : pointer;
+}
+.list-item-info.picked {
+    border : 3px solid var(--bg-color-blue);
+}
+.list-item-info.sold-out {
+    cursor : default;
+    position : relative;
+    overflow : hidden;
+}
+.list-item-info.sold-out::after {
+    content : '';
+    position : absolute;
+    inset : 0;
+    background : url(./mediaquery/Sold-out.svg) no-repeat rgba(0, 0, 0, 0.8) center 25%;
+}
+.list-item-info > figure {
+    margin-top : 10px;   
+}
+.list-item-info > figure > figcaption {
+    margin-top : 6px;
+    line-height : 1em;
+}
+
+/* 스크롤바 좀 떨어트려. */
+/* 획득한 음료 ul부분이 박스쉐도우가 아니라 보더다 */
+/* list도 박스 쉐도우가 아니라 border다. */
+/* 25000원 bold */
+/* 입금액입력 input도 박스 쉐도우가 아니라 border다. */
+
+.list-item-info > .item-price {
+    display : block;
+    background-color : var(--bg-color-blue);
+    width : 70px;
+    height : 22px;
+    margin: 7px auto 0px auto;
+    border-radius: 50px;    
+    line-height: 22px;
+    color : white;
+    font-size: 1.2rem;    
+}
+.list-item-info > .item-price::after {
+    content: "원";
+    /* 스크린리더 고려 안해? */
+}
+/* test용  */
+.list-item-info:not(.sold-out):hover {
+    border : 3px solid var(--bg-color-blue);
+}
+.btn-return-money, .input-put-money, .btn-put-money {
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+/* section-app exchanger */
+.exchanger {
+    display : grid;
+    grid-template-columns : 200px 94px;
+    grid-auto-rows : 33px 33px 106px;
+    gap : 12px;
+}
+.text-left-money, .text-hand-money {
+    background-color: var(--main-bg-color);
+    border-radius: 5px;
+}
+.text-left-money {
+    background-color: var(--main-bg-color);
+    display: flex;
+    justify-content: space-between;
+    line-height: 33px;
+    padding : 0 10px; 
+    font-size : 1.4rem;
+}
+.text-left-money > span::after, .text-hand-money > span::after, .text-total-money > span::after {
+    content : " : ";
+}
+.text-left-money > strong::after, .text-hand-money > strong::after, .text-total-money > strong::after {    
+    content: " 원"    
+}
+.btn-return-money, .btn-put-money {
+    font-size : 1.3rem;
+    border-radius: 5px;
+}
+.input-put-money {
+    font-size : 1.3rem;
+    text-align: right;
+    padding : 0 10px;
+}
+.list-get {
+    background-color: var(--main-bg-color);
+    border-radius: 5px;
+    overflow-y : scroll;
+    overflow-x : hidden;
+    padding : 12px 18px 12px 12px;
+    
+/*12 18 12 12*/
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);  
+}
+.list-get::-webkit-scrollbar {
+    width: 10px;  
+  }
+.list-get::-webkit-scrollbar-track {
+    background-color: transparent;
+    margin-top : 5px;
+  }
+.list-get::-webkit-scrollbar-thumb {   
+    border-radius: 50px;
+    background-clip: padding-box;
+    /* 백그라운드를 패딩까지 넣을거다. 기본 값은 border-box */
+    background-color: rgba(255, 255, 255, 0.8);
+    border : 3px solid transparent;
+}
+.list-get-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FFFFFF;
+    width :100%;
+    /* 154 */
+    height : 30px;
+    padding : 8px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+.list-get-item + .list-get-item {
+    margin-top : 6px;
+}
+.list-get-item > figure {
+    display:flex;
+}
+.list-get-item > figure > img {
+    width : 18px;
+    height : 33px;
+    margin-right : 10px;
+}
+.list-get-item > figure > figcaption {
+    line-height: 33px;
+}
+.list-get-item > .item-quantity {
+  font-size : 1.4rem;
+  width : 28px;
+  height : 28px;
+  border: 1px solid #BDBDBD;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.input-put-money { 
+    border-radius: 5px;
+}
+.btn-get-money {
+    border-radius: 5px;
+    background-color: var(--bg-color-blue);
+    color : #FFFFFF;
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+/* section-state */
+.section-state {
+    margin-bottom : 43px;
+}
+.text-hand-money {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width : 286px;
+    height : 32px;
+    font-size : 1.4rem;
+    padding : 0 10px;
+    margin-bottom : 41px;
+}
+.section-state h2 {
+    font-weight: 700;
+    font-size: 1.4rem;
+    text-align: center;
+    margin-bottom : 13px;
+}
+.list-get.big {
+    height : 340px;
+}
+
+.list-get-item.big {
+    width : 260px;  
+}
+.text-total-money {
+    width : 109px;
+    margin-left : auto;
+    text-align: right;
+    font-size : 1.2rem;
+    margin-top : 6px;
+}
+
+/* 반응형 */
+/* PC */
+@media all and (min-width : 1023px) {
+    .main {
+        display:flex;  
+       
+    }
+    .section-app {
+        margin-left : auto;
+        margin-right : 0;
+    }
+    .section-state {
+        margin-left : 0;
+        margin-right : auto;
+    }
+}
