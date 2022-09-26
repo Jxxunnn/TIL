@@ -110,13 +110,11 @@ html {
     margin-top : 6px;
     line-height : 1em;
 }
-
 /* 스크롤바 좀 떨어트려. */
 /* 획득한 음료 ul부분이 박스쉐도우가 아니라 보더다 */
 /* list도 박스 쉐도우가 아니라 border다. */
 /* 25000원 bold */
 /* 입금액입력 input도 박스 쉐도우가 아니라 border다. */
-
 .list-item-info > .item-price {
     display : block;
     background-color : var(--bg-color-blue);
@@ -148,7 +146,10 @@ html {
 }
 .text-left-money, .text-hand-money {
     background-color: var(--main-bg-color);
-    border-radius: 5px;
+    border-radius: 5px;  
+}
+.text-left-money > strong , .text-hand-money > strong {
+    font-weight: 700;
 }
 .text-left-money {
     background-color: var(--main-bg-color);
@@ -276,21 +277,79 @@ html {
     text-align: right;
     font-size : 1.2rem;
     margin-top : 6px;
+    font-weight: 700;
+}
+.text-total-money > strong {
+    font-weight: 700;
 }
 
 /* 반응형 */
 /* PC */
 @media all and (min-width : 1023px) {
+    body {
+        background-color: var(--main-bg-color);
+        box-sizing : border-box;
+    }
+    .header {
+        margin-bottom : 68px;
+        width : 386px;
+    }
+    .header-logo > img {
+        width : 100%;
+        
+    }
     .main {
-        display:flex;  
-       
+        display:flex;                         
+        column-gap: 28px;
+    }
+    .section {                         
+        width : 360px;
+        height: 545px;   
     }
     .section-app {
+        background-color : #FFFFFF;      
         margin-left : auto;
         margin-right : 0;
+        margin-bottom : 0;
+        padding-top : 31px;
+        padding-left : 34px;
     }
     .section-state {
         margin-left : 0;
+        height : 100%;
+        width : 394px;
         margin-right : auto;
+        padding-left : 20px;
+        padding-right : 14px;
+    }
+    .text-hand-money {
+        background-color: var(--main-bg-color);        
+        border-left : 27px solid;
+        border-right : 27px solid;
+        border-top : 9px solid;
+        border-bottom : 9px solid;
+        border-color : #FFFFFF;
+        border-radius: 0;
+        width : 316px;
+    }
+    .wrapper {
+        background-color : #FFFFFF;
+        padding-top: 20px;
+        padding-bottom : 24px;
+    }
+    .title-state {
+        
+    }
+
+    .list-get.big {
+        width : 306px;
+        height : 364px;
+        margin : 0 auto;
+    }
+    .list-get-item.big {
+        width : 100%;
+    }
+    .text-total-money {
+        margin-right : 29px;
     }
 }
