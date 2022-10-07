@@ -79,6 +79,11 @@ while (i < 10) {
   i++;
 }
 
+/**이름,나이를 입력하면 합쳐서 문자로 뱉어주는 함수 */
+function hello() {
+  console.log(hi);
+}
+
 // continue는 다음 루프로 갑니다.
 let i = 1;
 let j = 1;

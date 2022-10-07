@@ -1,6 +1,5 @@
 // 컴백홈
 // const fs = require("fs");
-// const { gzip } = require('zlib');
 // const input = fs.readFileSync("./input.txt").toString().trim().split("\n");
 // const [n, m, k] = input[0].split(" ").map((v) => +v);
 // console.log(n, m, k);
