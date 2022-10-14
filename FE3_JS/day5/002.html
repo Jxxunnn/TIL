@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <p></p>
+    <input type="text" />
+    <button>Write Something!</button>
+    <script>
+      const myBtn = document.querySelector("button");
+      const myP = document.querySelector("p");
+      const myInput = document.querySelector("input");
+      myInput.addEventListener("input", () => {
+        myP.textContent = myInput.value;
+      });
+      myP.innerHTML = `<h1>하이!</h1>`;
+      //리스너 안의 핸들러함수. 이벤트와 관련된 모든 정보를 가지고 있는 매개변수가 전송됩니다.
+      //이것이 바로 이벤트 객체입니다!
+    </script>
+  </body>
+</html>
