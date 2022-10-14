@@ -1,0 +1,17 @@
+/* style.css */
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+.container {
+  display: flex;
+  width: 500px;
+  height: 300px;
+  /* 컨테이너의 범위를 벗어난 이미지 숨김  */
+  overflow: hidden;
+}
+.contanier > img {
+  width: 100%;
+}
