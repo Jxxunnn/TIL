@@ -1,23 +1,30 @@
 :root {
-    /* 변수를 넣으시오 */
+  /* 변수를 넣으시오 */
 }
 html {
-    font-size : 62.5%;
+  font-size: 62.5%;
 }
 * {
-    margin : 0;
-    padding : 0;
+  margin: 0;
+  padding: 0;
 }
-*, *::before, *::after {
-    box-sizing: content-box;
+*,
+*::before,
+*::after {
+  box-sizing: content-box;
 }
 li {
-    list-style: none;
+  list-style: none;
 }
-h1,h2,h3,h4,h5,h6 {
-    font-size : inherit;
-    font-weight: initial;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: initial;
 }
 strong {
-    font-weight : initial;
+  font-weight: initial;
 }
