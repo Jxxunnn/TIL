@@ -5,13 +5,41 @@
 body {
   margin: 0;
 }
-.container {
-  display: flex;
+.carousel {
+  position: relative;
   width: 500px;
   height: 300px;
-  /* 컨테이너의 범위를 벗어난 이미지 숨김  */
   overflow: hidden;
 }
-.contanier > img {
-  width: 100%;
+/* style.css */
+.container {
+  display: flex;
+  height: 100%;
+  /* 버튼 클릭 시 슬라이드되는 속도를 조절합니다. */
+  transition: transform 0.3s ease-in-out;
+}
+.container > img {
+  min-width: 100%;
+}
+
+.btn-prev,
+.btn-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 60px;
+  height: 1em;
+  width: 1em;
+  line-height: 1;
+  cursor: pointer;
+  background: inherit;
+  border: inherit;
+  padding: 0;
+}
+
+.btn-prev {
+  left: 0;
+}
+.btn-next {
+  right: 0;
 }

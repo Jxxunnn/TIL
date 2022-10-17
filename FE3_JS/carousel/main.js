@@ -3,7 +3,16 @@ const container = document.querySelector(".container");
 const prevButton = document.querySelector(".btn-prev");
 const nextButton = document.querySelector(".btn-next");
 
-prevButton.addEventListener("click", () => {});
+let index = 0;
 
-nextButton.addEventListener("click", () => {});
-carousel.style.transform = `translateX(-${500 * index}px)`;
+prevButton.addEventListener("click", () => {
+  if (index === 0) return;
+  index -= 1;
+  container.style.transform = `translateX(-${500 * index}px)`;
+});
+
+nextButton.addEventListener("click", () => {
+  if (index === 2) return;
+  index += 1;
+  container.style.transform = `translateX(-${500 * index}px)`;
+});
