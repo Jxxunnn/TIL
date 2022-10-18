@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <h1>준근쓰 메모장</h1>
+    <form class="form-memo">
+      <input
+        class="input-title"
+        style="display: block; margin-bottom: 30px"
+        type="text"
+        required
+      />
+      <textarea
+        name="memo"
+        class="text-content"
+        id=""
+        cols="30"
+        rows="10"
+        required
+      ></textarea>
+    </form>
+    <script>
+      // 전부 객체 아니면 배열로 받아와야지 그리구 청므부터.
+      const $form = document.querySelector(".form-memo");
+      const $input = document.querySelector(".input-title");
+      const $textArea = document.querySelector(".text-content");
+      const paint = () => {
+        const $ul = document.createElement("ul");
+        const $li = document.createElement("li");
+        for (let i = 0; i < localStorage.length; i++) {
+          $li.append(localStorage.getItem(localStorage.key(i)));
+          $ul.append(li);
+        }
+      };
+      $form.addEventListener("submit", (e) => {
+        const title = $input.value;
+        const content = $textArea.value;
+        localStorage.setItem(title, content);
+        $input.value = "";
+        $textArea.value = "";
+      });
+    </script>
+  </body>
+</html>
