@@ -1,2 +1,2 @@
-# FrontendSchool_3
-프론트엔드스쿨 3기 repository
+# TIL
+일일배움 실천하고 성장하기
