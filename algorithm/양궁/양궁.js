@@ -26,6 +26,5 @@ function makeCases(leftArrows, arr) {
 // 남은 화살 수에서 어피치 + 1 을 뺀다.
 // 다음 인덱스로 넘어간다.
 // or
-
 // 1-1 arr[i]에 0을 집어넣는다.
 // 다음 인덱스로 넘어간다.
