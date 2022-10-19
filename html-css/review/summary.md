@@ -172,7 +172,7 @@
   ```html
   <table>
     <caption>
-      이 table은 영국에서 최초로 시작되어 일년에 한바퀴 돌면서...
+      제목이나 설명(사용을 권고합니다.)
     </caption>
     <colgroup>
       <col class="구분" />
@@ -292,3 +292,29 @@
 ## 1. CSS란?
 
 - Cascading Style Sheets
+- CSS3, CSS4 는 없다?! CSS 기능의 단위를 모듈(module)이라고 표현
+
+## 2. CSS 적용
+
+- 인라인, 내부, 외부, 다중(@import)
+
+## 3. reset CSS
+
+- 에릭 마이어의 reset CSS
+- normalizce.css (오늘날 가장 많이 사용하는 reset css)
+
+## 4. 주석 및 벤더 프리픽스
+
+- `/* 주석은 이렇게 사용합니다. */`
+- 벤더 프리픽스 : CSS 속성 앞에 브라우저 제조사 만의 접두어(prefix)를 붙이는 문법
+- 회사에서 사용하는 prefixer가 있거나 컨벤션이 정해져 있을 것이다.
+
+## 5. 선택자 우선순위
+
+1. 후자 우선의 원칙 : 동일한 선택자가 연속으로 사용되었을 경우 후자가 우선
+2. 구체성(명시도)의 원칙 : 더 구체적으로 작성된 선택자를 우선
+3. 중요성의 원칙 :
+
+## 7. CSS declaration
+
+-단위 : px, em, rem, vw, vh, %
