@@ -11,27 +11,45 @@
         height: 200px;
         background-color: aqua;
         margin: 100px auto;
-        transition: 0.3s;
       }
     </style>
   </head>
   <body>
     <div></div>
     <script>
-      const $div = document.querySelector("div");
-      let dist = 0;
-      console.dir($div);
-      function moveDiv(e) {
-        if (e.keyCode === 37) {
-          --dist;
-          $div.style.transform = `translateX(${dist * 10}px)`;
-        }
-        if (e.keyCode === 39) {
-          ++dist;
-          $div.style.transform = `translateX(${dist * 10}px)`;
-        }
+      const target = document.querySelector("div");
+      let pos = 0;
+
+      // 사용자가 누르는 키의 상태를 저장하는 객체
+      let keys = {};
+      // ArrowLeft: true;
+
+      function move(event) {
+        keys[event.key] = true;
       }
-      document.addEventListener("keydown", moveDiv);
+
+      function stop(event) {
+        keys[event.key] = false;
+      }
+
+      document.addEventListener("keydown", move);
+      document.addEventListener("keyup", stop);
+
+      function play() {
+        if (keys.ArrowRight) {
+          pos += 2;
+          target.style.transform = `translateX(${pos}px)`;
+        }
+
+        if (keys.ArrowLeft) {
+          pos -= 2;
+          target.style.transform = `translateX(${pos}px)`;
+        }
+
+        window.requestAnimationFrame(play);
+      }
+
+      window.requestAnimationFrame(play);
     </script>
   </body>
 </html>
