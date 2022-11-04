@@ -1,5 +1,63 @@
 # SPA 쇼핑몰
 
+## 환경 설정
+
+`product.json`
+
+```json
+[
+	{
+		"id": ?,
+		"name": ?,
+		"imageUrl": ?,
+		"price": ?,
+	},
+	...
+]
+```
+
+`product-details.json`
+
+```json
+{
+  "1": {
+    "id": ?,
+    "name": ?,
+    "price": ?,
+    "imageUrl": ?,
+    "productOptions": [
+      {
+        "id": ?,
+        "name": ?,
+        "price": ?,
+        "stock": ?,
+        "created_at": ?,
+        "updated_at": ?
+      },
+			...
+		]
+	},
+	...
+}
+```
+
+`api.js`
+
+```js
+import product from "./product.json" assert { type: "json" };
+import details from "./product-details.json" assert { type: "json" };
+
+export const request = async (state) => {
+  const res = !state ? product : details[state.productId];
+
+  return res;
+};
+```
+
+json 데이터는 단순 데이터가 아니라 JavaScript가 될 수 있고 실행될 수 있다는 가정이 걸려있다.
+
+json파일을 index.html내 모듈로 삽입하거나, 위와같이 ES모듈로 인식하고 import할 수 있게 assert { type: "json" };을 추가하여 json데이터를 가져올 수 있다.
+
 ## 생각해보기
 
 별도의 라이브러리 없이 SPA 구현하기. SPA를 구성하는 부분에서 중요한 것이 URL 라우팅 처리인데, 대부분 라이브러리나 프레임워크 차원에서 기본적으로 지원을 많이 하기 때문에 직접 구현해볼 일은 크게 없었을 것이다.
