@@ -1,0 +1,95 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Carousel</title>
+    <style>
+      /* style.css */
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+      }
+      .carousel {
+        width: 500px;
+        height: 300px;
+        position: relative;
+        overflow: hidden;
+      }
+      .container {
+        display: flex;
+        height: 100%;
+        transition: transform 0.3s ease-in-out;
+      }
+      .container > img {
+        min-width: 100%;
+      }
+      .btn-prev,
+      .btn-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 60px;
+        height: 1em;
+        width: 1em;
+        line-height: 1;
+        cursor: pointer;
+        background: inherit;
+        border: inherit;
+        padding: 0;
+      }
+      .btn-prev {
+        left: 0;
+      }
+      .btn-next {
+        right: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="carousel">
+      <div class="container">
+        <img
+          src="https://cdn.pixabay.com/photo/2019/09/17/02/20/jeju-4482313__340.jpg"
+          alt=""
+        />
+        <img
+          src="https://cdn.pixabay.com/photo/2015/09/10/14/11/jeju-934479__340.jpg"
+          alt=""
+        />
+        <img
+          src="https://cdn.pixabay.com/photo/2020/02/01/17/51/horse-4810956__340.jpg"
+          alt=""
+        />
+      </div>
+      <button class="btn-prev" type="button"><</button>
+      <button class="btn-next" type="button">></button>
+    </div>
+
+    <script>
+      /* main.js */
+      const container = document.querySelector(".container");
+      const prevButton = document.querySelector(".btn-prev");
+      const nextButton = document.querySelector(".btn-next");
+
+      let index = 0;
+
+      prevButton.addEventListener("click", () => {
+        if (index === 0) return;
+        index -= 1;
+        container.style.transform = `translateX(-${500 * index}px)`;
+      });
+
+      nextButton.addEventListener("click", () => {
+        if (index === 2) return;
+        index += 1;
+        container.style.transform = `translateX(-${500 * index}px)`;
+      });
+    </script>
+  </body>
+</html>
