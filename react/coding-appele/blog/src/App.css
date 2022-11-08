@@ -15,7 +15,13 @@ div {
   background: #eee;
   text-align: left;
 }
-.black-nav {
+.Form {
+  display: flex;
+  font-size: 30px;
+  flex-direction: column;
+  text-align: left;
+}
+.Nav {
   display: flex;
   padding-left: 20px;
   background-color: black;

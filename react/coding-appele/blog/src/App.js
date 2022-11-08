@@ -4,121 +4,120 @@ import "./App.css";
 import { useState } from "react";
 
 function App() {
-  let post = "강남 우동 맛집";
-  let [title, setTitle] = useState([
-    "남자 코트 추천",
-    "강남 우동 맛집",
-    "파이썬 독학",
-  ]);
-  let [likes, setLikes] = useState(Array(title.length).fill(0));
-  let [modal, setModal] = useState(false);
-  let [idx, setIdx] = useState(0);
-  let 입력값 = "";
+  const [title, setTitle] = useState([]);
+  const [likes, setLikes] = useState(Array(title.length).fill(0));
+  const [contents, setContents] = useState(Array(title.length).fill(""));
   return (
     <div className="App">
-      <div className="black-nav">
-        <h1>ReactBlog</h1>
-      </div>
-      <button
-        type="button"
-        onClick={() => {
-          let copy = [...title];
-          copy.sort();
-          setTitle(copy);
-        }}
-      >
-        글제목 가나다순 정렬
-      </button>
-      {title.map(function (title, i, arr) {
-        return (
-          <div className="list" key={i}>
-            <h4
-              onClick={() => {
-                setModal(true);
-                setIdx(i);
-              }}
-            >
-              {title}
-              <span
-                onClick={() => {
-                  const copy = [...likes];
-                  copy[i]++;
-                  setLikes(copy);
-                }}
-              >
-                🌞
-              </span>
-              {likes[i]}
-            </h4>
-            <p>2월 17일 발행</p>
-            <button
-              onClick={(e) => {
-                let copy = [...arr];
-                copy.splice(i, 1);
-                console.log(copy);
-                setTitle(copy);
-              }}
-              type="button"
-            >
-              삭제
-            </button>
-          </div>
-        );
-      })}
-
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          let copy = [...title];
-          copy.push(입력값);
-          setTitle(copy);
-          console.log(title);
-        }}
-      >
-        <input
-          onChange={(e) => {
-            입력값 = e.target.value;
-          }}
-        ></input>
-        <button type="submit">제출</button>
-      </form>
-      {modal === true ? (
-        <Modal
-          idx={idx}
+      <Nav></Nav>
+      {title.map((_, i, arr) => (
+        <Post
           title={title}
           setTitle={setTitle}
-          color={"green"}
-        ></Modal>
-      ) : null}
+          likes={likes}
+          setLikes={setLikes}
+          contents={contents}
+          idx={i}
+          key={i}
+        ></Post>
+      ))}
+      <Form
+        title={title}
+        setTitle={setTitle}
+        contents={contents}
+        setContents={setContents}
+      ></Form>
     </div>
   );
 }
-const Post = () => {
+function Form(props) {
+  let newTitle = "";
+  let newContent = "";
+  const [inputs, setInputs] = useState({
+    title: "",
+    contents: "",
+  });
   return (
-    <div className="post">
-      <h4>title</h4>
-      <p>2월 17일 발행</p>
-    </div>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        const copyTitle = [...props.title];
+        copyTitle.push(newTitle);
+        props.setTitle(copyTitle);
+        const copyContents = [...props.contents];
+        copyContents.push(newContent);
+        props.setContents(copyContents);
+        newTitle = "";
+        newContent = "";
+      }}
+      className="Form"
+    >
+      <label htmlFor="title">제목</label>
+      <input
+        name="title"
+        onChange={(e) => {
+          newTitle = e.target.value;
+        }}
+        onSubmit={(e) => {
+          e.target.value = "";
+          console.log("hi");
+        }}
+        id="title"
+        required
+      ></input>
+      <label htmlFor="contents">글</label>
+      <textarea
+        name="contents"
+        onChange={(e) => {
+          newContent = e.target.value;
+        }}
+        onSubmit={(e) => (e.target.value = "")}
+        id="content"
+        required
+      ></textarea>
+      <button type="submit">제출하기</button>
+    </form>
   );
-};
-const Modal = (props) => {
+}
+function Nav() {
   return (
-    <div className="modal">
-      <h4 style={{ color: props.color }}>{props.title[props.idx]}</h4>
-      <p>날짜</p>
-      <p>상세내용</p>
+    <>
+      <div className="Nav">
+        <h1>Blog</h1>
+      </div>
+    </>
+  );
+}
+function Post(props) {
+  return (
+    <article className="list">
+      <h2>
+        {props.title[props.idx]}
+        <span
+          onClick={() => {
+            const copy = [...props.likes];
+            copy[props.idx]++;
+            props.setLikes(copy);
+          }}
+        >
+          🧡
+        </span>
+        <span>{props.likes[props.idx]}</span>
+      </h2>
+      <p>10월30일</p>
+      <p>{props.contents[props.idx]}</p>
       <button
         onClick={() => {
-          console.log(props);
-          const copy = props.title;
-          copy[0] = "구리 구리 추천";
+          const copy = [...props.title];
+          copy.splice(props.idx, 1);
           props.setTitle(copy);
         }}
         type="button"
       >
-        글 수정 버튼
+        삭제하기
       </button>
-    </div>
+    </article>
   );
-};
+}
+
 export default App;
