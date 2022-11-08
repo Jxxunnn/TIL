@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 import "./App.css";
-import { useState } from "react";
+import React, { useState } from "react";
 
 function App() {
   const [title, setTitle] = useState([]);
@@ -27,9 +27,24 @@ function App() {
         contents={contents}
         setContents={setContents}
       ></Form>
+      <Modal2></Modal2>
     </div>
   );
 }
+
+class Modal2 extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      name: "kim",
+      age: 20,
+    };
+  }
+  render() {
+    return <div>{this.state.age}</div>;
+  }
+}
+
 function Form(props) {
   let newTitle = "";
   let newContent = "";

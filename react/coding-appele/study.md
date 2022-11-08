@@ -267,3 +267,287 @@ aa를 입력하면 a만 콘솔창에 뜨고요. 왜냐면 `state 변경함수 �
 **_Q.왜 새로고침하면 없어짐?_** -새로고침시 HTML, JS파일 다시 읽어서 그럼. 다시 읽으면 state나 변수같은 것들도 초기값으로 변경됩니다. 원래그럼 그래서 실제 서비스였으면 우선 서버로 보내서 DB에 영구저장을 하거나 그랬겠지만 갑자기 서버와 DB 가르치려면 20강 추가해야하니까 프론트엔드에서만 잘 구현해보면 됩니다.
 
 ## class를 이용한 옛날 React 문법
+
+지금은 리액트에서 컴포넌트 만들 때 function쓰라고 권장해요.
+
+```js
+class Modal2 extends React.Component {
+  constructor() {
+    super();
+  }
+
+  render() {
+    return <div>안녕</div>;
+  }
+}
+```
+
+1. class 어쩌구 작성하고 컴포넌트 이름 작명합니다.
+
+2. constructor, super, render 함수 3개 채워넣습니다. 기본 템플릿같은 것임
+
+3. 컴포넌트는 길고 복잡한 html 축약할 때 쓴다고 했습니다. return 안에 축약할 html 적으면 됩니다.
+
+그럼 이제 <Modal2></Modal2>라고 쓸 때 마다 <div>안녕</div> 이게 남습니다.
+
+근데 딱봐도 function으로 컴포넌트 만드는 것 보다 채워야할게 많아서 귀찮습니다.
+
+그래서 평소엔 function 쓰라는 것입니다.
+
+**_class가 뭔데요_**
+
+> class는 변수, 함수 보관하는 통입니다. extends는 기존 class안에 있던 변수, 함수 복사해주는 문법입니다. React.Component라는 class안에 있던 변수와 함수들을 복사해야 컴포넌트라고 인정해주기 때문에 class 어쩌구 extends React.Component라고 쓰는 것입니다. 리액트만든 사람이 그렇게 정한 것일 뿐이라 불만이 있으면 그 사람에게 따져야합니다.
+
+## 만든 리액트 사이트 build & Github Pages로 배포해보기
+
+여러분이 만든 사이트를 배포하려면 그냥 작업하던 App.js 파일 그대로 올리시는게 아니라
+
+build용 파일을 생성하신 후 그걸 올리셔야합니다.
+
+왜냐고요? 웹브라우저는 HTML CSS JS 이 세개의 언어만 해석할 수 있습니다. 리액트의 이상한 state, JSX 이런거 전혀 못알아듣습니다.
+
+그래서 리액트 프로젝트를 build 라는걸 하시면 브라우저 친화적인 HTML CSS JS 파일로 바꿔줍니다.
+
+그리고 그걸 웹에 올리셔야 사용자들이 여러분의 사이트를 구경할 수 있는겁니다.
+
+**_ Q.웹서버 가지고 있는데 여기에 배포는 어떻게 합니까? _**
+
+> 서버를 만들줄 아는 똑똑이시군요. 리액트는 HTML 이쁘게 만들어주는 툴일 뿐입니다. 그래서 리액트로 열심히 프로젝트 만드시고 build 하시면 index.html 파일이 생성됩니다. 그리고 "어떤 놈이 codingapple.com 으로 접속하면 build/index.html 파일 전송해라" 라고 서버 API를 작성하면 간단한 배포가 끝납니다.
+
+### 배포하기 전 체크할 사항
+
+1. 일단 미리보기 띄워보셨을 때 콘솔창, 터미널에 에러만 안나면 됩니다.
+
+warning 메세지는 사이트 구동에 별 영향이 없기 때문에 테스트해보실 땐 개무시하셔도 됩니다.
+
+2. 혹시 사이트를 배포하실 때
+
+http://codingapple.com/ 여기에 배포하시는 경우엔 따로 설정이 필요없이 대충 하셔도 되지만
+
+http://codingapple.com/blog/ 이런 하위 경로에 배포하고 싶으시면 프로젝트에 설정이 따로 필요합니다.
+
+여러분의 프로젝트 파일 중 package.json 이라는 파일을 오픈하면 큰 object가 하나 있는데
+
+```js
+"homepage": "http://codingapple.com/blog",
+```
+
+homepage라는 key값을 추가하신 후
+
+여러분이 배포할 사이트 경로를 추가해주시면 됩니다. (혹은 /blog 이렇게 경로 쓰셔도 됩니다)
+
+그리고 리액트 라우터가 설치되어있다면 라우터가 제공하는 basename="" 속성을 추가하시는게 라우팅 잘될겁니다.
+
+자세한 내용은 https://create-react-app.dev/docs/deployment/#building-for-relative-paths
+
+### 1. 별 문제가 없다면 이제 터미널에 build 명령어를 입력해보자.
+
+여러분이 작성하신 state, JSX, <컴포넌트>, props 이런 문법들은 브라우저가 해석할 수 없으니 그대로 배포할 수 없습니다.
+
+그래서 이런 문법들을 전통적인 CSS, JS, HTML 문법으로 바꿔주는 작업이 필요합니다.
+
+이것을 컴파일 또는 build라고 합니다.
+
+build 하려면 여러분의 리액트프로젝트에서 터미널을 켠 후
+
+```js
+npm run build
+```
+
+입력하면 된다.
+그럼 여러분 작업 프로젝트 폴더 내에 build 라는 폴더가 하나 생성됩니다.
+
+여러분이 짰던 코드를 전부 .html .css .js 파일로 변환해서 거기 담아줍니다.
+
+build 폴더 안에 안에 있는 내용을 모두 서버에 올리시면 됩니다.
+
+index.html이 메인페이지입니다.
+
+끝
+
+### 2. 근데 우린 무료 호스팅해주는 github pages에 올릴 겁니다.
+
+간단하게 HTML/CSS/JS 파일을 무료로 호스팅해주는 고마운 사이트입니다.
+
+Repository 생성이 끝나면 repository로 자동으로 들어가질겁니다.
+
+▼ 그럼 거기에 build 폴더 내의 파일을 전부 드래그 앤 드롭하시면 됩니다.
+
+(주의) build 폴더를 드래그 앤 드롭하는게 아닙니다. build 폴더 안의 내용물이요.
+
+드래그 앤 드롭하시고 초록버튼까지 눌러주시면 배포 끝입니다.
+
+실수했다면 repository 과감하게 삭제하고 다시 만드시면 됩니다.
+
+**_(흔한 github pages 에러) 왜 사이트 주소로 접속했는데 404 페이지가 뜨죠?_**
+
+- 10분 더 기다려보십시오.
+
+- ctrl + shift + r 을 이용해 새로고침 해보십시오.
+
+- 혹은 repository 생성하실 때 여러분 아이디를 잘못적으신겁니다. 대소문자 틀리지말고 정확히 적으셔야합니다.
+
+정확히 안적었으면 그냥 다시 하나 새로 만드시면 됩니다.
+
+**_(추가) github가 좋아졌습니다_**
+이제 여러 repository를 동시에 호스팅해준다고합니다. 다른 HTML 페이지도 호스팅받고 싶으면
+
+0. 위에서 만든 내이름.github.io 라는 repository 잘 있죠? 그거 지우면 안됩니다.
+
+1. 남에게 자랑하고픈 새로운 프로젝트를 올릴 repository를 새로 만들어줍니다. 이름은 아무렇게나 하시면 됩니다.
+
+2. 그 repository에 아까처럼 드래그앤드롭으로 원하는 HTML CSS JS 파일을 업로드하고 확인까지 누릅니다.
+
+3. repository setting 메뉴에 들어가서 Github pages 부분을 찾습니다.
+
+4. 저기 source 부분을 None이 아니라 main 이런걸로 바꿔주고 저장하셈
+
+5. 그럼 끝입니다. 이제 님아이디.github.io/repository이름/ 으로 들어가시면 아까 업로드했던 HTML파일을 볼 수 있습니다.
+
+안보이면
+
+님아이디.github.io/repository이름/html파일명.html
+
+이렇게 직접 들어가시면 됩니다. 그리고 첫 업로드 후엔 보통 10~20분넘게 기다려야 반영됩니다.
+
+---
+
+`Q1. 첫 페이지 로딩 속도를 빠르게 하려면`
+
+원래 리액트, 뷰로 만든 웹앱들은 첫 방문시 필요한 파일을 전부 로드합니다.
+
+트래픽을 조금이라도 줄이고 싶으면 컴포넌트들을 lazy하게 로딩하는 방법을 사용할 수도 있습니다.
+
+공식 튜토리얼에 있는 lazy 함수 : https://reactjs.org/docs/code-splitting.html#route-based-code-splitting
+
+그리고 어짜피 한국에서 github pages는 개느립니다. 서버가 미국에 있어서 이미지 같은거 로드할 때 한세월임 (이건 어쩔 수 없음)
+
+`Q2. 업데이트 사항이 생기면 배포 또 어떻게하죠?`
+
+build 또 하시고 그 파일 그대로 다시 업로드하시면 됩니다.
+
+build 할 때 마다 CSS, JS 파일 명이 무작위로 다시 생성됩니다.
+
+그래서 새로 배포할 때마다 사이트 방문자들은 새로운 CSS,JS 파일을 이용할 수 있습니다.
+
+`Q3. build 할 때 압축 시키지말고 남기고 싶은 파일은?`
+
+여러분이 ./ 부터 시작하는 경로로 첨부한 이미지, js 파일들은 전부 짜부되고 이름이 변합니다.
+
+이름이 변하지 않게 하고 싶으면 public 폴더안에 넣고 build 해보십시오.
+
+그럼 build 하고 나서도 그대로 루트경로에 파일이 남아있습니다.
+
+(개발시 그런 파일들을 이용하고 싶으면 public 폴더에 보관하시고 ./ 이게 아닌 / 경로로 import 해오시면 됩니다)
+
+`Q4. 서버에 올렸는데 왜 접속하면 이상한 페이지가 나오거나 일부 img, css파일이 로드가 안되는 것이죠?`
+
+대부분 경로 문제입니다.
+
+- build 할 때 에러 안나셨겠죠
+
+- 혹시 하위폴더에 배포하신거 아닙니까
+
+- 배포한 페이지가 안나오면 크롬개발자도구 열어서 index.html이 쓰고있는 css, js, img 파일들의 경로가 제대로 되어있는지 체크해보도록 합시다.
+
+`Q5. 메인페이지 말고 왜 특정 페이지로 접속하면 404 에러가 뜨나요?`
+
+어쩌구.github.io/detail/1 이렇게 세부 페이지 URL을 주소창에 직접 입력하시면
+
+찾는 페이지가 없어요~ 이렇게 404 에러가 날 수 있습니다.
+
+이건 서버에서 "누군가 어쩌구.github.io/어쩌구 로 접속하면 메인페이지로 안내하세요~"
+
+라고 API 개발을 해놓으셔야합니다.
+
+아니면 URL에 #기호가 붙는 hashRouter를 리액트 라우터 코드짤 때 쓰시든가요.
+
+근데 github은 우리가 서버를 만지고 어찌할 수 있는게 아니고 그냥 HTML 파일 올린것만 샤락 보여주는 곳이기 때문에
+
+사이트 메뉴에다가 페이지 이동버튼을 잘 만들어두시면 되겠습니다.
+
+---
+
+## 새로운 프로젝트 생성 & Bootstrap 사용하기
+
+### React-Bootstrap
+
+레이아웃을 복사붙여넣기 식으로 편하게 개발가능한 Bootstrap 라이브러리
+이거 설치하면 버튼, 메뉴같은거 html css로 직접 디자인안해도 됩니다.
+
+그냥 예제코드 복사붙여넣기만 하면 레이아웃을 매우 쉽게 생성가능합니다.
+
+실은 Bootstrap이 원조인데 이걸 리액트에 맞게 변형한 React-Bootstrap을 설치합시다.
+
+react bootstrap이라고 구글 검색하면 맨 처음에 나오는 사이트로 들어갑시다.
+
+▲ 그리고 get started 이런거 들어가보면 설치하는 법이 쭉 나오는데 그거 그대로 따라하면 됩니다.
+
+**설치 1. 에디터에서 터미널켜고**
+
+```js
+npm install react-bootstrap bootstrap
+```
+
+**설치 2. 어떤 스타일은 Bootstrap CSS 파일을 요구하는 경우가 있습니다.**
+그래서 그냥 그 사이트에 있는 CSS 파일을 index.html 파일의 <head> 태그 안에 복붙해주시면 됩니다.
+
+**React-Bootstrap 사용법**
+버튼이 필요하면 React-Bootstrap 사이트에서 검색해서 예제코드를 복붙하면 버튼 생성 끝입니다.
+
+<Button variant="primary">Primary</Button>
+
+이런거 복사붙여넣기하면 파란 버튼이 나온다는데 진짜로 복붙해봅시다.
+
+```js
+import { Button } from "react-bootstrap";
+
+function App() {
+  return (
+    <div>
+      <Button variant="primary">Primary</Button>
+    </div>
+  );
+}
+```
+
+파란버튼이 나옵니다.
+
+근데 다만 복사붙여넣기할 때 대문자로 시작하는 컴포넌트이름은 상단에 저렇게 import 해와야합니다.
+
+상단메뉴가 필요하면 Navbar라고 그 사이트에서 검색해서
+
+예제코드 복붙하면 개발 끝입니다
+
+```js
+import { Button, Navbar, Container, Nav } from "react-bootstrap";
+
+function App() {
+  return (
+    <div>
+      <Navbar bg="dark" variant="dark">
+        <Container>
+          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+          <Nav className="me-auto">
+            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link href="#features">Features</Nav.Link>
+            <Nav.Link href="#pricing">Pricing</Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar>
+    </div>
+  );
+}
+```
+
+붙여넣기했더니 까만 상단바가 완성되었습니다.
+
+역시 대문자로 시작하는 컴포넌트들은 전부 import 해오면 됩니다.
+
+(참고)
+
+당연히 className 부여해서 CSS 커스터마이징하는건 자유입니다.
+
+심심하면 쇼핑몰스럽게 이것저것 꾸며오십시오
+
+### 이미지 넣는 법 & public 폴더 이용하기
