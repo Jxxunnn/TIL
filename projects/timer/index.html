@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>타이머</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --font-size-xlarge: 40px;
+        --font-size-large: 24px;
+        --font-size-medium: 14px;
+        --font-size-small: 12px;
+        --font-weight-bold: 700;
+        --font-weight-regular: 600;
+      }
+      html {
+        font-family: "Pretendard", "-apple-system", "BlinkMacSystemFont";
+      }
+      body {
+        background: radial-gradient(
+            96.74% 276.79% at 3.59% 5.28%,
+            #f0f4ff 0%,
+            #a5b6ee 100%
+          )
+          no-repeat fixed;
+        text-align: center;
+      }
+      header {
+        margin-top: 72px;
+      }
+      header .img-logo {
+        width: 244px;
+        height: 48px;
+      }
+      main {
+        margin-top: 60px;
+        text-align: center;
+      }
+      .timer .timer-title {
+        color: white;
+        font-weight: 700;
+      }
+      .timer .timer-container {
+        display: flex;
+        justify-content: center;
+      }
+
+      footer {
+        margin-top: 60px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>
+        <img
+          class="img-logo"
+          src="./src/img/weniv-logo.svg"
+          alt="위니브 로고"
+        />
+      </h1>
+    </header>
+    <main>
+      <article class="timer">
+        <h2 class="timer-title">TIMER</h2>
+        <div class="timer-container">
+          <div>
+            <strong>HRS</strong>
+            <div><time class="time-hour">00</time></div>
+          </div>
+          <img src="./src/img/dot.png" alt="" />
+          <div>
+            <strong>MIN</strong>
+            <div><time class="time-min">00</time></div>
+          </div>
+          <img src="./src/img/dot.png" alt="" />
+          <div>
+            <strong>SRC</strong>
+            <div><time class="time-sec">00</time></div>
+          </div>
+        </div>
+        <div>
+          <button class="btn-start" type="button">
+            <img src="./src/img/icon-start.png" alt="" />
+          </button>
+          <button class="btn-reset" type="button">
+            <img src="./src/img/icon-reset.svg" alt="" />
+          </button>
+        </div>
+      </article>
+    </main>
+    <footer>
+      <img src="./src/img/ⓒ WENIV Corp..png" alt="copyright" />
+    </footer>
+    <script>
+      window.onload = function () {
+        startTimer(60);
+      };
+      function startTimer(duration) {
+        let timer = duration,
+          minutes,
+          seconds;
+        let interval = setInterval(function () {
+          var timer = parseInt(duration, 10);
+          var hours = Math.floor(timer / 3600);
+          var minutes = Math.floor((timer - hours * 3600) / 60);
+          var seconds = timer - hours * 3600 - minutes * 60;
+
+          hours = hours < 10 ? "0" + hours : hours;
+          minutes = minutes < 10 ? "0" + minutes : minutes;
+          seconds = seconds < 10 ? "0" + seconds : seconds;
+
+          document.querySelector(".time-hour").textContent = hours;
+          document.querySelector(".time-min").textContent = minutes;
+          document.querySelector(".time-sec").textContent = seconds;
+
+          if (--timer < 0) {
+            timer = duration;
+          }
+          if (timer === 0) {
+            clearInterval(interval);
+            window.alert("끝");
+          }
+        }, 1000);
+      }
+    </script>
+  </body>
+</html>
