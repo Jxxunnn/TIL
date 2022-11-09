@@ -1,62 +1,71 @@
 import "./App.css";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { shoesData } from "./data.js";
+import { useState } from "react";
+import { Container, Nav, Navbar, Row, Col } from "react-bootstrap";
+import { Routes, Route, Link } from "react-router-dom";
 
 function App() {
+  const [shoes] = useState(shoesData);
   return (
     <div className="App">
-      <Navbar bg="dark" variant="dark">
-        <Container>
-          <Navbar.Brand href="#home">준신사</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#Cart">Cart</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
-      <div className="main-bg"></div>
-      <AutoLayoutExample />
+      <NavBootstrap />
+      <Link to="/">홈</Link>
+      <Link to="/detail">상세페이지</Link>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <Banner />
+              <ProductList shoes={shoes} />
+            </>
+          }
+        />
+        <Route path="/detail" element={<div>상세페이지</div>} />
+        <Route path="/about" element={<div>요호요호</div>} />
+      </Routes>
     </div>
   );
 }
+function NavBootstrap() {
+  return (
+    <Navbar bg="dark" variant="dark">
+      <Container>
+        <Navbar.Brand href="#home">준신사</Navbar.Brand>
+        <Nav className="me-auto">
+          <Nav.Link href="#Home">Home</Nav.Link>
+          <Nav.Link href="#Cart">Cart</Nav.Link>
+        </Nav>
+      </Container>
+    </Navbar>
+  );
+}
+function Banner() {
+  return <div className="main-bg"></div>;
+}
 
-function AutoLayoutExample() {
+function ProductList({ shoes }) {
   return (
     <Container>
       <Row>
-        <Col sm>
-          <img
-            alt="#"
-            src="https://codingapple1.github.io/shop/shoes1.jpg"
-            width="80%"
-          />
-          <h4>상품명</h4>
-          <p>상품정보</p>
-        </Col>
-        <Col sm>
-          <img
-            alt="#"
-            src="https://codingapple1.github.io/shop/shoes2.jpg"
-            width="80%"
-          />
-          <h4>상품명</h4>
-          <p>상품정보</p>
-        </Col>
-        <Col sm>
-          <img
-            alt="#"
-            src="https://codingapple1.github.io/shop/shoes3.jpg"
-            width="80%"
-          />
-          <h4>상품명</h4>
-          <p>상품정보</p>
-        </Col>
+        {shoes.map(({ id, title, content }, i) => {
+          return <Product id={id} title={title} content={content} key={i} />;
+        })}
       </Row>
     </Container>
   );
 }
-
+function Product({ id, title, content }) {
+  return (
+    <Col sm>
+      <img
+        alt="#"
+        src={`https://codingapple1.github.io/shop/shoes${id + 1}.jpg`}
+        width="80%"
+      />
+      <h4>{title}</h4>
+      <p>{content}</p>
+    </Col>
+  );
+}
 export default App;
