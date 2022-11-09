@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <h1>추상화</h1>
+    <div id="app"></div>
+    <script>
+      class Component {
+        $target;
+        $state;
+        constructor($target) {
+          this.$target = $target;
+          this.setup();
+          this.render();
+        }
+        setup() {}
+        template() {
+          return ``;
+        }
+        render() {
+          this.$target.innerHTML = this.template();
+          this.setEvent();
+        }
+        setEvent() {}
+        setState(nextState) {
+          this.$state = { ...this.$state, ...nextState };
+          this.render();
+        }
+      }
+      class App extends Component {
+        setup() {
+          this.$state = { items: ["item1", "item2", "item3"] };
+        }
+        template() {
+          const { items } = this.$state;
+          return `<ul>${items.map(
+            (item) => `<li>${item}</li>`
+          )}</ul><button type="button">추가</button>`;
+        }
+        setEvent() {
+          document.querySelector("button").addEventListener("click", () => {
+            const { items } = this.$state;
+            this.setState({ items: [...items, `item${items.length + 1}`] });
+          });
+        }
+      }
+      new App(document.querySelector("#app"));
+    </script>
+  </body>
+</html>
