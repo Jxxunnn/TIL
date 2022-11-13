@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>러닝리액트</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+
+    <script>
+      const secretIngredients = ["버터", "땅콩", "흑설탕", "달걀"];
+      function IngredientList() {
+        return React.createElement(
+          "ul",
+          { className: "ingredients" },
+          items.map((Ingredient, i) =>
+            React.createElement("li", { key: i }, Ingredient)
+          )
+        );
+      }
+      console.dir(React.createElement("h1", { classNama: "aasd" }, "하이루"));
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+
+      root.render($ul);
+      console.dir(root);
+    </script>
+  </body>
+</html>
