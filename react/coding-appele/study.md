@@ -668,3 +668,325 @@ export default / import 쓰거나
 export { } / import { } 쓰거나 둘 중 마음에드는걸 써봅시다.
 
 ## 리액트 라우터 1 : 셋팅이랑 기본 라우팅
+
+리액트는 html 파일을 하나만 사용합니다.
+그래서 리액트에선 누가 다른 페이지 요청하면 그냥 내부에 있는 <div>를 갈아치워서 보여주면 됩니다.
+근데 직접 코드짜면 귀찮으니 react-router-dom 이라는 외부 라이브러리 설치해서 구현하는게 일반적이라 그렇게 해봅시다.
+
+### react-router-dom 설치하려면
+
+외부라이브러리라서 설치 셋팅하는 법은
+react-router-dom 홈페이지 들어가서 그대로 따라하면 되는데 그냥 알려드리자면
+터미널 열어서
+`npm install react-router-dom@6` 입력해서 설치합니다.
+셋팅은 index.js 파일로 가서
+
+```js
+import { BrowserRouter } from "react-router-dom";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
+);
+```
+
+▲ import 어쩌구 해오고
+<BrowserRouter> 이걸로 <App/> 이걸 감싸면 끝입니다.
+
+### 라우터로 페이지 나누는 법
+
+다른 웹사이트를 잘 살펴보면
+codingapple.com/어쩌구로 접속하면 A페이지를 보여주고
+codingapple.com/저쩌구로 접속하면 B페이지를 보여줍니다.
+이런 식으로 url 경로마다 다른 페이지를 보여주고 싶으면 이렇게 작성합니다.
+
+```js
+(App.js)
+import { Routes, Route, Link } from 'react-router-dom'
+
+function App(){
+  return (
+    (생략)
+    <Routes>
+      <Route path="/detail" element={ <div>상세페이지임</div> } />
+      <Route path="/about" element={ <div>어바웃페이지임</div> } />
+    </Routes>
+  )
+}
+```
+
+1. 우선 상단에서 여러가지 컴포넌트를 import 해오고
+2. <Routes> 만들고 그 안에 <Route>를 작성합니다.
+3. <Route path="/url경로" element={ <보여줄html> } /> 이렇게 작성하면 됩니다.
+   그래서 방금 페이지 2개 만든 것임
+   진짜 페이지 보이나 url 뒤에 /about 입력해보고 /detail 도 입력해보십시오.
+
+`<Route path="/" element={ <div>메인페이지에서 보여줄거</div> } />`
+▲ 이 url 경로는 메인페이지입니다.
+Q. 저는 메인페이지 접속시에만 상품목록 보여주고 싶습니다
+A. 그럼 element={ } 안에 상품목록 레이아웃 다 넣으면 되는거 아닙니까
+
+```js
+<Route
+  path="/"
+  element={
+    <>
+      <div className="main-bg"></div>
+      <div className="container">
+        <div className="row">
+          {shoes.map((a, i) => {
+            return <Card shoes={shoes[i]} i={i}></Card>;
+          })}
+        </div>
+      </div>
+    </>
+  }
+/>
+```
+
+이러면 메인페이지 접속시에만 상품목록이 보이고
+나머지 /detail 그리고 /about 페이지에선 안보이겠군요.
+이렇게 페이지에서 보여줄 html 내용은 마음대로 작성하면 됩니다.
+
+### 페이지 이동 버튼은
+
+유저들은 주소창에 url 입력해서 들어가지 않고 링크타고 들어갑니다.
+링크를 만들고 싶으면 react-router-dom에서 Link 컴포넌트 import 해오고
+원하는 곳에서 <Link> 쓰면 됩니다.
+
+```js
+<Link to="/">홈</Link>
+<Link to="/detail">상세페이지</Link>
+```
+
+이러면 각각 url 경로로 이동하는 링크를 생성할 수 있습니다.
+진짜 이동하는지 눌러봅시다.
+
+## 리액트 라우터 2 : navigate, nested routes, outlet
+
+오늘은 navigate() 함수와 간단한 프로젝트에선 쓸데없는데 가끔 쓰는 nested routes라는 기능을 배워봅시다.
+
+### 리액트 프로젝트 폴더구조는
+
+리액트는 그냥 html 이쁘게 만들어주는 쪼그만한 라이브러리일 뿐입니다.
+그래서 여러분이 만들 파일들은 95% 확률로 .js 파일이기 때문에
+비슷한 .js 파일끼리 한 폴더에 묶어놓으면 그냥 그게 좋은 폴더구조입니다.
+
+- 컴포넌트 역할하는 js 파일은 components 폴더에 묶고
+- 페이지 역할하는 js 파일은 routes 아니면 pages 폴더에 묶고
+- 자주 쓰는 함수가 들어있는 js 파일은 utils 폴더에 묶고
+  알아서 필요할 때마다 폴더 만들어쓰십시오
+
+`import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'`
+
+### 1. 페이지 이동기능을 만들고 싶으면 useNavigate() 씁니다.
+
+페이지 이동은 Link 써도 된다고 했는데 그게 못생겼으면 이거 쓰면 됩니다.
+
+```js
+function App(){
+  let navigate = useNavigate()
+
+  return (
+    (생략)
+    <button onClick={()=>{ navigate('/detail') }}>이동버튼</button>
+  )
+}
+```
+
+useNavigate() 쓰면 그 자리에 유용한 함수가 남습니다.
+페이지 이동시켜주는 함수입니다.
+그럼 이제 navigate('/detail') 이런 코드가 실행되면 /detail 페이지로 이동가능합니다.
+navigate(2) 숫자넣으면 앞으로가기, 뒤로가기 기능개발도 가능합니다.
+
+-1 넣으면 뒤로 1번 가기
+2 넣으면 앞으로 2번 가기 기능입니다.
+
+### 404페이지는
+
+유저가 이상한 경로로 접속했을 때 "없는 페이지입니다" 이런거 보여주고 싶으면
+
+```
+<Route path="*" element={ <div>없는페이지임</div> } />
+```
+
+<Route path="*"> 하나 맨 밑에 만들어두면 됩니다.
+
+- 경로는 모든 경로를 뜻해서
+
+위에 만들어둔 /detail 이런게 아닌 이상한 페이지 접속시 \* 경로로 안내해줍니다.
+
+### 3. 서브경로 만들 수 있는 nested routes
+
+/about/member로 접속하면 회사멤버 소개하는 페이지
+/about/location으로 접속하면 회사위치 소개하는 페이지
+
+를 만들고 싶으면 어떻게 합니까.
+
+```js
+<Route path="/about" element={<About />}>
+  <Route path="member" element={<div>멤버들</div>} />
+  <Route path="location" element={<div>회사위치</div>} />
+</Route>
+```
+
+이렇게 만들어도 됩니다.
+
+<Route>안에 <Route>를 넣을 수 있는데 이걸 Nested routes 라고 부릅니다.
+저렇게 쓰면
+/about/member로 접속시 <About> &<div>멤버들</div> 을 보여줍니다.
+/about/location으로 접속시 <About> & <div>회사위치</div> 을 보여줍니다.
+진짜 보이는지 <About>컴포넌트 하나 만들어서 확인해봅시다.
+
+Q. <div>는 안보이는데요
+
+실은 위처럼 코드짜면
+
+/about/member로 접속시 <About>안에 <div>멤버들</div> 을 보여줍니다.
+
+그래서 <About> 컴포넌트 안에 <div>를 어디다 보여줄지 표기해야 잘보여줍니다.
+
+```js
+<Route path="/about" element={<About />}>
+  <Route path="member" element={<div>멤버들</div>} />
+  <Route path="location" element={<div>회사위치</div>} />
+</Route>;
+
+function About() {
+  return (
+    <div>
+      <h4>about페이지임</h4>
+      <Outlet></Outlet>
+    </div>
+  );
+}
+```
+
+위에서 import해온 <Outlet>은 nested routes안의 element들을 어디에 보여줄지 표기하는 곳입니다.
+
+그래서 이렇게 해두면
+
+/about/member로 접속시 <Outlet>자리에 아까의 <div> 박스들이 잘 보입니다.
+
+그래서 유사한 서브페이지들이 많이 필요하다면 이렇게 만들어도 됩니다.
+방금 만든거 보면 페이지 url을 바꿀 때 마다 각각 다른 UI를 보여주는데
+
+이것도 동적인 UI 만드는 방법 중 하나입니다.
+
+그래서 라우터써도 동적인 UI 만들 수 있습니다.
+
+라우터쓰면 뒤로가기 버튼을 이용가능하다는 장점이 있을듯요
+
+## 리액트 라우터 3 : URL 파라미터로 상세페이지 100개 만들기
+
+Q. 근데 shoes라는 state를 Detail.js 안에서 또 만들면 굳이 props 필요없지 않나요?
+
+A. 나중에 수정이 필요하면 두군데 수정해야해서 귀찮으니 그러면 안됩니다.
+
+### 상세페이지 여러 개 만들려면
+
+```js
+<Route path="/detail/:id" element={<Detail shoes={shoes} />} />
+```
+
+페이지를 여러개 만들고 싶으면 URL 파라미터라는 문법을 사용가능합니다.
+
+path 작명할 때 /:어쩌구 이렇게 사용하면 "아무 문자"를 뜻합니다.
+
+그래서 위의 <Route>는 누군가 주소창에 /detail/아무거나 입력했을 때
+
+<Detail> 컴포넌트 보여달라는 뜻입니다.
+
+이제 그럼
+
+/detail/0
+
+/detail/1
+
+/detail/2
+
+이렇게 접속해도 <Detail> 컴포넌트 잘 보여줄 수 있습니다.
+
+문제해결
+
+### 페이지마다 똑같은 내용 보여주기 싫은데요
+
+/detail/0
+
+/detail/1
+
+/detail/2
+
+이렇게 페이지는 여러개 만들어놨지만 접속해보면 다 똑같은 0번째 상품명만 보여주고 있습니다.
+
+왜냐면 0번째 상품명 보여달라고 여러분이 코드짰으니까요.
+
+이게 싫으면 이렇게 코드짤 수 있지않을까요.
+
+```js
+(Detail.js)
+
+<h4 className="pt-5">{props.shoes[현재url에입력된숫자].title}</h4>
+<p>{props.shoes[0].content}</p>
+<p>{props.shoes[0].price}원</p>
+<button className="btn btn-danger">주문하기</button>
+```
+
+0이라고 하드코딩해놨던 자리에
+
+현재url파라미터에 입력된숫자를 넣는겁니다.
+
+그럼 /detail/1로 접속하면 1번째 상품명을 보여줄 수 있을듯요.
+
+저런 숫자를 가져올 수 있냐고요?
+
+가져올 수 있습니다.
+
+```js
+import { useParams } from 'react-router-dom'
+
+function Detail(){
+  let {id} = useParams();
+  console.log(id)
+
+  return (
+    <div className="container>
+      <div className="row">
+        <div className="col-md-6">
+          <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" />
+        </div>
+        <div className="col-md-6 mt-4">
+        <h4 className="pt-5">{props.shoes[id].title}</h4>
+        <p>{props.shoes[0].content}</p>
+        <p>{props.shoes[0].price}원</p>
+        <button className="btn btn-danger">주문하기</button>
+      </div>
+    </div>
+  </div>
+  )
+}
+```
+
+useParams() 라는 함수를 상단에서 import 해오면 쓸 수 있는데
+
+이거 쓰면 현재 /:url파라미터 자리에 유저가 입력한 값을 가져올 수 있습니다.
+
+변수에 저장해서 쓰든가 하면 됩니다.
+
+그래서 위처럼 사용하면
+
+누가 /detail/1로 접속하면 id라는 변수에 1이 들어옵니다.
+
+누가 /detail/2로 접속하면 id라는 변수에 2가 들어옵니다.
+
+그래서 props.shoes[id].title 이러면 아까 의도했던 기능이 완성되겠군요.
+
+페이지마다 각각 다른 상품명이 보입니다.
+
+(참고)
+
+path 작명시 url 파라미터는 몇번이고 사용가능합니다. detail/:어쩌구/:저쩌구 이런식
