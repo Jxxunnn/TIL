@@ -1,6 +1,6 @@
 import "./App.css";
 import { shoesData } from "./data.js";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container, Nav, Navbar, Row, Col } from "react-bootstrap";
 import {
   Routes,
@@ -10,15 +10,25 @@ import {
   Outlet,
   useParams,
 } from "react-router-dom";
+import styled from "styled-components";
+import axios from "axios";
+
+const Box = styled.div`
+  background: ${(props) => props.bg};
+  padding: 20px;
+`;
 
 function App() {
-  const [shoes] = useState(shoesData);
+  const [shoes, setShoes] = useState(shoesData);
   const navigate = useNavigate();
   return (
     <div className="App">
       <NavBootstrap navigate={navigate} />
       <Routes>
-        <Route path="/" element={<ProductListPage shoes={shoes} />} />
+        <Route
+          path="/"
+          element={<ProductListPage shoes={shoes} setShoes={setShoes} />}
+        />
         <Route
           path="/detail/:id"
           element={<ProductDetailPage shoes={shoes} />}
@@ -58,7 +68,7 @@ function NavBootstrap({ navigate }) {
           </Nav.Link>
           <Nav.Link
             onClick={() => {
-              navigate("/detail");
+              navigate("/detail/0");
             }}
           >
             Cart
@@ -86,33 +96,80 @@ function AboutPage() {
     </div>
   );
 }
+
+// Tabs
+function Tabs() {
+  return (
+    <Nav variant="tabs" defaultActiveKey="link0">
+      <Nav.Item>
+        <Nav.Link eventKey="link0">버튼0</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link eventKey="link1">버튼1</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link eventKey="link2">버튼2</Nav.Link>
+      </Nav.Item>
+    </Nav>
+  );
+}
+
 // ProductDetailPage
 function ProductDetailPage({ shoes }) {
+  const [isTimeOut, setIsTimeOut] = useState(false);
   const { id } = useParams();
   const idx = shoes.findIndex((item) => item.id === +id);
+  useEffect(() => {
+    const timer = () => {
+      setIsTimeOut(true);
+    };
+    setTimeout(timer, 1000);
+    return clearTimeout(timer);
+  }, []);
   return (
     <div className="ProductDetailPage">
+      {isTimeOut ? null : (
+        <div className="alert alert-warning">2초 이내 구매시 할인</div>
+      )}
+
       <ProductDetail shoes={shoes[idx]}></ProductDetail>
     </div>
   );
 }
 function ProductDetail({ shoes: { title, content, price, id } }) {
+  const [inputValue, setInputValue] = useState("");
+
+  useEffect(() => {
+    if (Number.isNaN(+inputValue)) alert("그러지 마세요");
+    return setInputValue("");
+  }, [inputValue]);
   return (
     <div className="container">
       <div className="row">
-        <div className="col-md-6">
+        <div>
           <img
             src={`https://codingapple1.github.io/shop/shoes${id + 1}.jpg`}
             alt=""
             width="100%"
           />
         </div>
+        <div>
+          <input
+            onChange={({ target: { value } }) => {
+              setInputValue(value);
+            }}
+            type="text"
+          ></input>
+        </div>
+
         <h4 className="pt-5">{title}</h4>
         <p>{content}</p>
         <p>{price}</p>
-        <div className="col-md-6">
+
+        <div>
           <button className="btn btn-danger">주문하기</button>
         </div>
+        <Tabs></Tabs>
       </div>
     </div>
   );
@@ -121,11 +178,35 @@ function ProductDetail({ shoes: { title, content, price, id } }) {
 function Banner() {
   return <div className="main-bg"></div>;
 }
-function ProductListPage({ shoes }) {
+function ProductListPage({ shoes, setShoes }) {
+  const [count, setCount] = useState(1);
+  const [isFetched, setIsFetched] = useState(false);
   return (
     <div className="ProductListPage">
       <Banner></Banner>
       <ProductList shoes={shoes}></ProductList>
+      {isFetched ? <h2>로딩중</h2> : null}
+      <button
+        onClick={() => {
+          if (count === 2) {
+            alert("상품이 없어욤");
+            setCount(1);
+            return;
+          }
+          setIsFetched(true);
+          axios
+            .get(`https://codingapple1.github.io/shop/data${count + 1}.json`)
+            .then((res) => setShoes([...shoes, ...res.data]))
+            .catch(() => {
+              /*로딩중 UI 숨기기*/ setIsFetched(false);
+            });
+          setCount(count + 1);
+          //로딩중 UI 숨기기
+          setIsFetched(false);
+        }}
+      >
+        버튼
+      </button>
     </div>
   );
 }
