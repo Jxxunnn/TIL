@@ -1,12 +1,20 @@
 /* eslint-disable */
 
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function App() {
   const [title, setTitle] = useState([]);
   const [likes, setLikes] = useState(Array(title.length).fill(0));
   const [contents, setContents] = useState(Array(title.length).fill(""));
+
+  //LifeCycle 컴포넌트의 생애주기
+  // mount 컴포넌트는 리액라는 세상에서 태어나고 성장하고 죽습니다.
+
+  // mount , update , unmount
+  // 컴포넌트의 생애주기에 개입할 수 있는 능력을 가진 녀석이 useEffect
+  useEffect(() => {}, []);
+
   return (
     <div className="App">
       <Nav></Nav>

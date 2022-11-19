@@ -1,5 +1,7 @@
 # React
 
+`$npx create-react-app 생성할폴더명 --template basic-react`
+
 ## React를 쓰는 이유
 
 1. Single Page Application을 만들 떄 쓴다.
@@ -990,3 +992,1157 @@ useParams() 라는 함수를 상단에서 import 해오면 쓸 수 있는데
 (참고)
 
 path 작명시 url 파라미터는 몇번이고 사용가능합니다. detail/:어쩌구/:저쩌구 이런식
+
+## Styled-Components 쓰면 CSS 파일 없어도 되는데
+
+컴포넌트가 많은 경우 스타일링을 하다보면 불편함이 생기는데
+
+1. class 만들어놓은걸 까먹고 중복해서 또 만들거나
+2. 갑자기 다른 이상한 컴포넌트에 원하지않는 스타일이 적용되거나
+3. CSS 파일이 너무 길어져서 수정이 어렵거나
+
+이런 경우가 있습니다.
+그래서 스타일을 바로 입혀서 컴포넌트를 만들어버릴 수도 있는데
+styled-components 라는 인기 라이브러리를 설치하여 이용하시면 됩니다.
+
+`npm install styled-components`
+`import styled from 'styled-components'`
+그리고 사용하고 싶은 컴포넌트 맨위에 이런걸 import 해와야합니다.
+
+Detail.js 파일 위에 ▲ 위처럼 입력해서 import 해오십시오. 그럼 셋팅 끝
+
+### styled-components 기본적인 사용법
+
+이 라이브러리를 이용하면 컴포넌트를 만들 때 스타일을 미리 주입해서 만들 수 있습니다.
+
+제가 한번 예시로 padding : 20px인 div박스를 styled-components를 이용해 만들어보겠습니다.
+
+```js
+import styled from "styled-components";
+
+let Box = styled.div`
+  padding: 20px;
+  color: grey;
+`;
+let YellowBtn = styled.button`
+  background: yellow;
+  color: black;
+  padding: 10px;
+`;
+
+function Detail() {
+  return (
+    <div>
+      <Box>
+        <YellowBtn>버튼임</YellowBtn>
+      </Box>
+    </div>
+  );
+}
+```
+
+1. <div>를 하나 만들고 싶으면 저렇게 styled.div 라는걸 사용하면 됩니다.
+
+<p> 만들려면 styled.p 이런 식임
+
+2. 오른쪽에 `` backtick 기호를 이용해서 CSS 스타일을 넣을 수 있습니다.
+
+3. 그럼 그 자리에 컴포넌트를 남겨주는데 변수에 저장해서 쓰면 됩니다.
+
+장점1. CSS 파일 오픈할 필요없이 JS 파일에서 바로 스타일넣을 수 있습니다.
+
+장점2. 여기 적은 스타일이 다른 JS 파일로 오염되지 않습니다. 원래 그냥 CSS파일은 오염됩니다.
+
+장점3. 페이지 로딩시간 단축됩니다.
+
+왜냐면 저기 적은 스타일은 html 페이지의 <style>태그에 넣어줘서 그렇습니다.
+
+### 실은 일반 CSS 파일도 오염방지 가능
+
+여러분이 App.css 파일을 만들어서 App.js에서 import해서 쓴다고 해도
+
+거기 적은 클래스명들은 Detail.js까지 사용가능합니다. (오염됨)
+
+프로젝트 사이즈가 작을 땐 편리하겠지만 사이즈가 커지면 관리하기 힘들어집니다.
+
+그럴 땐 styled-components 써도 되지만 그냥 CSS파일에서도 다른 JS 파일에 간섭하지 않는 '모듈화' 기능을 제공하는데
+
+컴포넌트명.module.css
+
+이렇게 CSS 파일을 작명하면 됩니다.
+
+그리고 컴포넌트명.js 파일에서 import 해서 쓰면 그 스타일들은 컴포넌트명.js 파일에만 적용됩니다.
+
+### 추가 문법: props로 재활용가능
+
+여러가지 비슷한 UI가 필요한 경우 어쩌죠?
+
+예를 들어 지금 노란 버튼말고 오렌지색 버튼이 필요해지면?
+
+물론 예전 강의를 잘 되살려보면 props 이용하면 기존 컴포넌트를 살짝씩 다르게 이용할 수 있다고 했습니다.
+
+그래서 여기도 props 문법 지원합니다.
+
+```js
+import styled from "styled-components";
+
+let YellowBtn = styled.button`
+  background: ${(props) => props.bg};
+  color: black;
+  padding: 10px;
+`;
+
+function Detail() {
+  return (
+    <div>
+      <YellowBtn bg="orange">오렌지색 버튼임</YellowBtn>
+      <YellowBtn bg="blue">파란색 버튼임</YellowBtn>
+    </div>
+  );
+}
+```
+
+${ props => props.bg } 이게 styled-components 에서의 props 뚫는 문법입니다.
+
+bg부분에 자유롭게 작명하면되고
+
+이제 컴포넌트 쓸 때 bg라는 props를 입력가능합니다.
+
+물론 CSS 쓴다고 이게 불가능한건 아닙니다. class 더 만들면 되는 것임
+
+Q. 저거 ${ } 이거 무슨 문법임?
+
+A. 자바스크립트 `` 백틱 따옴표 안에 적어도 문자를 만들 수 있는데
+
+백틱으로 만든 문자 중간에 변수같은걸 넣고 싶을 때 ${ 변수명 } 이렇게 쓸 수 있습니다.
+
+Q. props 전송시 작명={ } 이렇게 전송안하고 따옴표써도 되나요?
+
+A. 넴
+
+```js
+let YellowBtn = styled.button`
+  background: ${(props) => props.bg};
+  color: ${(props) => (props.bg == "blue" ? "white" : "black")};
+  padding: 10px;
+`;
+```
+
+### 세상에 장점만 있는 게 어딨습니까.
+
+단점1. JS 파일이 매우 복잡해집니다.
+
+그리고 이 컴포넌트가 styled 인지 아니면 일반 컴포넌트인지 구분도 어렵습니다.
+
+단점2. JS 파일 간 중복 디자인이 많이 필요하면 어쩌죠?
+
+다른 파일에서 스타일 넣은 것들 import 해와서 쓰면 됩니다.
+
+근데 그럼 CSS파일 쓰는거랑 차이가 없을 수도요
+
+단점3. CSS 담당하는 디자이너가 있다면 협업시 불편할텐데
+
+그 사람이 styled-components 문법을 모른다면
+
+그 사람이 CSS로 짠걸 styled-components 문법으로 다시 바꾸거나 그런 작업이 필요하겠군요.
+
+그래서 신기술같은거 도입시엔 언제나 미래를 생각해보아야합니다.
+
+styled-components를 써보고 싶다면 직접 레이아웃 몇개 만들어보며 익혀보면 되겠습니다.
+
+## Lifecycle과 useEffect 1
+
+오늘은 Lifecycle 어쩌구랑 useEffect라는 함수에 대해 알아봅시다.
+
+어딜 들쳐봐도 다들 어렵게 가르치는 Lifecycle 이라는 개념이 있는데 실은 별거아닙니다.
+
+이걸 배우는 이유는 componentDidMount() 이런 유용한 Lifecycle 함수들을 쓰기 위해서 배우는겁니다.
+
+요즘 사람들은 저렇게 긴 함수 안쓰고 useEffect() 라는 깔끔한 함수를 사용하기 때문에 우리도 그걸 배워봅시다.
+
+### 컴포넌트의 인생
+
+여러분이 만들어쓰고있는 컴포넌트는 Lifecycle이라는 개념이 있습니다.
+컴포넌트도 인생이 있다는겁니다.
+컴포넌트는
+
+1. 생성이 될 수도 있고 (전문용어로 mount)
+
+2. 재렌더링이 될 수도 있고 (전문용어로 update)
+
+3. 삭제가 될 수도 있습니다. (전문용어로 unmount)
+
+컴포넌트의 인생을 배우는 이유는 컴포넌트 인생 중간중간에 간섭할 수 있기 때문입니다.
+
+간섭이 뭐냐면 그냥 코드실행인데
+
+컴포넌트가 장착이 될 때 특정 코드를 실행할 수도 있고
+
+컴포넌트가 업데이트될 때 특정 코드를 실행할 수도 있다는 겁니다.
+
+그럼 재밌는 기능들 개발가능
+
+### 인생에 간섭하는 방법
+
+Detail 컴포넌트 등장 전에 이것좀 해줘"
+
+"Detail 컴포넌트 사라지기 전에 이것좀 해줘"
+
+"Detail 컴포넌트 업데이트 되고나서 이것좀 해줘"
+
+이렇게 코드좀 실행해달라고 간섭할 수 있는데 간섭은 갈고리(hook)를 달아서 합니다.
+갈고리를 달아서 코드를 넣어주면 됩니다. 그럼 진짜 페이지 장착시, 업데이트시, 제거시 코드실행가능 갈고리는 영어로 hook이라고 합니다. 그래서 저걸 Lifecycle hook 이라고 부릅니다
+
+### 옛날 React에서 Lifecycle hook 쓰는 법
+
+```js
+class Detail2 extends React.Component {
+  componentDidMount() {
+    //Detail2 컴포넌트가 로드되고나서 실행할 코드
+  }
+  componentDidUpdate() {
+    //Detail2 컴포넌트가 업데이트 되고나서 실행할 코드
+  }
+  componentWillUnmount() {
+    //Detail2 컴포넌트가 삭제되기전에 실행할 코드
+  }
+}
+```
+
+예전엔 class 문법으로 컴포넌트를 만들었습니다.
+그 경우엔 안에 함수명을 저렇게 써주면 각각 특정 Lifecycle에서 코드를 실행할 수 있었습니다.
+
+### 요즘 React에서 Lifecycle hook 쓰는 법
+
+```js
+import { useState, useEffect } from "react";
+
+function Detail() {
+  useEffect(() => {
+    //여기적은 코드는 컴포넌트 로드 & 업데이트 마다 실행됨
+    console.log("안녕");
+  });
+
+  return 생략;
+}
+```
+
+useEffect 를 사용 할 때에는 첫번째 파라미터에는 함수, 두번째 파라미터에는 의존값이 들어있는 배열 (deps)을 넣습니다. 만약에 deps 배열을 비우게 된다면, 컴포넌트가 처음 나타날때에만 useEffect 에 등록한 함수가 호출됩니다.
+
+주로, 마운트 시에 하는 작업들은 다음과 같은 사항들이 있습니다.
+
+props 로 받은 값을 컴포넌트의 로컬 상태로 설정
+외부 API 요청 (REST API 등)
+라이브러리 사용 (D3, Video.js 등...)
+setInterval 을 통한 반복작업 혹은 setTimeout 을 통한 작업 예약
+그리고 언마운트 시에 하는 작업들은 다음과 같은 사항이 있습니다.
+
+setInterval, setTimeout 을 사용하여 등록한 작업들 clear 하기 (clearInterval, clearTimeout)
+라이브러리 인스턴스 제거
+
+**Q. 왜 저는 '안녕' 2번 출력됨?**
+
+index.js에 <React.StrictMode>라는 태그가 있으면 2번 출력해줍니다.
+디버깅용으로 편하라고 2번 출력해주는데 싫으면 저 태그를 제거하거나 그럽시다.
+
+### 근데 useEffect 밖에 적어도 똑같은데요
+
+들킴
+
+실은 useEffect 바깥에 적어도 똑같이 컴포넌트 mount & update시 실행됩니다.
+
+컴포넌트가 mount & update시 function 안에 있는 코드도 다시 읽고 지나가서 그렇습니다.
+
+그럼 대체 useEffect 왜 만들어놓은 것이죠
+
+그래서 문법 배우는게 중요한게 아니라 이걸 배웠으면
+
+어떤 상황에서 언제 사용할지도 함께 배워야합니다.
+
+그래야 나중에 "여기서 useEffect 써도 되나요" 이런 초보질문 안함
+
+**useEffect 안에 적은 코드는 html 렌더링 이후에 동작합니다.**
+
+그럼 이제 useEffect가 뭔가 유용할 것 같지 않습니까
+
+예를 들어서 굉장히 시간이 오래걸리는 쓸데없는 코드가 필요하다고 가정해봅시다.
+
+> 함수안에 이것저것 코드짤 때 함수의 핵심기능 외에 쓸데없는 기능들을 프로그래밍 용어로 side effect라고 부릅니다. 그래서 useEffect도 거기서 따온건데 컴포넌트의 핵심 기능은 html 렌더링이라 그거 외의 쓸데없는 기능들은 useEffect 안에 적으라는 소리입니다. 오래걸리는 반복연산, 서버에서 데이터가져오는 작업, 타이머다는거 이런건 useEffect 안에 많이 적습니다.
+
+## Lifecycle과 useEffect 2
+
+동적인 UI 같은 거 만들 땐
+
+1. UI 상태를 저장할 state 만들고
+
+2. state에 따라서 UI가 어떻게 보일지 작성하라고 했으니 그거부터 해봅시다.
+
+### useEffect에 넣을 수 있는 실행조건
+
+`useEffect(()=>{ 실행할코드 }, [count])`
+
+useEffect()의 둘째 파라미터로 [ ] 를 넣을 수 있는데 거기에 변수나 state같은 것들을 넣을 수 있습니다. 그렇게 하면 [ ]에 있는 변수나 state 가 변할 때만 useEffect 안의 코드를 실행해줍니다. 그래서 위의 코드는 count라는 변수가 변할 때만 useEffect 안의 코드가 실행되겠군요.
+
+(참고) [ ] 안에 state 여러개 넣을 수 있음
+
+`useEffect(()=>{ 실행할코드 }, [])`
+아무것도 안넣으면 컴포넌트 mount시 (로드시) 1회 실행하고 영영 실행해주지 않습니다.
+그래서 저번시간 숙제에도 [ ] 이걸 넣어봤습니다.
+
+### clean up function
+
+useEffect 동작하기 전에 특정코드를 실행하고 싶으면
+
+return ()=>{} 안에 넣을 수 있습니다.
+
+```js
+useEffect(()=>{
+  그 다음 실행됨
+  return ()=>{
+    여기있는게 먼저실행됨
+  }
+}, [count])
+```
+
+그럼 useEffect 안에 있는 코드를 실행하기 전에
+
+return ()=>{ } 안에 있는 코드를 실행해줍니다.
+
+참고로 저걸 clean up function 이라고 부릅니다.
+
+왜 저딴 쓸데없는 기능이 있냐고요?여러분 복잡하고 어려운 숙제할 때
+
+책상을 싹 치우고 하면 잘되는 것 처럼
+
+useEffect 안에 있는 코드를 실행할 때도
+
+싹 치우고 깔끔한 마음으로 실행하는게 좋을 때가 있습니다.
+
+예를 들면 숙제로 했던 setTimeout 타이머인데
+
+setTimeout() 쓸 때마다 브라우저 안에 타이머가 하나 생깁니다.
+
+근데 useEffect 안에 썼기 때문에 컴포넌트가 mount 될 때 마다 실행됩니다.
+
+그럼 잘못 코드를 짜면 타이머가 100개 1000개 생길 수도 있겠군요.
+
+나중에 그런 버그를 방지하고 싶으면useEffect에서 타이머 만들기 전에 기존 타이머를 싹 제거하라고 코드를 짜면 되는데
+
+그런거 짤 때 return ()=>{} 안에 짜면 됩니다.
+
+```js
+useEffect(() => {
+  let a = setTimeout(() => {
+    setAlert(false);
+  }, 2000);
+  return () => {
+    clearTimeout(a);
+  };
+}, []);
+```
+
+타이머 장착하기 전에 기존 타이머가 있으면 제거를 해줄듯요.
+(참고1) clean up function에는 타이머제거, socket 연결요청제거, ajax요청 중단 이런 코드를 많이 작성합니다.
+
+(참고2) 컴포넌트 unmount 시에도 clean up function 안에 있던게 1회 실행됩니다.
+
+### 빡통 정리 시간
+
+저런 코드가 언제 실행되는지만 잘 알아두면 알아서 개발가능한데
+
+원리이해가 싫다면 사용법만 정리해둡시다.
+
+`useEffect(()=>{ 실행할코드 })`
+
+1. 이러면 재렌더링마다 코드를 실행가능합니다.
+   `useEffect(()=>{ 실행할코드 }, [])`
+2. 이러면 컴포넌트 mount시 (로드시) 1회만 실행가능합니다.
+
+```js
+useEffect(() => {
+  return () => {
+    실행할코드;
+  };
+});
+```
+
+3. 이러면 useEffect 안의 코드 실행 전에 항상 실행됩니다.
+
+```js
+useEffect(() => {
+  return () => {
+    실행할코드;
+  };
+}, []);
+```
+
+4. 이러면 컴포넌트 unmount시 1회 실행됩니다.
+
+```js
+useEffect(() => {
+  실행할코드;
+}, [state1]);
+```
+
+5. 이러면 state1이 변경될 때만 실행됩니다.
+
+## 리액트에서 서버와 통신하려면 ajax 1
+
+오늘은 상품 더보기 기능을 만들어봅시다. 그래서 실제 상품을 서버에서 가져와볼 것인데 서버가 뭔지 그리고 통신은 어떻게 하는지 부터 알아봅시다.
+
+### 서버란?
+
+유저가 데이터달라고 요청을 하면 데이터를 보내주는 간단한 프로그램일 뿐입니다. 네이버웹툰 서버 : 유저가 웹툰 달라고 하면 웹툰 보내주는 프로그램 유튜브 서버 : 유저가 영상 달라고 하면 영상 보내주는 프로그램 입니다. 그래서 서버개발 별거아님 "누가 A를 요청하면 A를 보내주세요" 라고 코드짜는게 서버개발 끝입니다. 유저가 그냥 데이터달라고 떼쓰면 서버가 보내주진 않습니다. 서버에 데이터를 요청할 때는 정확한 규격에 맞춰서 요청해야하는데
+
+1. 어떤 데이터인지 (URL 형식으로)
+2. 어떤 방법으로 요청할지 (GET or POST)
+   잘 기재해야 데이터를 보내줍니다.
+
+   데이터를 가져올 때는 보통 GET 고르면 되고
+
+데이터를 서버로 보낼 때는 POST 고르면 됩니다.
+
+그리고 어떤 데이터를 보고싶은지 URL만 잘 기재하면 되는데
+
+예를 들어서 쇼미더럭키짱이라는 네이버웹툰을 보고싶으면
+
+https://comic.naver.com/webtoon/list?titleId=783054 여기 URL로 GET요청하면 보내줍니다.
+
+예를 들어서 독립일기라는 네이버웹툰을 보고싶으면
+
+https://comic.naver.com/webtoon/list?titleId=748105 여기 URL로 GET요청하면 보내줍니다.
+
+URL을 어떻게 알았냐고요?
+
+네이버 웹툰 서버개발자에게 물어보거나 URL이 기재된 html 페이지를 찾아보거나 그러면 됩니다
+
+### GET/POST 요청하는 법?
+
+GET요청을 날리고 싶으면 가장 쉬운 방법은 브라우저 주소창입니다.
+
+거기에 URL 아무거나 적으면 그 곳으로 GET요청을 날려줍니다.
+
+진짠지 테스트해보셈
+
+POST요청을 날리고 싶으면
+
+<form action="요청할url" method="post"> 태그 이용하면 됩니다.
+
+그럼 폼이 전송되었을 때 POST요청을 날려줍니다.
+
+근데 GET, POST 요청을 저렇게 날리면 단점이 뭐냐면 브라우저가 새로고침됩니다.
+
+### AJAX란?
+
+서버에 GET, POST 요청을 할 때 새로고침 없이 데이터를 주고받을 수 있게 도와주는 간단한 브라우저 기능을 AJAX라고 합니다. 그거 쓰면 새로고침 없이도 쇼핑몰 상품을 더 가져올 수도 있고 새로고침 없이도 댓글을 서버로 전송할 수도 있고 그런 기능을 만들 수 있는 것임 AJAX로 GET/POST요청하려면 방법 3개 중 택1 하면 됩니다.
+
+1. XMLHttpRequest라는 옛날 문법 쓰기
+
+2. fetch() 라는 최신 문법 쓰기
+
+3. axios 같은 외부 라이브러리 쓰기
+
+3번이 가장 편하니 3번을 써봅시다.
+
+`npm install axios`
+
+### AJAX 요청하는 법
+
+버튼누르면 제가 만든 서버로 ajax 요청을 해봅시다.
+https://codingapple1.github.io/shop/data2.json 이 URL로 GET요청을 하면 상품 3개를 가져와줍니다.
+여기로 요청해봅시다.
+
+```js
+import axios from "axios";
+
+function App() {
+  return (
+    <button
+      onClick={() => {
+        axios
+          .get("https://codingapple1.github.io/shop/data2.json")
+          .then((결과) => {
+            console.log(결과.data);
+          })
+          .catch(() => {
+            console.log("실패함");
+          });
+      }}
+    >
+      버튼
+    </button>
+  );
+}
+```
+
+1. axios를 쓰려면 상단에서 import해오고
+
+2. axios.get(URL) 이러면 그 URL로 GET요청이 됩니다.
+
+3. 데이터 가져온 결과는 결과.data 안에 들어있습니다.
+
+그래서 위의 버튼 누르면 서버에서 가져온 데이터가 콘솔창에 출력됩니다.
+
+4. 인터넷이 안되거나 URL이 이상하면 실패하는데
+
+실패했을 때 실행할 코드는 .catch() 안에 적으면 됩니다.
+
+그래서 오늘의 숙제로
+
+버튼을 누르면 서버에서 상품데이터 3개를 가져와서
+
+메인페이지에 상품카드 3개를 더 생성해봅시다.
+
+(팁) 리액트에선 html을 3개 더 생성해주세요~라고 코드짜지 않는다고 했습니다.
+
+state 조작하면 html 알아서 생성될걸요
+
+### POST요청 하는 법
+
+`axios.post('URL', {name : 'kim'})`
+이거 실행하면 서버로 { name : 'kim' } 자료가 전송됩니다.
+
+완료시 특정 코드를 실행하고 싶으면 이것도 역시 .then() 뒤에 붙이면 됩니다.
+
+### 동시에 AJAX 요청 여러 개 날리려면
+
+`Promise.all( [axios.get('URL1'), axios.get('URL2')] )`
+이러면 URL1, URL2로 GET요청을 동시에 해줍니다.
+
+둘 다 완료시 특정 코드를 실행하고 싶으면 .then() 뒤에 붙이면 됩니다.
+
+### 원래 서버와 문자자료만 주고받을 수 있음
+
+object/array 이런거 못주고받습니다.
+
+근데 방금만해도 array 자료 받아온 것 같은데 그건 어떻게 한거냐면
+
+object/array 자료에 따옴표를 쳐놓으면 됩니다.
+
+"{"name" : "kim"}"
+
+이걸 JSON 이라고 합니다.
+
+JSON은 문자 취급을 받기 때문에 서버와 자유롭게 주고받을 수 있습니다.
+
+그래서 실제로 결과.data 출력해보면 따옴표쳐진 JSON이 나와야하는데
+
+axios 라이브러리는 JSON -> object/array 변환작업을 자동으로 해줘서
+
+출력해보면 object/array가 나옵니다.
+
+`fetch('URL').then(결과 => 결과.json()).then((결과) => { console.log(결과) } )`
+쌩자바스크립트 문법인 fetch() 를 이용해도 GET/POST 요청이 가능한데
+그건 JSON -> object/array 이렇게 자동으로 안바꿔줘서 직접 바꾸는 작업이 필요합니다.
+마음에 들면 쓰도록 합시다.
+
+## 리액트에서 탭 UI 만들기
+
+### 리액트 국룰
+
+1. html css로 디자인 미리 완성해놓고
+2. UI의 현재 상태를 저장할 state 하나 만들고
+3. state에 따라서 UI가 어떻게 보일지 작성하면 된다고 했습니다.
+
+### 1. HTML, CSS 탭 디자인 미리 완성하기
+
+버튼3개와 <div> 3개가 필요합니다.
+
+디자인하기 귀찮아서 버튼은 react-bootstrap 사이트에서 복사해서 Detail 페이지에 넣어봤습니다.
+
+```js
+<Nav variant="tabs"  defaultActiveKey="link0">
+    <Nav.Item>
+      <Nav.Link eventKey="link0">버튼0</Nav.Link>
+    </Nav.Item>
+    <Nav.Item>
+      <Nav.Link eventKey="link1">버튼1</Nav.Link>
+    </Nav.Item>
+    <Nav.Item>
+      <Nav.Link eventKey="link2">버튼2</Nav.Link>
+    </Nav.Item>
+</Nav>
+<div>내용0</div>
+<div>내용1</div>
+<div>내용2</div>
+```
+
+거기 문서 보니까 eventKey 속성은 버튼마다 맘대로 작명하면 된다고 합니다.
+
+defaultActiveKey 여기는 페이지 로드시 어떤 버튼에 눌린효과를 줄지 결정하는 부분입니다.
+
+### 2. UI의 현재 상태를 저장할 state 하나 만들기
+
+```js
+function Detail() {
+  let [탭, 탭변경] = useState(0)(생략);
+}
+```
+
+상단에 state 하나 만들었습니다.
+
+탭 UI의 상태는
+
+0번 내용이 보이거나 / 1번 내용이 보이거나 / 2번 내용이 보이거나
+
+셋 중 하나기 때문에 저는 0, 1, 2 숫자로 상태를 표현해보겠습니다.
+
+### 3. state에 따라서 UI가 어떻게 보일지 작성
+
+state가 0이면 0번 내용 보여주세요~
+
+1이면 1번 내용 보여주세요~
+
+이렇게 코드짜면 됩니다. 삼항연산자 이런거 써도 되는데 심심하니까 컴포넌트로 만들어봅시다.
+
+```js
+<Nav variant="tabs" defaultActiveKey="link0">
+  <Nav.Item>
+    <Nav.Link
+      onClick={() => {
+        탭변경(0);
+      }}
+      eventKey="link0"
+    >
+      버튼0
+    </Nav.Link>
+  </Nav.Item>
+  <Nav.Item>
+    <Nav.Link
+      onClick={() => {
+        탭변경(1);
+      }}
+      eventKey="link1"
+    >
+      버튼1
+    </Nav.Link>
+  </Nav.Item>
+  <Nav.Item>
+    <Nav.Link
+      onClick={() => {
+        탭변경(2);
+      }}
+      eventKey="link2"
+    >
+      버튼2
+    </Nav.Link>
+  </Nav.Item>
+</Nav>
+```
+
+### 센스좋으면 if 필요 없을 수도 있습니다
+
+```js
+function TabContent({ 탭 }) {
+  return [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][탭];
+}
+```
+
+## 멋있게 컴포넌트 전환 애니메이션 주는 법 (transition)
+
+컴포넌트 등장, 퇴장 애니메이션같은게 필요하면 라이브러리설치해서 써도 되겠지만 CSS 잘하면 간단한건 알아서 개발가능합니다. 옛날에 배웠던 useEffect 이런거 활용하면 되는데
+CSS 애니메이션 처음인 분들을 위해 오늘도 정확한 개발스텝을 알려드립니다.
+
+애니메이션 만들고 싶으면
+
+1. 애니메이션 동작 전 스타일을 담을 className 만들기
+
+2. 애니메이션 동작 후 스타일을 담을 className 만들기
+
+3. transition 속성도 추가
+
+4. 원할 때 2번 탈부착
+
+이게 끝입니다. CSS 잘쓰면 모든 애니메이션 알아서 만들 수 있습니다.
+
+저번에 만들었던 탭의 내용이 서서히 등장하는 fade in 애니메이션을 만들어봅시다.
+
+### 1. 애니메이션 동작 전 2. 애니메이션 동작 후 className 만들기
+
+```js
+.start {
+  opacity : 0
+}
+.end {
+  opacity : 1;
+  transition : opacity 0.5s;
+}
+```
+
+CSS 파일 열어서 이런거 추가하면 됩니다.
+애니메이션 동작 전엔 투명도가 0, 동작 후엔 투명도가 1이 되면 좋을듯요
+transition은 "해당 속성이 변할 때 서서히 변경해주세요~" 라는 뜻입니다.
+
+그럼 이제 원하는 <div> 요소에 start 넣어두고 end 를 탈부착할 때 마다 fade in이 됩니다.
+
+### 원할 때 end 부착
+
+이제 "버튼을 누를 때 마다 end를 저기 부착해주세요" 라고 코드짜면 애니메이션 동작합니다.
+
+버튼누르면 end 부착하라고 코드짜려면 코드를 3번이나 짜야할듯요 버튼이 3개니까요.
+
+그게 싫으면 useEffect 이런거 활용해봐도 됩니다.
+
+useEffect 쓰면 특정 state 아니면 props가 변할 때 마다 코드실행이 가능하다고 했습니다.
+
+그래서 "탭이라는 state가 변할 때 end를 저기 부착해주세요" 라고 코드짜도 같을듯
+
+```js
+function TabContent({ 탭 }) {
+  let [fade, setFade] = useState("");
+
+  useEffect(() => {
+    setFade("end");
+  }, [탭]);
+
+  return (
+    <div className={"start " + fade}>
+      {[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][탭]}
+    </div>
+  );
+}
+```
+
+탭이라는게 변할 때 end를 저기 부착하고 싶으면 동적인 UI 만드는 법 떠올리면 됩니다.
+
+- fade라는 state 하나 만들고
+
+- state에 따라서 className이 어떻게 보일지 작성하고
+
+- 원할 때 fade를 변경했습니다.
+
+이제 탭이라는 state가 변할 때 마다
+
+fade라는 state가 'end'로 변하고
+
+그럼 className="start end" 이렇게 변합니다.
+
+이제 버튼 막 누르면 end가 부착되니까 애니메이션이 잘 보이겠군요
+
+Q. 안보이는데요
+
+내 의도와 다르게 동작하는건 개발자도구에서 검사해보면 됩니다.
+
+end라는 클래스명을 부착하는게 맞긴 맞는데
+
+실은 떼었다가 붙여야 애니메이션이 보입니다. end를 떼었다가 붙여보셈
+
+```js
+function TabContent({ 탭 }) {
+  let [fade, setFade] = useState("");
+
+  useEffect(() => {
+    setTImeout(() => {
+      setFade("end");
+    }, 100);
+    return () => {
+      setFade("");
+    };
+  }, [탭]);
+
+  return (
+    <div className={"start " + fade}>
+      {[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][탭]}
+    </div>
+  );
+}
+```
+
+▲ 떼었다가 부착하라고 코드짜봤습니다.
+
+clean up function 안에 fade라는 state를 공백으로 바꾸라고 했으니
+
+useEffect 실행 전엔 'end'가 ' ' 이걸로 바뀝니다.
+
+이제 잘될듯
+
+### Q. setTimeout 왜 씁니까
+
+리액트 18버전 이상부터는 automatic batch 라는 기능이 생겼습니다.
+
+state 변경함수들이 연달아서 여러개 처리되어야한다면
+
+state 변경함수를 다 처리하고 마지막에 한 번만 재렌더링됩니다.
+
+그래서 'end' 로 변경하는거랑 ' ' 이걸로 변경하는거랑 약간 시간차를 뒀습니다.
+
+찾아보면 setTimeout 말고 flushSync() 이런거 써도 될 것 같기도 합니다. automatic batching을 막아줍니다.
+
+## props 싫으면 Context API 써도 됩니다.
+
+App에 있던 state를 TabContent 컴포넌트에서 사용하고 싶어지면 어떻게 코드짜야하죠?
+
+App -> Detail -> TabContent 이렇게 props를 2번 전송해주면 됩니다.
+이게 귀찮으면 Context API 문법을 쓰거나 Redux 같은 외부 라이브러리 쓰면 되는데 오늘은 전자를 알아봅시다.
+
+### Context API 문법으로 props 없이 state 공유하기
+
+재고라는 state를 App 컴포넌트에 만들어봅시다.
+
+이걸 TabContent라는 자식컴포넌트에서 쓰고싶다고 가정해봅시다.
+
+Context API 문법을 쓰면 props 전송없이도 TabContent 컴포넌트가 쓸 수 있는데
+
+이거 쓰려면 일단 셋팅부터 해야합니다.
+
+```js
+App.js;
+
+export let Context1 = React.createContext();
+
+function App() {
+  let [재고, 재고변경] = useState([10, 11, 12]);
+
+  생략;
+}
+```
+
+▲ 1. 일단 createContext() 함수를 가져와서 context를 하나 만들어줍니다.
+
+context를 쉽게 비유해서 설명하자면 state 보관함입니다.
+
+```js
+App.js;
+
+export let 재고context = React.createContext();
+
+function App() {
+  let [재고, 재고변경] = useState([10, 11, 12]);
+
+  return (
+    <Context1.Provider value={{ 재고, shoes }}>
+      <Detail shoes={shoes} />
+    </Context1.Provider>
+  );
+}
+```
+
+▲ 2. 아까만든 Context1로 원하는 곳을 감싸고 공유를 원하는 state를 value 안에 다 적으면 됩니다.
+
+그럼 이제 Context1로 감싼 모든 컴포넌트와 그 자식컴포넌트는
+
+state를 props 전송없이 직접 사용가능합니다.
+
+### Context 안에 있던 state 사용하려면
+
+1. 만들어둔 Context를 import 해옵니다.
+
+2. useContext() 안에 넣습니다.
+
+그럼 이제 그 자리에 공유했던 state가 전부 남는데 그거 쓰면 됩니다.
+
+```js
+Detail.js;
+
+import { useState, useEffect, useContext } from "react";
+import { Context1 } from "./../App.js";
+
+function Detail() {
+  let { 재고 } = useContext(Context1);
+
+  return <div>{재고}</div>;
+}
+```
+
+▲ 예를 들어서 Detail 컴포넌트에서 Context에 있던 state를 꺼내 쓰려면
+
+1. Context1을 import 하고
+
+2. useContext() 안에 담으면 됩니다. Context 해체해주는 함수임
+
+그럼 그 자리에 공유했던 모든 state가 남습니다.
+
+변수에 담아서 가져다쓰거나 하면 됩니다.
+
+심지어 Detail 안에 있는 모든 자식컴포넌트도 useContext() 쓰면 자유롭게 재고 state를 사용가능합니다.
+
+TabContent 안에서 실험해봅시다.
+
+### Q. props보다 불편한데요?
+
+A. 그럼 props를 씁시다. 이건 중첩해서 사용한 컴포넌트가 많을 때 편리한 문법입니다.
+
+### Context API 단점
+
+실은 잘 안쓰는 이유는
+
+1. state 변경시 쓸데없는 컴포넌트까지 전부 재렌더링이 되고
+
+2. useContext() 를 쓰고 있는 컴포넌트는 나중에 다른 파일에서 재사용할 때 Context를 import 하는게 귀찮아질 수 있습니다.
+
+그래서 이것 보다는 redux 같은 외부라이브러리를 많이들 사용합니다.
+
+## 장바구니 페이지 만들기 & Reduc 1 : Redux Toolkit 설치
+
+/cart로 접속하면 장바구니 페이지를 보여줍시다.
+
+근데 장바구니 기능은 Redux 배울 겸 그걸 이용해서 만들어봅시다.
+
+### 여기서 잠깐! 리덕스(Redux)란 무엇인가?
+
+리덕스는 어플리케이션의 클라이언트쪽 state를 관리하기 위한 거대한 이벤트루프이다.
+액션 = 이벤트
+리듀서 = 이벤트에 대한 반응
+
+Redux공식 문서(참조)에 의하면 리덕스는 클라이언트 앱의 복잡성을 제어하기 위한 하나의 state제어 수단이라고 한다(정확히는 방법론이 맞는것 같다.)
+
+### Redux의 원리
+
+어플리케이션 전체에는 store라는 커다란 하나의 state가 존재하는데 이것이 어플리케이션의 state를 총괄한다.
+
+이 store의 state는 그 자체를 직접 변형할 수 없고, 오직 순수 함수인 `리듀서`로만 새로운 형태로 갈아치우는 것이 가능하다.
+
+리듀서는 type과 payloads(꼭 속성이름이 이렇지 않아도 됨)를 속성으로 갖는 단순 객체인 action이벤트가 발생했을 때에만 작동하며
+
+action이벤트를 발생시키는 방법은 dispatch라는 함수에 단순 객체인 action을 넣는것으로 가능하게 한다.
+
+이제 앞서 말했던 순서를 시간순으로 정리해보자.
+
+dispatch(action) => 리듀서 작동 => store의 state변경 => 변경된 state가 state를 subscribe하고 있는 컴포넌트에 전달
+
+### application전체의 상태를 redux로 관리하면 어떤 장점이 있을까?
+
+1. 가장 먼저, application state의 변화가 예측가능하게 변한다는 점이다.
+2. 리듀서가 순수 함수(외부에 영향을 끼치지 않는 함수. ex: api calling이 없는 함수)이기 때문에 test코드를 짤 수 있다는 장점도 존재한다.
+3. 마지막으로 선언적으로 프로그래밍을 할 수 있다는 점이다(Declarative Programming)
+
+### 결론 `redux는 state관리를 위한 거대한 event loop`
+
+액션 = 이벤트
+리듀서 = 이벤트에 대한 반응
+
+즉, 액션이벤트를 발생시켜서 리듀서라는 이벤트에 대한 반응을 일으키므로서 어플리케이션의 state를 a라는 상태에서 b라는 상태로 만든다.(a is b)
+
+### 장바구니 페이지만들기
+
+페이지하나 필요하면 어떻게 해야합니까.
+
+라우터 쓰면 되는 것 아니겠습니까 그래서 App.js의 <Routes> 쓰던 곳을 찾아가봅시다.
+
+```js
+<Route path="/cart" element={<Cart />} />
+```
+
+그리고 <Route>를 하나 추가했습니다. 누가 /cart 로 접속하면 <Cart> 컴포넌트를 보여주기로 했습니다.
+
+<Cart> 컴포넌트는 알아서 만들어서 저기 넣으면 됩니다.
+
+전 Cart.js 라는 다른 파일에 컴포넌트 만들었음
+
+### 장바구니 페이지에서 사용할 Table 레이아웃은
+
+```js
+<Table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>상품명</th>
+      <th>수량</th>
+      <th>변경하기</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>안녕</td>
+      <td>안녕</td>
+      <td>안녕</td>
+    </tr>
+  </tbody>
+</Table>
+```
+
+이거 넣으면 표가 생성됩니다. Cart 컴포넌트에 넣어봤습니다.
+
+물론 React-bootstrap에서 가져온거라 상단에서 import { Table } from 'react-bootstrap' 하면 됩니다.
+
+### Redux 쓰면 뭐가 좋냐면
+
+Redux는 props 없이 state를 공유할 수 있게 도와주는 라이브러리입니다.
+이거 설치하면 js 파일(`redux store.js`) 하나에 state들을 보관할 수 있는데
+
+그걸 모든 컴포넌트가 직접 꺼내쓸 수 있습니다.
+
+그래서 귀찮은 props 전송이 필요없어집니다.
+
+컴포넌트가 많아질 수록 좋겠군요.
+
+그래서 사이트가 커지면 쓸 수 밖에 없어서
+
+개발자 구인시에도 redux같은 라이브러리 숙련도를 대부분 요구합니다.
+
+### Redux 설치는
+
+```js
+npm install @reduxjs/toolkit react-redux
+```
+
+터미널에 입력하면됩니다.
+
+참고로 redux toolkit이라는 라이브러리를 설치할 건데 redux의 개선버전이라고 보면 됩니다. 문법이 좀 더 쉬워짐
+
+근데 설치하기 전에 package.json 파일을 열어서
+
+"react"
+
+"react-dom"
+
+항목의 버전을 확인합시다.
+
+이거 두개가 18.1.x 이상이면 사용가능합니다.
+그게 아니면 `package.json`에서 직접 두개를 18.1.0 이렇게 수정한 다음 파일저장하고
+
+터미널에서 npm install 누르면 됩니다. 그럼 이제 redux 설치가능
+
+### Redux 세팅은
+
+```js
+import { configureStore } from "@reduxjs/toolkit";
+
+export default configureStore({
+  reducer: {},
+});
+```
+
+1. 아무데나 store.js 파일을 만들어서 위 코드를 복붙해줍니다.
+
+저는 src 폴더 안에 만들었음
+
+이게 뭐냐면 아까 말했던 state들을 보관하는 파일입니다.
+
+```js
+import { Provider } from "react-redux";
+import store from "./store.js";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  </React.StrictMode>
+);
+```
+
+2. index.js 파일가서 Provider 라는 컴포넌트와 아까 작성한 파일을 import 해옵니다.
+
+그리고 밑에 <Provider store={import해온거}> 이걸로 <App/> 을 감싸면 됩니다.
+
+그럼 이제 <App>과 그 모든 자식컴포넌트들은 store.js에 있던 state를 맘대로 꺼내쓸 수 있습니다.
+
+간편하겠군요 실제 사용은 다음시간에 해봅시다.
+
+## Redux 2 : store에 state 보관하고 쓰는 법
+
+**오늘의 숙제 :**
+
+하단에 있는 데이터를 Redux store 안에 보관해둡시다.
+
+그리고 Cart.js 페이지에 가져와서 데이터바인딩해봅시다.
+
+데이터 갯수에 맞게 표 생성해달라고 반복문쓰는 것도 좋을듯요
+
+```js
+[
+  { id: 0, name: "White and Black", count: 2 },
+  { id: 2, name: "Grey Yordan", count: 1 },
+];
+```
+
+▲ 유저가 장바구니에 추가한 데이터라고 생각하고
+
+redux store에 보관해두고 가져다가 써봅시다.
+
+array 자료 안에 object 자료가 2개 들어있을 뿐입니다.
+
+object 자료 안엔 상품 1개의 정보가 들어있군요
+
+### Redux 왜 쓰느냐
+
+뭐 배우기 전에 항상 이걸 왜 쓰는지 생각해보는게 중요합니다.
+
+그래야 나중에 "여기서 Redux 쓰는게 맞나요?" 이런 질문 안하고 알아서 코드 잘짬
+
+Redux 라이브러리 왜 쓴다고 했냐면
+
+state를 Redux store에 보관해둘 수 있는데 모든 컴포넌트가 거기 있던 state를 직접 꺼내쓸 수 있어서
+
+props 없어도 편리하게 state 공유가 가능하다고 했습니다.
+
+오늘은 Redux store에 state 보관하는 법을 알아봅시다.
+
+### Redux store에 state 보관하는 법
+
+저번시간에 만들어둔 store.js 파일 열어서 이렇게 코드짜면 state 하나 만들 수 있습니다.
+
+step 1. createSlice( ) 로 state 만들고
+
+step 2. configureStore( ) 안에 등록하면 됩니다.
+
+```js
+import { configureStore, createSlice } from "@reduxjs/toolkit";
+
+let user = createSlice({
+  name: "user",
+  initialState: "kim",
+});
+
+export default configureStore({
+  reducer: {
+    user: user.reducer,
+  },
+});
+```
+
+1. createSlice( ) 상단에서 import 해온 다음에
+
+**{ name : 'state이름', initialState : 'state값' }** 이거 넣으면 state 하나 생성가능합니다.
+
+(createSlice( ) 는 useState( ) 와 용도가 비슷하다고 보면 됩니다)
+
+2. state 등록은 configureStore( ) 안에 하면 됩니다.
+
+**{ 작명 : createSlice만든거.reducer }** 이러면 등록 끝입니다.
+
+여기 등록한 state는 모든 컴포넌트가 자유롭게 사용가능합니다.
+
+### Redux store에 있던 state 가져다쓰는 법
+
+```js
+Cart.js;
+
+import { useSelector } from "react-redux";
+
+function Cart() {
+  let a = useSelector((state) => {
+    return state;
+  });
+  console.log(a);
+
+  return 생략;
+}
+```
+
+아무 컴포넌트에서 useSelector((state) => { return state } ) 쓰면 store에 있던 모든 state가 그 자리에 남습니다.
+
+변수에 저장해서 진짜로 출력해보십시오.
+
+{ user : 'kim' } 이런거 출력될듯
+
+```js
+let a = useSelector((state) => state.user);
+```
+
+이런 식으로 쓰면 좀 더 편리할 수도 있습니다.
+
+### Redux 편하니까 맨날 쓰면 되겠네요
+
+간단한거 만들 때
+
+컴포넌트가 몇개 없을 때
+
+이럴 땐 그냥 props 쓰는게 더 코드가 짧습니다.
+
+## Redux 3: store의 state 변경하는 법

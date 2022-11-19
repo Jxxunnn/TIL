@@ -1,7 +1,7 @@
 import "./App.css";
 import { shoesData } from "./data.js";
-import { useState, useEffect } from "react";
-import { Container, Nav, Navbar, Row, Col } from "react-bootstrap";
+import { useState, useEffect, createContext, useContext } from "react";
+import { Container, Nav, Navbar, Row, Col, Table } from "react-bootstrap";
 import {
   Routes,
   Route,
@@ -12,6 +12,9 @@ import {
 } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
+import { useSelector } from "react-redux";
+
+const Context1 = createContext();
 
 const Box = styled.div`
   background: ${(props) => props.bg};
@@ -20,6 +23,7 @@ const Box = styled.div`
 
 function App() {
   const [shoes, setShoes] = useState(shoesData);
+  const [재고] = useState([10, 11, 12]);
   const navigate = useNavigate();
   return (
     <div className="App">
@@ -31,7 +35,11 @@ function App() {
         />
         <Route
           path="/detail/:id"
-          element={<ProductDetailPage shoes={shoes} />}
+          element={
+            <Context1.Provider value={{ 재고, shoes }}>
+              <ProductDetailPage shoes={shoes} />
+            </Context1.Provider>
+          }
         />
         <Route path="/about" element={<AboutPage></AboutPage>}>
           <Route path="member" element={<div>멤버임</div>} />
@@ -41,6 +49,7 @@ function App() {
           <Route path="one" element={<p>첫 주문시 양배추즙 서비스</p>} />
           <Route path="two" element={<p>생일기념 쿠폰받기</p>} />
         </Route>
+        <Route path="/cart" element={<CartPage></CartPage>} />
         <Route path="*" element={<div>없는 페이지임</div>} />
       </Routes>
     </div>
@@ -78,6 +87,49 @@ function NavBootstrap({ navigate }) {
     </Navbar>
   );
 }
+// CartPage
+function CartPage() {
+  return (
+    <div>
+      <CartList />
+    </div>
+  );
+}
+
+function CartList() {
+  const cart = useSelector((state) => state.cart);
+  console.log(cart);
+
+  return (
+    <Table striped bordered hover variant="dark">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>상품명</th>
+          <th>수량</th>
+          <th>변경하기</th>
+        </tr>
+      </thead>
+      <tbody>
+        {cart.map(({ count, id, name }) => {
+          return <Cart name={name} count={count} key={id} />;
+        })}
+      </tbody>
+    </Table>
+  );
+}
+
+function Cart({ name, count, id }) {
+  return (
+    <tr>
+      <td>{id}</td>
+      <td>{name}</td>
+      <td>{count}</td>
+      <td>🤣</td>
+    </tr>
+  );
+}
+
 // EventPage
 function EventPage() {
   return (
@@ -97,48 +149,105 @@ function AboutPage() {
   );
 }
 
-// Tabs
-function Tabs() {
+function TabContent({ 탭, title, content, price, id }) {
+  const [fade, setFade] = useState("");
+  const { 재고 } = useContext(Context1);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setFade("end");
+    }, 500);
+    return () => {
+      clearTimeout(timer);
+      setFade("");
+    };
+  }, [탭]);
   return (
-    <Nav variant="tabs" defaultActiveKey="link0">
-      <Nav.Item>
-        <Nav.Link eventKey="link0">버튼0</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link eventKey="link1">버튼1</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link eventKey="link2">버튼2</Nav.Link>
-      </Nav.Item>
-    </Nav>
+    <div className={`start ${fade}`}>
+      {[<div>{재고}</div>, <div>내용1</div>, <div>내용2</div>][탭]}
+    </div>
+  );
+}
+
+function Tabs({ 탭, 탭변경, title, content, price, id }) {
+  return (
+    <>
+      <Nav variant="tabs" defaultActiveKey="link0">
+        <Nav.Item>
+          <Nav.Link
+            onClick={() => {
+              탭변경(0);
+            }}
+            eventKey="link0"
+          >
+            버튼0
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link
+            onClick={() => {
+              탭변경(1);
+            }}
+            eventKey="link1"
+          >
+            버튼1
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link
+            onClick={() => {
+              탭변경(2);
+            }}
+            eventKey="link2"
+          >
+            버튼2
+          </Nav.Link>
+        </Nav.Item>
+      </Nav>
+      <TabContent
+        탭={탭}
+        title={title}
+        content={content}
+        price={price}
+        id={id}
+      />
+    </>
   );
 }
 
 // ProductDetailPage
 function ProductDetailPage({ shoes }) {
+  const [fade, setFade] = useState("");
+  const [탭, 탭변경] = useState(0);
   const [isTimeOut, setIsTimeOut] = useState(false);
   const { id } = useParams();
   const idx = shoes.findIndex((item) => item.id === +id);
   useEffect(() => {
-    const timer = () => {
+    const bannerTimer = () => {
       setIsTimeOut(true);
     };
-    setTimeout(timer, 1000);
-    return clearTimeout(timer);
+    setTimeout(bannerTimer, 2500);
+
+    return clearTimeout(bannerTimer);
   }, []);
+  useEffect(() => {
+    const loadTimer = () => {
+      setFade("end");
+    };
+    setTimeout(loadTimer, 500);
+    return clearTimeout(loadTimer);
+  });
   return (
-    <div className="ProductDetailPage">
+    <div className={`ProductDetailPage start ${fade}`}>
       {isTimeOut ? null : (
         <div className="alert alert-warning">2초 이내 구매시 할인</div>
       )}
 
-      <ProductDetail shoes={shoes[idx]}></ProductDetail>
+      <ProductDetail 탭={탭} 탭변경={탭변경} shoes={shoes[idx]}></ProductDetail>
     </div>
   );
 }
-function ProductDetail({ shoes: { title, content, price, id } }) {
+function ProductDetail({ shoes: { title, content, price, id }, 탭, 탭변경 }) {
   const [inputValue, setInputValue] = useState("");
-
   useEffect(() => {
     if (Number.isNaN(+inputValue)) alert("그러지 마세요");
     return setInputValue("");
@@ -169,7 +278,14 @@ function ProductDetail({ shoes: { title, content, price, id } }) {
         <div>
           <button className="btn btn-danger">주문하기</button>
         </div>
-        <Tabs></Tabs>
+        <Tabs
+          탭={탭}
+          탭변경={탭변경}
+          title={title}
+          content={content}
+          price={price}
+          id={id}
+        ></Tabs>
       </div>
     </div>
   );
