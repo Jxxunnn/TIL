@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <form action="">
+      <label for="pw">비밀번호 : </label>
+      <input
+        pattern="(?=.*[!@#$%^&*()_+=-])(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}"
+        type="password"
+        id="pw"
+      />
+      <label for="pwConfirm">비밀번호 확인 : </label>
+      <input
+        pattern="(?=.*[!@#$%^&*()_+=-])(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}"
+        type="password"
+        id="pwConfirm"
+      />
+      <button>제출</button>
+    </form>
+
+    <script>
+      const inps = document.querySelectorAll("input");
+      const btn = document.querySelector("button");
+      const validate = (target) => (e) => {
+        const [password, passwordCheck] = Array.from(target);
+
+        if (password.validity.valueMissing) {
+          password.setCustomValidity("아무것도 입력되지 않았다구요!");
+        } else if (password.validity.patternMismatch) {
+          password.setCustomValidity("입력 값의 패턴이 틀려먹었습니다.");
+        } else {
+          password.setCustomValidity("");
+        }
+        if (passwordCheck.validity.valueMissing) {
+          passwordCheck.setCustomValidity("아무것도 입력되지 않았다구요!");
+        } else if (passwordCheck.validity.patternMismatch) {
+          passwordCheck.setCustomValidity("입력 값의 패턴이 틀려먹었습니다.");
+        } else {
+          passwordCheck.setCustomValidity("");
+        }
+        if (password.value !== passwordCheck.value) {
+          alert("비밀번호가 서로 일치하지 않는다구요!");
+        }
+      };
+      btn.addEventListener("submit", validate(inps));
+    </script>
+  </body>
+</html>
