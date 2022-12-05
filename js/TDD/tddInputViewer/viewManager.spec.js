@@ -1,6 +1,4 @@
-// describe 함수 : 테스트할 유닛들의 모음
-describe("클릭 이벤트 및 뷰를 담당하는 클래스입니다.", () => {
-  // it 함수 : 함수의 테스트 유닛입니다. 첫번째 인자로 함수의 설명, 두 번째 인자로 테스트할 함수를 전달합니다.
+describe("클릭이벤트 및 뷰를 담당하는 클래스입니다.", () => {
   it("viewManager의 인자로 textManager의 인스턴스가 전달되는지 확인합니다.", () => {
     const textManager = null;
     const btnEl = document.createElement("button");
@@ -8,9 +6,41 @@ describe("클릭 이벤트 및 뷰를 담당하는 클래스입니다.", () => {
     const inpTxt = document.createElement("input");
 
     const actual = () =>
-      new ViewManager(testManager, { btnEl, viewerEl, inpTxt });
-    // expect : 기대식.. 실행할 함수의 결과값을 인자로 전달합니다.
-    // toBe 함수 : 매치 함수입니다. 내가 기대한 결과가 일치하는지 판단하는 함수
-    expect(plusOne(num)).toBe(num + 1);
+      new ViewManager(textManager, { btnEl, viewerEl, inpTxt });
+
+    expect(actual).toThrowError();
+  });
+
+  it("viewManager의 인자로 HTML요소들이 잘 전달되는지 확인합니다.", () => {
+    const textManager = new TextManager();
+    const btnEl = null;
+    const viewerEl = null;
+    const inpTxt = null;
+
+    const actual = () =>
+      new ViewManager(textManager, { btnEl, viewerEl, inpTxt });
+
+    expect(actual).toThrowError();
+  });
+
+  const textManager = new TextManager(),
+    btnEl = document.createElement("button"),
+    viewerEl = document.createElement("h2"),
+    inpTxt = document.createElement("input"),
+    viewManager = new ViewManager(textManager, { btnEl, viewerEl, inpTxt });
+
+  it("click 이벤트가 발생했을 경우 changeValue 함수가 실행되는지 확인합니다.", () => {
+    // spyOn : 특정 객체의 메서드를 감시합니다.
+    spyOn(viewManager, "changeValue");
+    btnEl.click();
+
+    // toHaveBeenCalled : 함수가 과거에 호출된적이 있는지 확인합니다.
+    expect(viewManager.changeValue).toHaveBeenCalled();
+  });
+
+  it("changeValue 함수를 통해 updateView 함수가 호출되는지 확인합니다.", () => {
+    spyOn(viewManager, "updateView");
+    viewManager.changeValue();
+    expect(viewManager.updateView).toHaveBeenCalled();
   });
 });

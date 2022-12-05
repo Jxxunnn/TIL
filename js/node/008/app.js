@@ -28,3 +28,6 @@ const server = http.createServer(function (req, res) {
 });
 
 server.listen(8080);
+
+//npm install express
+//npm i express
