@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <custom-input value="2"></custom-input>
+    <script>
+      class 클래스 extends HTMLElement {
+        connectedCallback() {
+          this.innerHTML = `<label>이메일인풋이에요</label><input>`;
+        }
+        static get observedAttributes() {
+          return ["value"];
+        }
+        attributeChangedCallback() {
+          console.log(this.getAttribute("value"));
+          this.innerHTML = ``;
+        }
+      }
+      customElements.define("custom-input", 클래스);
+      console.log(customElements);
+    </script>
+  </body>
+</html>

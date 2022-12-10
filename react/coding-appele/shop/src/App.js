@@ -1,6 +1,15 @@
 import "./App.css";
 import { shoesData } from "./data.js";
-import { useState, useEffect, createContext, useContext } from "react";
+import {
+  lazy,
+  Suspense,
+  useState,
+  useEffect,
+  createContext,
+  useContext,
+  memo,
+  useMemo,
+} from "react";
 import { Container, Nav, Navbar, Row, Col, Table } from "react-bootstrap";
 import {
   Routes,
@@ -12,7 +21,10 @@ import {
 } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { changeName } from "./store/userSlice.js";
+import { addCount, addCart, removeCount, removeCart } from "./store.js";
+import { useQuery } from "react-query";
 
 const Context1 = createContext();
 
@@ -25,33 +37,57 @@ function App() {
   const [shoes, setShoes] = useState(shoesData);
   const [재고] = useState([10, 11, 12]);
   const navigate = useNavigate();
+  const state = {
+    info: <p>상품정보</p>,
+    shipping: <p>배송정보</p>,
+  };
+  let result = useQuery("작명", () =>
+    axios.get("https://codingapple1.github.io/userdata.json").then((a) => {
+      console.log("여쳥됨");
+      return a.data;
+    })
+  );
   return (
     <div className="App">
+      {state["shipping"]}
       <NavBootstrap navigate={navigate} />
-      <Routes>
-        <Route
-          path="/"
-          element={<ProductListPage shoes={shoes} setShoes={setShoes} />}
-        />
-        <Route
-          path="/detail/:id"
-          element={
-            <Context1.Provider value={{ 재고, shoes }}>
-              <ProductDetailPage shoes={shoes} />
-            </Context1.Provider>
-          }
-        />
-        <Route path="/about" element={<AboutPage></AboutPage>}>
-          <Route path="member" element={<div>멤버임</div>} />
-          <Route path="location" element={<div>위치정보임</div>} />
-        </Route>
-        <Route path="/event" element={<EventPage></EventPage>}>
-          <Route path="one" element={<p>첫 주문시 양배추즙 서비스</p>} />
-          <Route path="two" element={<p>생일기념 쿠폰받기</p>} />
-        </Route>
-        <Route path="/cart" element={<CartPage></CartPage>} />
-        <Route path="*" element={<div>없는 페이지임</div>} />
-      </Routes>
+      <div>
+        {result.isLoading && "로딩중"}
+        {result.error && "에러남"}
+        {result.data && result.data.name}
+      </div>
+      <Suspense fallback={<div>로딩중임</div>}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <ProductListPage
+                shoes={shoes}
+                setShoes={setShoes}
+                navigate={navigate}
+              />
+            }
+          />
+          <Route
+            path="/detail/:id"
+            element={
+              <Context1.Provider value={{ 재고, shoes }}>
+                <ProductDetailPage shoes={shoes} />
+              </Context1.Provider>
+            }
+          />
+          <Route path="/about" element={<AboutPage></AboutPage>}>
+            <Route path="member" element={<div>멤버임</div>} />
+            <Route path="location" element={<div>위치정보임</div>} />
+          </Route>
+          <Route path="/event" element={<EventPage></EventPage>}>
+            <Route path="one" element={<p>첫 주문시 양배추즙 서비스</p>} />
+            <Route path="two" element={<p>생일기념 쿠폰받기</p>} />
+          </Route>
+          <Route path="/cart" element={<CartPage></CartPage>} />
+          <Route path="*" element={<div>없는 페이지임</div>} />
+        </Routes>
+      </Suspense>
     </div>
   );
 }
@@ -77,7 +113,7 @@ function NavBootstrap({ navigate }) {
           </Nav.Link>
           <Nav.Link
             onClick={() => {
-              navigate("/detail/0");
+              navigate("/cart");
             }}
           >
             Cart
@@ -88,18 +124,46 @@ function NavBootstrap({ navigate }) {
   );
 }
 // CartPage
+function Test() {
+  let text = null;
+  if (true) {
+    text = <p>참이면 보여줄 녀석 </p>;
+  }
+  return <div>{1 !== 1 && text}</div>;
+}
+function 함수() {
+  return "반복문 10억번 도린 결과";
+}
+
 function CartPage() {
+  const result = useMemo(() => {
+    return 함수();
+  }, [state]);
+  useMemo();
+  const state = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const [count, setCount] = useState(0);
   return (
     <div>
+      <Test />
+      <Child />
+      <button
+        onClick={() => {
+          setCount(count + 1);
+        }}
+      >
+        버튼
+      </button>
       <CartList />
     </div>
   );
 }
 
 function CartList() {
-  const cart = useSelector((state) => state.cart);
-  console.log(cart);
-
+  const cart = useSelector((state) => state.cart).filter((item) => {
+    return item.count > 0;
+  });
+  const dispatch = useDispatch();
   return (
     <Table striped bordered hover variant="dark">
       <thead>
@@ -108,24 +172,60 @@ function CartList() {
           <th>상품명</th>
           <th>수량</th>
           <th>변경하기</th>
+          <th>삭제하기</th>
         </tr>
       </thead>
       <tbody>
-        {cart.map(({ count, id, name }) => {
-          return <Cart name={name} count={count} key={id} />;
-        })}
+        {cart.map(({ count, id, name }, i) => (
+          <Cart
+            name={name}
+            i={i}
+            id={id}
+            count={count}
+            key={id}
+            dispatch={dispatch}
+          />
+        ))}
       </tbody>
     </Table>
   );
 }
+const Child = memo(function () {
+  console.log("재렌더링됨.");
+  return <h1>자식</h1>;
+});
 
-function Cart({ name, count, id }) {
+function Cart({ i, name, count, id, dispatch }) {
   return (
     <tr>
-      <td>{id}</td>
+      <td>{i}</td>
       <td>{name}</td>
       <td>{count}</td>
-      <td>🤣</td>
+      <td>
+        <button
+          onClick={() => {
+            dispatch(addCount(id));
+          }}
+        >
+          +
+        </button>
+        <button
+          onClick={() => {
+            dispatch(removeCount(id));
+          }}
+        >
+          -
+        </button>
+      </td>
+      <td>
+        <button
+          onClick={() => {
+            dispatch(removeCart(id));
+          }}
+        >
+          X
+        </button>
+      </td>
     </tr>
   );
 }
@@ -222,6 +322,14 @@ function ProductDetailPage({ shoes }) {
   const { id } = useParams();
   const idx = shoes.findIndex((item) => item.id === +id);
   useEffect(() => {
+    let 꺼낸거 = localStorage.getItem("watched");
+    꺼낸거 = JSON.parse(꺼낸거);
+    꺼낸거.push(id);
+    꺼낸거 = new Set(꺼낸거);
+    꺼낸거 = Array.from(꺼낸거);
+    localStorage.setItem("watched", JSON.stringify(꺼낸거));
+  }, []);
+  useEffect(() => {
     const bannerTimer = () => {
       setIsTimeOut(true);
     };
@@ -248,6 +356,8 @@ function ProductDetailPage({ shoes }) {
 }
 function ProductDetail({ shoes: { title, content, price, id }, 탭, 탭변경 }) {
   const [inputValue, setInputValue] = useState("");
+  const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
   useEffect(() => {
     if (Number.isNaN(+inputValue)) alert("그러지 마세요");
     return setInputValue("");
@@ -276,7 +386,22 @@ function ProductDetail({ shoes: { title, content, price, id }, 탭, 탭변경 })
         <p>{price}</p>
 
         <div>
-          <button className="btn btn-danger">주문하기</button>
+          <button
+            onClick={() => {
+              if (
+                cart.findIndex((item) => {
+                  return item.id === id;
+                }) === -1
+              ) {
+                dispatch(addCart({ id, name: title, count: 1 }));
+              } else {
+                dispatch(addCount(id));
+              }
+            }}
+            className="btn btn-danger"
+          >
+            주문하기
+          </button>
         </div>
         <Tabs
           탭={탭}
@@ -294,13 +419,27 @@ function ProductDetail({ shoes: { title, content, price, id }, 탭, 탭변경 })
 function Banner() {
   return <div className="main-bg"></div>;
 }
-function ProductListPage({ shoes, setShoes }) {
+function ProductListPage({ shoes, setShoes, navigate }) {
+  const [recentlyViewed, setRecentlyViewed] = useState([]);
   const [count, setCount] = useState(1);
   const [isFetched, setIsFetched] = useState(false);
+  useEffect(() => {
+    if (!localStorage.getItem("watched")) {
+      localStorage.setItem("watched", JSON.stringify([]));
+    } else {
+      const res = localStorage.getItem("watched");
+      setRecentlyViewed(JSON.parse(res));
+    }
+  }, []);
   return (
     <div className="ProductListPage">
       <Banner></Banner>
-      <ProductList shoes={shoes}></ProductList>
+      <ProductList
+        recentlyViewed={recentlyViewed}
+        setRecentlyViewed={setRecentlyViewed}
+        shoes={shoes}
+        navigate={navigate}
+      ></ProductList>
       {isFetched ? <h2>로딩중</h2> : null}
       <button
         onClick={() => {
@@ -327,20 +466,46 @@ function ProductListPage({ shoes, setShoes }) {
   );
 }
 
-function ProductList({ shoes }) {
+function ProductList({ shoes, navigate, recentlyViewed, setRecentlyViewed }) {
   return (
     <Container>
       <Row>
         {shoes.map(({ id, title, content }, i) => {
-          return <Product id={id} title={title} content={content} key={i} />;
+          return (
+            <Product
+              navigate={navigate}
+              id={id}
+              title={title}
+              content={content}
+              key={i}
+              recentlyViewed={recentlyViewed}
+              setRecentlyViewed={setRecentlyViewed}
+            />
+          );
         })}
       </Row>
     </Container>
   );
 }
-function Product({ id, title, content }) {
+function Product({
+  id,
+  title,
+  content,
+  navigate,
+  recentlyViewed,
+  setRecentlyViewed,
+}) {
   return (
-    <Col sm>
+    <Col
+      sm
+      onClick={() => {
+        navigate(`/detail/${id}`);
+        localStorage.setItem(
+          "watched",
+          JSON.stringify([...new Set([...recentlyViewed, id])])
+        );
+      }}
+    >
       <img
         alt="#"
         src={`https://codingapple1.github.io/shop/shoes${id + 1}.jpg`}
